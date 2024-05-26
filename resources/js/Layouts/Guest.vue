@@ -1,15 +1,31 @@
 <script setup>
 
 import AuthUser from "../Components/AuthUserComponent.vue";
+import MenuList from "../Components/Navigation/GuestMenuListComponent.vue";
+import Search from "../Components/SearchComponent.vue";
+import {usePage} from "@inertiajs/vue3";
+import {computed} from "vue";
+
+const page = usePage();
+const user = computed(() => page.props.auth.user);
+const menu = computed(() => page.props.menu);
 
 </script>
 
 <template>
-    <div>
-        Layout: Guest
+    <nav>
+        <MenuList
+            :menu="menu.data"
+        />
+    </nav>
 
-        <AuthUser />
+    <Search />
 
-        <slot />
-    </div>
+    <main>
+        <AuthUser
+            :user="user"
+        />
+
+        <slot/>
+    </main>
 </template>
