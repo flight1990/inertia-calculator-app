@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Calculator extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, Searchable;
 
     protected $fillable = [
         'name',
@@ -22,6 +23,15 @@ class Calculator extends Model
         'seo_keywords',
         'category_id'
     ];
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => (int) $this['id'],
+            'name' => $this['name'],
+            'slug' => $this['slug'],
+        ];
+    }
 
     public function getSlugOptions() : SlugOptions
     {

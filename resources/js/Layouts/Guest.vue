@@ -2,6 +2,7 @@
 
 import AuthUser from "../Components/AuthUserComponent.vue";
 import MenuList from "../Components/Navigation/GuestMenuListComponent.vue";
+import Search from "../Components/SearchComponent.vue";
 import {usePage} from "@inertiajs/vue3";
 import {computed} from "vue";
 
@@ -17,6 +18,8 @@ const menu = computed(() => page.props.menu);
             :menu="menu.data"
         />
     </nav>
+
+    <Search />
 
     <main>
         <AuthUser
