@@ -36,6 +36,7 @@ watch(() => search.value, () => searchHandler());
         <label for="search">Search</label>
 
         <input
+            autofocus
             type="search"
             id="search"
             placeholder="Find a calculator..."
@@ -46,6 +47,7 @@ watch(() => search.value, () => searchHandler());
 
     <div>
         <ClaculatorList
+            v-if="calculators.length"
             :calculators="calculators"
         />
     </div>
