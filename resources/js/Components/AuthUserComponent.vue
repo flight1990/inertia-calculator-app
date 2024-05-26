@@ -1,18 +1,29 @@
 <script setup>
 
-import {usePage, Link} from "@inertiajs/vue3";
-import {computed} from "vue";
+import {Link} from "@inertiajs/vue3";
 
-const page = usePage();
-const user = computed(() => page.props.auth.user);
+defineProps({
+    user: Object
+});
 
 </script>
 
 <template>
     <div v-if="user">
-        {{ user }}
+        <div>
+            <p>{{ user.name }}</p>
+            <p><small>{{ user.email }}</small></p>
+        </div>
 
-        <Link href="/profile">Profile</Link>
+        <ul>
+            <li>
+                <Link href="/profile">Profile</Link>
+            </li>
+            <li>
+                <Link href="/favorites">Favorites</Link>
+            </li>
+        </ul>
+
         <Link href="/logout" as="button" method="POST">Logout</Link>
     </div>
 </template>

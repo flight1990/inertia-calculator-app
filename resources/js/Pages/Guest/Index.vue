@@ -2,9 +2,14 @@
 
 import {Head} from "@inertiajs/vue3";
 import Layout from "../../Layouts/Guest.vue";
+import CategoriesList from "../../Components/Categories/CategoriesListComponent.vue";
 
 defineOptions({
-   layout: Layout
+    layout: Layout
+});
+
+defineProps({
+    categories: Object
 });
 
 </script>
@@ -16,6 +21,8 @@ defineOptions({
     </Head>
 
     <div>
-        Page: guest/index
+        <CategoriesList
+            :items="categories.data"
+        />
     </div>
 </template>
