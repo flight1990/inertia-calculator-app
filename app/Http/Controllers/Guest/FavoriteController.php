@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Actions\Calculators\AttachFavoriteCalculatorAction;
+use App\Actions\Calculators\DetachFavoriteCalculatorAction;
+use App\Actions\Calculators\GetGuestFavoritesCalculatorsAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CalculatorResource;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class FavoriteController extends Controller
 {
+    public function __construct(
+        protected GetGuestFavoritesCalculatorsAction $getGuestFavoritesCalculatorsAction,
+        protected AttachFavoriteCalculatorAction     $attachFavoriteCalculatorAction,
+        protected DetachFavoriteCalculatorAction     $detachFavoriteCalculatorAction
+    )
+    {
+    }
+
     public function index(): Response
     {
-        $calculators = Auth::user()->favoriteCalculators()->get();
+        $calculators = $this->getGuestFavoritesCalculatorsAction->run();
 
         return Inertia::render('Guest/Favorites', [
             'calculators' => CalculatorResource::collection($calculators)
@@ -22,13 +32,13 @@ class FavoriteController extends Controller
 
     public function store(int $id): RedirectResponse
     {
-        Auth::user()->favoriteCalculators()->attach($id);
+        $this->attachFavoriteCalculatorAction->run($id);
         return back();
     }
 
     public function destroy(int $id): RedirectResponse
     {
-        Auth::user()->favoriteCalculators()->detach($id);
+        $this->detachFavoriteCalculatorAction->run($id);
         return back();
     }
 }
