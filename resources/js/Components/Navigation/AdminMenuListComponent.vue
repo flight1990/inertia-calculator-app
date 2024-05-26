@@ -1,5 +1,7 @@
 <script setup>
 
+import MenuItem from "./AdminMenuListItemComponent.vue";
+
 defineProps({
     menu: Array
 });
@@ -7,7 +9,11 @@ defineProps({
 </script>
 
 <template>
-    Components: AdminMenuListComponent
-
-    {{ menu }}
+    <ul>
+        <MenuItem
+            v-for="item in menu"
+            :key="item.id"
+            :menu-item="item"
+        />
+    </ul>
 </template>

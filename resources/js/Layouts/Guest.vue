@@ -12,17 +12,17 @@ const menu = computed(() => page.props.menu);
 </script>
 
 <template>
-    <div>
-        Layout: Guest
-
+    <nav>
         <MenuList
             :menu="menu.data"
         />
+    </nav>
 
+    <main>
         <AuthUser
             :user="user"
         />
 
-        <slot />
-    </div>
+        <slot/>
+    </main>
 </template>

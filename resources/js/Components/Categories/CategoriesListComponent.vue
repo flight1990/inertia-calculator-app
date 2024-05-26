@@ -9,15 +9,11 @@ defineProps({
 </script>
 
 <template>
-    <div>
-        Components: CategoriesListComponent
-
-        <ul>
-            <CategoriesListItem
-                v-for="item in items"
-                :key="item.id"
-                :item="item"
-            />
-        </ul>
-    </div>
+    <ul>
+        <CategoriesListItem
+            v-for="item in items"
+            :key="item.id"
+            :item="item"
+        />
+    </ul>
 </template>
