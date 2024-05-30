@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Guest\SearchController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,3 +10,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/search', [SearchController::class, 'search']);
+Route::get('/categories', [CategoryController::class, 'index']);

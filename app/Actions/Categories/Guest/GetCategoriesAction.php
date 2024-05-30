@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Actions\Categories;
+namespace App\Actions\Categories\Guest;
 
-use App\Tasks\Categories\GetGuestCategoriesTask;
+use App\Tasks\Categories\Guest\GetCategoriesTask;
 use Illuminate\Database\Eloquent\Collection;
 
-class GetGuestCategoriesAction
+class GetCategoriesAction
 {
     public function __construct(
-        protected GetGuestCategoriesTask $getGuestCategoriesTask
+        protected GetCategoriesTask $getGuestCategoriesTask
     )
     {
     }

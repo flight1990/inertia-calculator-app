@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Actions\Calculators\FindGuestCalculatorAction;
-use App\Actions\Categories\FindGuestCategoryAction;
+use App\Actions\Calculators\Guest\FindCalculatorAction;
+use App\Actions\Categories\Guest\FindCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CalculatorResource;
 use App\Http\Resources\CategoryResource;
@@ -13,8 +13,8 @@ use Inertia\Response;
 class CalculatorController extends Controller
 {
     public function __construct(
-        protected FindGuestCategoryAction   $findGuestCategoryAction,
-        protected FindGuestCalculatorAction $findGuestCalculatorAction
+        protected FindCategoryAction        $findGuestCategoryAction,
+        protected FindCalculatorAction $findGuestCalculatorAction
     )
     {
     }

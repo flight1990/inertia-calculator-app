@@ -32,7 +32,8 @@ class GenerateMenus
     private function buildAdminMenu(): void
     {
         Menu::make('Menu', function ($menu) {
-            $menu->add('Dashboard', route('admin.index'));
+            $menu->add('Dashboard', route('admin.index'))->nickname('dashboard');
+            $menu->add('Categories', route('admin.categories.index'))->nickname('admin.categories.index');
         });
     }
 }

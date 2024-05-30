@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Actions\Calculators\AttachFavoriteCalculatorAction;
-use App\Actions\Calculators\DetachFavoriteCalculatorAction;
-use App\Actions\Calculators\GetGuestFavoritesCalculatorsAction;
+use App\Actions\Calculators\Guest\AttachFavoriteCalculatorAction;
+use App\Actions\Calculators\Guest\DetachFavoriteCalculatorAction;
+use App\Actions\Calculators\Guest\GetFavoritesCalculatorsAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CalculatorResource;
 use Illuminate\Http\RedirectResponse;
@@ -14,9 +14,9 @@ use Inertia\Response;
 class FavoriteController extends Controller
 {
     public function __construct(
-        protected GetGuestFavoritesCalculatorsAction $getGuestFavoritesCalculatorsAction,
-        protected AttachFavoriteCalculatorAction     $attachFavoriteCalculatorAction,
-        protected DetachFavoriteCalculatorAction     $detachFavoriteCalculatorAction
+        protected GetFavoritesCalculatorsAction  $getGuestFavoritesCalculatorsAction,
+        protected AttachFavoriteCalculatorAction $attachFavoriteCalculatorAction,
+        protected DetachFavoriteCalculatorAction $detachFavoriteCalculatorAction
     )
     {
     }

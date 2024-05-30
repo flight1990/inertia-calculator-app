@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Guest;
+namespace App\Http\Controllers\API;
 
-use App\Actions\Calculators\SearchCalculatorsAction;
+use App\Actions\Calculators\Guest\SearchCalculatorsAction;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 

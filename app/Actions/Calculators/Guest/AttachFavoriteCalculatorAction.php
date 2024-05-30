@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Calculators;
+namespace App\Actions\Calculators\Guest;
 
 use App\Tasks\Calculators\AttachFavoriteCalculatorTask;
 

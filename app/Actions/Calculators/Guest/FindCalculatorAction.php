@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\Calculators;
+namespace App\Actions\Calculators\Guest;
 
 use App\Tasks\Calculators\FindGuestCalculatorTask;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class FindGuestCalculatorAction
+class FindCalculatorAction
 {
     public function __construct(
         protected FindGuestCalculatorTask $findGuestCalculatorTask

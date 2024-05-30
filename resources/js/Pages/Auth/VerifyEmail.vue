@@ -1,7 +1,8 @@
 <script setup>
+
 import { computed } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import Layout from "../../Layouts/Auth.vue";
+import Layout from "@/Layouts/Auth.vue";
 
 defineOptions({
     layout: Layout
