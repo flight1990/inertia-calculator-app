@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tasks\Categories;
+namespace App\Tasks\Categories\Guest;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
-class FindGuestCategoryTask
+class FindCategoryTask
 {
     public function run(int $categoryId, ?int $calculatorId = null): Model
     {

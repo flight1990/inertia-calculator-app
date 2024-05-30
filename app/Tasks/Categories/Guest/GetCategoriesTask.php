@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tasks\Categories;
+namespace App\Tasks\Categories\Guest;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 
-class GetGuestCategoriesTask
+class GetCategoriesTask
 {
     public function run(): Collection
     {

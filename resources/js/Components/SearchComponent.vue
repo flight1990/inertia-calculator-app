@@ -12,7 +12,7 @@ const searchHandler = debounce(async () => {
     try {
         loading.value = true;
 
-        const {data} = await axios.get('http://127.0.0.1/api/search', {
+        const {data} = await axios.get('/api/search', {
             params: {
                 search: search.value
             }

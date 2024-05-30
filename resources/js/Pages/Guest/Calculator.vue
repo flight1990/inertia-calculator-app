@@ -1,8 +1,8 @@
 <script setup>
 
 import {Head, useForm} from "@inertiajs/vue3";
-import Category from "../../Components/Categories/CategoryComponent.vue";
-import Layout from "../../Layouts/Guest.vue";
+import Category from "@/Components/Categories/CategoryComponent.vue";
+import Layout from "@/Layouts/Guest.vue";
 
 const props = defineProps({
     calculator: Object,

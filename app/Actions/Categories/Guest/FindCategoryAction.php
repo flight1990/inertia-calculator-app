@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Actions\Categories;
+namespace App\Actions\Categories\Guest;
 
-use App\Tasks\Categories\FindGuestCategoryTask;
 use Illuminate\Database\Eloquent\Model;
 
-class FindGuestCategoryAction
+class FindCategoryAction
 {
     public function __construct(
-        protected FindGuestCategoryTask $findGuestCategoryTask
+        protected \App\Tasks\Categories\Guest\FindCategoryTask $findGuestCategoryTask
     )
     {
     }

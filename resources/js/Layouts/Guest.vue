@@ -1,8 +1,8 @@
 <script setup>
 
-import AuthUser from "../Components/AuthUserComponent.vue";
-import MenuList from "../Components/Navigation/GuestMenuListComponent.vue";
-import Search from "../Components/SearchComponent.vue";
+import AuthUser from "@/Components/AuthUserComponent.vue";
+import MenuList from "@/Components/Navigation/GuestMenuListComponent.vue";
+import Search from "@/Components/SearchComponent.vue";
 import {usePage} from "@inertiajs/vue3";
 import {computed} from "vue";
 
