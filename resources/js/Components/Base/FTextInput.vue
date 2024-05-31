@@ -18,7 +18,7 @@ const props = defineProps({
     <div>
         <label>
             {{ label ?? '' }}
-            <input type="text" v-model="model">
+            <input :type="type" v-model="model">
         </label>
 
         <small v-if="errorMessage">{{ errorMessage }}</small>

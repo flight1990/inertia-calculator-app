@@ -8,8 +8,8 @@ use App\Actions\Categories\Admin\FindCategoryByIdAction;
 use App\Actions\Categories\Admin\GetCategoriesAction;
 use App\Actions\Categories\Admin\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Categories\CreateCategoryRequest;
-use App\Http\Requests\Categories\UpdateCategoryRequest;
+use App\Http\Requests\Users\CreateUserRequest;
+use App\Http\Requests\Users\UpdateUserRequest;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +38,7 @@ class CategoryController extends Controller
         return Inertia::render('Admin/Categories/Modify');
     }
 
-    public function store(CreateCategoryRequest $request): RedirectResponse
+    public function store(CreateUserRequest $request): RedirectResponse
     {
         $this->createCategoryAction->run($request->validated());
         return redirect()->route('admin.categories.index');
@@ -53,7 +53,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
+    public function update(UpdateUserRequest $request, int $id): RedirectResponse
     {
         $this->updateCategoryAction->run($request->validated(), $id);
         return redirect()->route('admin.categories.index');
