@@ -31,7 +31,8 @@ const toggleFavorite = () => {
 
 <template>
     <Head>
-        <title>{{ calculator.seo_title }}</title>
+        <title>{{ calculator.name }}</title>
+        <meta name="title" :content="calculator.seo_title">
         <meta name="description" :content="calculator.seo_description">
         <meta name="keywords" :content="calculator.seo_keywords">
     </Head>

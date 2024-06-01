@@ -34,6 +34,7 @@ class GenerateMenus
         Menu::make('Menu', function ($menu) {
             $menu->add('Dashboard', route('admin.index'))->nickname('dashboard');
             $menu->add('Categories', route('admin.categories.index'))->nickname('admin.categories.index');
+            $menu->add('Calculators', route('admin.calculators.index'))->nickname('admin.calculators.index');
             $menu->add('Users', route('admin.users.index'))->nickname('admin.users.index');
         });
     }

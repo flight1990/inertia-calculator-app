@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace App\Http\Requests\Calculators;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class UpdateCalculatorRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,10 +15,11 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:190'],
-            'icon' => ['nullable', 'string', 'max:190'],
+            'description' => ['required', 'string'],
             'seo_title' => ['nullable', 'string', 'max:190'],
             'seo_description' => ['nullable', 'string', 'max:190'],
             'seo_keywords' => ['nullable', 'string', 'max:190'],
+            'category_id' => ['required', 'integer', 'exists:categories,id']
         ];
     }
 }

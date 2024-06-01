@@ -11,6 +11,8 @@ export default {
     pageText: '{0} - {1} of {2}',
     nexPageLabel: 'Next',
     prevPageLabel: 'Prev',
+    firstPageLabel: 'First page',
+    lastPageLabel: 'Last page',
     itemKey: 'id',
     itemValue: 'id',
     disableSort: false,

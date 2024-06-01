@@ -14,6 +14,7 @@ const props = defineProps({
 
 const form = useForm({
     name: props.category?.name ?? "",
+    icon: props.category?.icon ?? "",
     seo_title: props.category?.seo_title ?? "",
     seo_description: props.category?.seo_description ?? "",
     seo_keywords: props.category?.seo_keywords ?? "",
@@ -36,6 +37,12 @@ const saveCategory = () => {
             label="Name"
             v-model="form.name"
             :error-message="form.errors.name"
+        />
+
+        <FTextInput
+            label="Icon"
+            v-model="form.icon"
+            :error-message="form.errors.icon"
         />
 
         <FTextInput

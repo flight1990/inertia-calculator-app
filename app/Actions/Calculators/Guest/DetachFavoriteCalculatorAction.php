@@ -2,7 +2,7 @@
 
 namespace App\Actions\Calculators\Guest;
 
-use App\Tasks\Calculators\DetachFavoriteCalculatorTask;
+use App\Tasks\Calculators\Guest\DetachFavoriteCalculatorTask;
 
 class DetachFavoriteCalculatorAction
 {

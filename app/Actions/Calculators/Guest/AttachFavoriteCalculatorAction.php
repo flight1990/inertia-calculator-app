@@ -2,7 +2,7 @@
 
 namespace App\Actions\Calculators\Guest;
 
-use App\Tasks\Calculators\AttachFavoriteCalculatorTask;
+use App\Tasks\Calculators\Guest\AttachFavoriteCalculatorTask;
 
 class AttachFavoriteCalculatorAction
 {

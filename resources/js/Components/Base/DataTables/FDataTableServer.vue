@@ -73,6 +73,14 @@ const props = defineProps({
     prevPageLabel: {
         type: String,
         default: datableConfig.prevPageLabel
+    },
+    firstPageLabel: {
+        type: String,
+        default: datableConfig.firstPageLabel
+    },
+    lastPageLabel: {
+        type: String,
+        default: datableConfig.lastPageLabel
     }
 });
 
@@ -102,6 +110,9 @@ const computedPageText = computed(() => {
 
 const isPrevBtnDisabled = computed(() => options.page === 1);
 const isNextBtnDisabled = computed(() => options.page >= Math.ceil(props.itemsLength / options.itemsPerPage));
+
+const isFirstPageBtnDisabled = computed(() => options.page === 1);
+const isLastPageBtnDisabled = computed(() => options.page >= Math.ceil(props.itemsLength / options.itemsPerPage));
 
 const colSpan = computed(() => {
     let span = props.headers.length;
@@ -173,6 +184,16 @@ const prevPageHandler = () => {
 
 const nextPageHandler = () => {
     options.page++;
+    updatePageHandler();
+};
+
+const firstPageHandler = () => {
+    options.page = 1;
+    updatePageHandler();
+};
+
+const lastPageHandler = () => {
+    options.page = Math.ceil(props.itemsLength / options.itemsPerPage);
     updatePageHandler();
 };
 
@@ -296,14 +317,24 @@ onMounted(() => updateOptionsHandler());
                         </select>
                     </label>
 
+                    <button :disabled="isFirstPageBtnDisabled" @click.prevent="firstPageHandler">
+                        {{ firstPageLabel }}
+                    </button>
+
                     <button :disabled="isPrevBtnDisabled" @click.prevent="prevPageHandler">
                         {{ prevPageLabel }}
                     </button>
+
                     <template v-if="showCurrentPage">
                         {{ options.page }}
                     </template>
+
                     <button :disabled="isNextBtnDisabled" @click.prevent="nextPageHandler">
                         {{ nexPageLabel }}
+                    </button>
+
+                    <button :disabled="isLastPageBtnDisabled" @click.prevent="lastPageHandler">
+                        {{ lastPageLabel }}
                     </button>
                 </td>
             </tr>

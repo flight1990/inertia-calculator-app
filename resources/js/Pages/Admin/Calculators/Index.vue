@@ -13,7 +13,6 @@ defineOptions({
 const headers = ref([
     {key: 'id', title: 'ID', align: 'center'},
     {key: 'name', title: 'Name'},
-    {key: 'icon', title: 'Icon'},
     {key: 'slug', title: 'Slug'},
     {key: 'seo_title', title: 'Seo title'},
     {key: 'seo_description', title: 'Seo description', sortable: false},
@@ -32,22 +31,20 @@ const params = reactive({
 const items = ref([]);
 const total = ref(0);
 const loading = ref(false);
-const selected = ref([]);
-const expanded = ref([]);
 
 const updateOptionsHandler = (options) => {
     params.page = options.page;
     params.limit = options.itemsPerPage;
     params.sortBy = options.sortBy;
 
-    fetchCategories();
+    fetchCalculators();
 }
 
-const fetchCategories = async () => {
+const fetchCalculators = async () => {
     try {
         loading.value = true;
 
-        const {data} = await axios.get('/api/categories', {params});
+        const {data} = await axios.get('/api/calculators', {params});
 
         items.value = data.data;
         total.value = data.meta.total;
@@ -57,10 +54,10 @@ const fetchCategories = async () => {
     }
 }
 
-const deleteCategory = (id) => {
-    router.delete(`/admin/categories/${id}`, {
+const deleteCalculator = (id) => {
+    router.delete(`/admin/calculators/${id}`, {
         onSuccess() {
-            fetchCategories();
+            fetchCalculators();
         }
     });
 }
@@ -69,33 +66,18 @@ const deleteCategory = (id) => {
 
 <template>
     <Head>
-        <title>Categories</title>
+        <title>Calculators</title>
     </Head>
 
-    expanded: {{ expanded }}
-    selected: {{ selected }}
-
-    <Link href="/admin/categories/create">Create</Link>
+    <Link href="/admin/calculators/create">Create</Link>
 
     <FDataTableServer
-        v-model:expanded="expanded"
-        v-model:selected="selected"
-        :show-selected="true"
-        :show-expanded="true"
         :headers="headers"
         :items="items"
         :items-length="total"
         :loading="loading"
         @update:options="updateOptionsHandler"
     >
-        <template v-slot:loading>
-            My fucking loading...
-        </template>
-
-        <template v-slot:expanded-row="{item}">
-            {{ item }}
-        </template>
-
         <template v-slot:item.created_at="{item}">
             {{ useDateTransformer(item.created_at) }}
         </template>
@@ -105,8 +87,8 @@ const deleteCategory = (id) => {
         </template>
 
         <template v-slot:item.actions="{item}">
-            <Link :href="`/admin/categories/${item.id}/edit`">Edit</Link>
-            <button @click="deleteCategory(item.id)">Delete</button>
+            <Link :href="`/admin/calculators/${item.id}/edit`">Edit</Link>
+            <button @click="deleteCalculator(item.id)">Delete</button>
         </template>
     </FDataTableServer>
 </template>

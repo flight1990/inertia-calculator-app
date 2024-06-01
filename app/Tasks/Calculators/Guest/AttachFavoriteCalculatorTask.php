@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tasks\Calculators;
+namespace App\Tasks\Calculators\Guest;
 
 use Illuminate\Support\Facades\Auth;
 
