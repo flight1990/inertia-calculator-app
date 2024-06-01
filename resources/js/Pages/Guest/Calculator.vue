@@ -1,12 +1,16 @@
 <script setup>
 
-import {Head, useForm} from "@inertiajs/vue3";
+import {Head, useForm, usePage} from "@inertiajs/vue3";
 import Category from "@/Components/Categories/CategoryComponent.vue";
 import Layout from "@/Layouts/Guest.vue";
+import {computed} from "vue";
+
+const user = computed(() => usePage().props.auth.user);
 
 const props = defineProps({
     calculator: Object,
-    category: Object
+    category: Object,
+    metta_seo: Object
 });
 
 defineOptions({
@@ -32,9 +36,10 @@ const toggleFavorite = () => {
 <template>
     <Head>
         <title>{{ calculator.name }}</title>
-        <meta name="title" :content="calculator.seo_title">
-        <meta name="description" :content="calculator.seo_description">
-        <meta name="keywords" :content="calculator.seo_keywords">
+
+        <meta name="description" :content="metta_seo.description">
+        <meta name="keywords" :content="metta_seo.keywords">
+        <meta name="title" :content="metta_seo.title">
     </Head>
 
     <div>
@@ -42,7 +47,9 @@ const toggleFavorite = () => {
 
         <p v-html="calculator.description"></p>
 
-        <button @click.prevent="toggleFavorite" :disabled="form.processing">Favorite {{ calculator.is_favorite }}</button>
+        <button @click.prevent="toggleFavorite" :disabled="form.processing" v-if="user">
+            Favorite {{ calculator.is_favorite }}
+        </button>
 
         <Category
             :category="category"

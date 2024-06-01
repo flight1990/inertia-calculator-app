@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\CalculatorController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -28,6 +29,15 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'verified'])->group(
     });
 
     Route::controller(CalculatorController::class)->name('calculators.')->prefix('calculators')->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::get('/create', 'create')->name('create');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::controller(SeoController::class)->name('seo.')->prefix('seo')->group(function() {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');

@@ -12,8 +12,14 @@ defineOptions({
 
 const headers = ref([
     {key: 'id', title: 'ID', align: 'center'},
-    {key: 'name', title: 'Name'},
-    {key: 'slug', title: 'Slug'},
+    {key: 'url', title: 'URL', align: 'center'},
+    {key: 'h1', title: 'H1', align: 'center'},
+    {key: 'title', title: 'Title', align: 'center'},
+    {key: 'description', title: 'Description', align: 'center'},
+    {key: 'keywords', title: 'Keywords', align: 'center'},
+    {key: 'robots', title: 'Robots', align: 'center'},
+    {key: 'no_index', title: 'No index', align: 'center'},
+    {key: 'no_follow', title: 'No follow', align: 'center'},
     {key: 'created_at', title: 'Created at', align: 'center'},
     {key: 'updated_at', title: 'Updated at', align: 'center'},
     {key: 'actions', title: 'Actions', align: 'center'},
@@ -34,14 +40,14 @@ const updateOptionsHandler = (options) => {
     params.limit = options.itemsPerPage;
     params.sortBy = options.sortBy;
 
-    fetchCalculators();
+    fetchSeo();
 }
 
-const fetchCalculators = async () => {
+const fetchSeo = async () => {
     try {
         loading.value = true;
 
-        const {data} = await axios.get('/api/calculators', {params});
+        const {data} = await axios.get('/api/seo', {params});
 
         items.value = data.data;
         total.value = data.meta.total;
@@ -51,10 +57,10 @@ const fetchCalculators = async () => {
     }
 }
 
-const deleteCalculator = (id) => {
-    router.delete(`/admin/calculators/${id}`, {
+const deleteSeo = (id) => {
+    router.delete(`/admin/seo/${id}`, {
         onSuccess() {
-            fetchCalculators();
+            fetchSeo();
         }
     });
 }
@@ -63,10 +69,10 @@ const deleteCalculator = (id) => {
 
 <template>
     <Head>
-        <title>Calculators</title>
+        <title>Seo</title>
     </Head>
 
-    <Link href="/admin/calculators/create">Create</Link>
+    <Link href="/admin/seo/create">Create</Link>
 
     <FDataTableServer
         :headers="headers"
@@ -75,6 +81,7 @@ const deleteCalculator = (id) => {
         :loading="loading"
         @update:options="updateOptionsHandler"
     >
+
         <template v-slot:item.created_at="{item}">
             {{ useDateTransformer(item.created_at) }}
         </template>
@@ -84,8 +91,8 @@ const deleteCalculator = (id) => {
         </template>
 
         <template v-slot:item.actions="{item}">
-            <Link :href="`/admin/calculators/${item.id}/edit`">Edit</Link>
-            <button @click="deleteCalculator(item.id)">Delete</button>
+            <Link :href="`/admin/seo/${item.id}/edit`">Edit</Link>
+            <button @click="deleteSeo(item.id)">Delete</button>
         </template>
     </FDataTableServer>
 </template>

@@ -15,9 +15,6 @@ const props = defineProps({
 const form = useForm({
     name: props.category?.name ?? "",
     icon: props.category?.icon ?? "",
-    seo_title: props.category?.seo_title ?? "",
-    seo_description: props.category?.seo_description ?? "",
-    seo_keywords: props.category?.seo_keywords ?? "",
 });
 
 const saveCategory = () => {
@@ -43,24 +40,6 @@ const saveCategory = () => {
             label="Icon"
             v-model="form.icon"
             :error-message="form.errors.icon"
-        />
-
-        <FTextInput
-            label="Seo title"
-            v-model="form.seo_title"
-            :error-message="form.errors.seo_title"
-        />
-
-        <FTextInput
-            label="Seo description"
-            v-model="form.seo_description"
-            :error-message="form.errors.seo_description"
-        />
-
-        <FTextInput
-            label="Seo keywords"
-            v-model="form.seo_keywords"
-            :error-message="form.errors.seo_keywords"
         />
 
         <button type="submit">{{ category ? 'Update' : 'Create' }}</button>

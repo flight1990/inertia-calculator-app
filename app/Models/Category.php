@@ -15,10 +15,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'icon',
-        'seo_title',
-        'seo_description',
-        'seo_keywords'
+        'icon'
     ];
 
     public function getSlugOptions() : SlugOptions

@@ -15,7 +15,7 @@ export default {
     lastPageLabel: 'Last page',
     itemKey: 'id',
     itemValue: 'id',
-    disableSort: false,
+    disableSort: true,
     multipleSort: false,
     mustSort: true,
 };

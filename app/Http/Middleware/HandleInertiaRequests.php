@@ -2,6 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Actions\Seo\Guest\GetSeoAction;
+use App\Http\Resources\SeoGuestResource;
+use App\Http\Resources\SeoResource;
 use Menu;
 use App\Http\Resources\MenuResource;
 use Illuminate\Http\Request;
@@ -29,6 +32,9 @@ class HandleInertiaRequests extends Middleware
                     : null,
             ],
             'menu' => MenuResource::collection(Menu::get('Menu')->roots()),
+            'metta_seo' => in_array($request->route()->getName(), ['pages.index', 'calculators.show']) && !$request->routeIs('admin.*')
+                ? new SeoGuestResource(app(GetSeoAction::class)->run($request->url()))
+                : []
         ];
     }
 }

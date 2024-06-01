@@ -19,9 +19,6 @@ const form = useForm({
     name: props.calculator?.name ?? "",
     description: props.calculator?.description ?? "",
     category_id: props.calculator?.category_id ?? "",
-    seo_title: props.calculator?.seo_title ?? "",
-    seo_description: props.calculator?.seo_description ?? "",
-    seo_keywords: props.calculator?.seo_keywords ?? "",
 });
 
 const saveCalculator = () => {
@@ -54,24 +51,6 @@ const saveCalculator = () => {
             label="Description"
             v-model="form.description"
             :error-message="form.errors.description"
-        />
-
-        <FTextInput
-            label="Seo title"
-            v-model="form.seo_title"
-            :error-message="form.errors.seo_title"
-        />
-
-        <FTextInput
-            label="Seo description"
-            v-model="form.seo_description"
-            :error-message="form.errors.seo_description"
-        />
-
-        <FTextInput
-            label="Seo keywords"
-            v-model="form.seo_keywords"
-            :error-message="form.errors.seo_keywords"
         />
 
         <button type="submit">{{ calculator ? 'Update' : 'Create' }}</button>
