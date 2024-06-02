@@ -2,6 +2,7 @@
 
 import {Head, useForm, usePage} from "@inertiajs/vue3";
 import Category from "@/Components/Categories/CategoryComponent.vue";
+import SendEmailComponent from "@/Components/Calculators/SendEmailComponent.vue";
 import Layout from "@/Layouts/Guest.vue";
 import {computed} from "vue";
 
@@ -20,11 +21,15 @@ defineOptions({
 const form = useForm({});
 
 const addToFavorites = () => {
-    form.post(`/favorites/${props.calculator.id}`);
+    form.post(`/favorites/${props.calculator.id}`, {
+        preserveScroll: true
+    });
 }
 
 const removeFromFavorites = () => {
-    form.delete(`/favorites/${props.calculator.id}`);
+    form.delete(`/favorites/${props.calculator.id}`, {
+        preserveScroll: true
+    });
 }
 
 const toggleFavorite = () => {
@@ -50,6 +55,12 @@ const toggleFavorite = () => {
         <button @click.prevent="toggleFavorite" :disabled="form.processing" v-if="user">
             Favorite {{ calculator.is_favorite }}
         </button>
+
+        <SendEmailComponent
+            title="Error message"
+            subject="Error message"
+            :send-url="true"
+        />
 
         <Category
             :category="category"

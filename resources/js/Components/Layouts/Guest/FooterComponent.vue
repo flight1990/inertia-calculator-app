@@ -1,0 +1,16 @@
+<script setup>
+
+import SendEmail from "@/Components/Calculators/SendEmailComponent.vue";
+
+</script>
+
+<template>
+    <div>
+        Components: Layouts/Guest/Footer
+
+        <SendEmail
+            title="Feedbacks"
+            subject="Feedback"
+        />
+    </div>
+</template>
