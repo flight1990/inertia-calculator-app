@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\FaqController;
 use App\Http\Controllers\Guest\MailController;
 use App\Http\Controllers\Guest\CalculatorController;
 use App\Http\Controllers\Guest\FavoriteController;
@@ -21,6 +22,10 @@ Route::controller(ProfileController::class)->middleware('auth')->name('profile.'
     Route::get('/', 'edit')->name('edit');
     Route::patch('/', 'update')->name('update');
     Route::delete('/', 'destroy')->name('destroy');
+});
+
+Route::controller(FaqController::class)->name('faq.')->prefix('faq')->group(function() {
+    Route::get('/', 'index')->name('index');
 });
 
 Route::controller(CalculatorController::class)->name('calculators.')->group(function() {

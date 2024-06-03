@@ -21,6 +21,7 @@ class GenerateMenus
     {
         Menu::make('Menu', function ($menu) {
             $menu->add('Home', route('pages.index'))->nickname('pages.index');
+            $menu->add('FAQ', route('faq.index'))->nickname('faq.index');
 
             if (!Auth::check()) {
                 $menu->add('Login', route('login'))->nickname('login');
