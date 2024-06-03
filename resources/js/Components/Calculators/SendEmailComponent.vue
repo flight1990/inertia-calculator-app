@@ -27,7 +27,7 @@ const url = computed(() => props.sendUrl ? window.location.href : null);
 const form = useForm({
     title: props.title ?? null,
     subject: props.subject ?? null,
-    email: user.value.email ?? null,
+    email: user?.value?.email ?? null,
     message: null,
     url: url.value ?? null,
     files: []
