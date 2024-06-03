@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tasks\Calculators;
+namespace App\Tasks\Calculators\Guest;
 
 use App\Models\Calculator;
 use Illuminate\Database\Eloquent\Collection;

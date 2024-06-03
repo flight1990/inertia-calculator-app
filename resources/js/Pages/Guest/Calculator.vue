@@ -1,12 +1,17 @@
 <script setup>
 
-import {Head, useForm} from "@inertiajs/vue3";
+import {Head, useForm, usePage} from "@inertiajs/vue3";
 import Category from "@/Components/Categories/CategoryComponent.vue";
+import SendEmailComponent from "@/Components/Calculators/SendEmailComponent.vue";
 import Layout from "@/Layouts/Guest.vue";
+import {computed} from "vue";
+
+const user = computed(() => usePage().props.auth.user);
 
 const props = defineProps({
     calculator: Object,
-    category: Object
+    category: Object,
+    metta_seo: Object
 });
 
 defineOptions({
@@ -16,11 +21,15 @@ defineOptions({
 const form = useForm({});
 
 const addToFavorites = () => {
-    form.post(`/favorites/${props.calculator.id}`);
+    form.post(`/favorites/${props.calculator.id}`, {
+        preserveScroll: true
+    });
 }
 
 const removeFromFavorites = () => {
-    form.delete(`/favorites/${props.calculator.id}`);
+    form.delete(`/favorites/${props.calculator.id}`, {
+        preserveScroll: true
+    });
 }
 
 const toggleFavorite = () => {
@@ -31,9 +40,11 @@ const toggleFavorite = () => {
 
 <template>
     <Head>
-        <title>{{ calculator.seo_title }}</title>
-        <meta name="description" :content="calculator.seo_description">
-        <meta name="keywords" :content="calculator.seo_keywords">
+        <title>{{ calculator.name }}</title>
+
+        <meta name="description" :content="metta_seo.description">
+        <meta name="keywords" :content="metta_seo.keywords">
+        <meta name="title" :content="metta_seo.title">
     </Head>
 
     <div>
@@ -41,7 +52,15 @@ const toggleFavorite = () => {
 
         <p v-html="calculator.description"></p>
 
-        <button @click.prevent="toggleFavorite" :disabled="form.processing">Favorite {{ calculator.is_favorite }}</button>
+        <button @click.prevent="toggleFavorite" :disabled="form.processing" v-if="user">
+            Favorite {{ calculator.is_favorite }}
+        </button>
+
+        <SendEmailComponent
+            title="Error message"
+            subject="Error message"
+            :send-url="true"
+        />
 
         <Category
             :category="category"

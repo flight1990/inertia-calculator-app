@@ -2,7 +2,7 @@
 
 namespace App\Actions\Calculators\Guest;
 
-use App\Tasks\Calculators\GetGuestFavoritesCalculatorsTask;
+use App\Tasks\Calculators\Guest\GetGuestFavoritesCalculatorsTask;
 use Illuminate\Database\Eloquent\Collection;
 
 class GetFavoritesCalculatorsAction
