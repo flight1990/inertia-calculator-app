@@ -1,3 +1,35 @@
+<script setup>
+
+    import { ref, watch } from "vue";
+    import { debounce } from "lodash";
+    import ClaculatorList from "@/Components/Calculators/CalculatorsListComponent.vue"
+    
+    const search = ref("");
+    const loading = ref(false);
+    const calculators = ref([]);
+
+    const searchHandler = debounce(async () => {
+        try {
+            loading.value = true;
+
+            const { data } = await axios.get('/api/search', {
+                params: {
+                    search: search.value
+                }
+            });
+
+            calculators.value = data;
+
+        } catch (e) {
+            console.log(e);
+        } finally {
+            loading.value = false;
+        }
+    }, 400);
+
+    watch(() => search.value, () => searchHandler());
+
+</script>
 <template>
     <div id="hs-search-modal"
         class="hs-overlay-backdrop-open:backdrop-blur-sm hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
@@ -24,11 +56,16 @@
                 <div
                     class="p-4 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
                     <div class="">
-                        <input type="text" autofocus
-                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none"
-                            placeholder="Найти калькулятор">
+                        <!-- <input autofocus type="search" id="search" placeholder="Find a calculator..." v-model="search"
+                            :disabled="loading"> -->
+
+                        <input id="search" type="search" v-model="search" :disabled="loading" autofocus
+                            placeholder="Найти калькулятор"
+                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none">
+
                     </div>
                     <div class="mt-4 space-y-6">
+                        <ClaculatorList v-if="calculators.length" :calculators="calculators" />
                         <div>
                             <h2 class="text-base font-semibold text-gray-700">
                                 Финансовые калькуляторы
@@ -42,8 +79,7 @@
                                         </span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="flex-none size-4">
+                                            stroke-linecap="round" stroke-linejoin="round" class="flex-none size-4">
                                             <path d="m9 18 6-6-6-6" />
                                         </svg>
                                     </a>
@@ -54,8 +90,7 @@
                                         Ипотечный калькулятор
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="flex-none size-4">
+                                            stroke-linecap="round" stroke-linejoin="round" class="flex-none size-4">
                                             <path d="m9 18 6-6-6-6" />
                                         </svg>
                                     </a>
@@ -73,8 +108,7 @@
                                         Кредитный калькулятор
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="flex-none size-4">
+                                            stroke-linecap="round" stroke-linejoin="round" class="flex-none size-4">
                                             <path d="m9 18 6-6-6-6" />
                                         </svg>
                                     </a>
@@ -85,8 +119,7 @@
                                         Ипотечный калькулятор
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="flex-none size-4">
+                                            stroke-linecap="round" stroke-linejoin="round" class="flex-none size-4">
                                             <path d="m9 18 6-6-6-6" />
                                         </svg>
                                     </a>

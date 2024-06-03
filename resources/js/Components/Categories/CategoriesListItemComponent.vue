@@ -10,7 +10,7 @@ defineProps({
 
 <template>
     <li>
-        {{ item.name }}
+        <b>{{ item.name }}</b>
 
         <CalculatorsList
             :calculators="item.calculators"

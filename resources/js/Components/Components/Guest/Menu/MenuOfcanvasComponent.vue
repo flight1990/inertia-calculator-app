@@ -1,3 +1,10 @@
+<script setup>
+
+    import {computed} from "vue";
+
+    const menu = computed(() => page.props.menu);
+
+</script>
 <template>
     <div id="hs-overlay-menu"
         class="hs-overlay hs-overlay-open:translate-x-0 hs-overlay-backdrop-open:backdrop-blur-sm hidden translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-xs w-full z-[80] bg-white border-s"
@@ -23,8 +30,11 @@
             class="p-4 h-[calc(100vh-4rem)] !overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
             <nav class="hs-accordion-group w-full flex flex-col flex-wrap">
                 <ul class="space-y-1.5">
-                    <li class="hs-accordion" id="accordion-id-1">
-                        <button type="button"
+                    
+
+
+                    <li class="hs-accordion" id="accordion-heading-id-1">
+                        <button type="button" aria-controls="accordion-collapse-id-1"
                             class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
                             Финансовые калькуляторы
                             <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
@@ -34,7 +44,7 @@
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </button>
-                        <div id="accordion-id-1"
+                        <div id="accordion-collapse-id-1" aria-labelledby="accordion-heading-id-1"
                             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                             <ul class="pt-2 ps-2">
                                 <li>
@@ -76,8 +86,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="hs-accordion" id="accordion-id-2">
-                        <button type="button"
+                    <li class="hs-accordion" id="accordion-heading-id-2">
+                        <button type="button" aria-controls="accordion-collapse-id-2"
                             class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
                             Калькуляторы для инвестиций
                             <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
@@ -87,7 +97,7 @@
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </button>
-                        <div id="accordion-id-2"
+                        <div id="accordion-collapse-id-2" aria-labelledby="accordion-heading-id-2"
                             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                             <ul class="pt-2 ps-2">
                                 <li>
@@ -111,8 +121,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="hs-accordion" id="accordion-id-3">
-                        <button type="button"
+                    <li class="hs-accordion" id="accordion-heading-id-3">
+                        <button type="button" aria-controls="accordion-collapse-id-3"
                             class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
                             Бухгалтерия и налоги
                             <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
@@ -122,7 +132,7 @@
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </button>
-                        <div id="accordion-id-3"
+                        <div id="accordion-collapse-id-3" aria-labelledby="accordion-heading-id-3"
                             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                             <ul class="pt-2 ps-2">
                                 <li>
@@ -188,8 +198,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="hs-accordion" id="accordion-id-4">
-                        <button type="button"
+                    <li class="hs-accordion" id="accordion-heading-id-4">
+                        <button type="button" aria-controls="accordion-collapse-id-4"
                             class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
                             Автомобильные калькуляторы
                             <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
@@ -199,7 +209,7 @@
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </button>
-                        <div id="accordion-id-4"
+                        <div id="accordion-collapse-id-4" aria-labelledby="accordion-heading-id-4"
                             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                             <ul class="pt-2 ps-2">
                                 <li>
@@ -241,8 +251,8 @@
                             </ul>
                         </div>
                     </li>
-                    <!-- <li class="hs-accordion" id="accordion-id-5">
-                        <button type="button"
+                    <!-- <li class="hs-accordion" id="accordion-heading-id-5">
+                        <button type="button" aria-controls="accordion-collapse-id-5"
                             class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
                             Калькуляторы для здоровья
                             <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
@@ -252,7 +262,7 @@
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </button>
-                        <div id="accordion-id-5"
+                        <div id="accordion-collapse-id-5" aria-labelledby="accordion-heading-id-5"
                             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                             <ul class="pt-2 ps-2">
                                 <li>
