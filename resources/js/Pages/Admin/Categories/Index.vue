@@ -13,13 +13,11 @@ defineOptions({
 const headers = ref([
     {key: 'id', title: 'ID', align: 'center'},
     {key: 'name', title: 'Name'},
+    {key: 'icon', title: 'Icon'},
     {key: 'slug', title: 'Slug'},
-    {key: 'seo_title', title: 'Seo title'},
-    {key: 'seo_description', title: 'Seo description', sortable: false},
-    {key: 'seo_keywords', title: 'Seo keywords', sortable: false},
     {key: 'created_at', title: 'Created at', align: 'center'},
     {key: 'updated_at', title: 'Updated at', align: 'center'},
-    {key: 'actions', title: 'Actions', align: 'center', sortable: false},
+    {key: 'actions', title: 'Actions', align: 'center'},
 ]);
 
 const params = reactive({

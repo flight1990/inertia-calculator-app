@@ -3,8 +3,15 @@
     import MenuList from "@/Components/Navigation/GuestMenuListComponent.vue";
     import Search from "@/Components/SearchComponent.vue";
 
+
     import HeaderComponent from "@/Components/Components/Guest/Header/HeaderComponent.vue";
-    import FooterComponent from "@/Components/Components/Guest/Footer/FooterComponent.vue";
+   
+import AuthUser from "@/Components/AuthUserComponent.vue";
+import MenuList from "@/Components/Navigation/GuestMenuListComponent.vue";
+import Search from "@/Components/SearchComponent.vue";
+import Footer from "@/Components/Layouts/Guest/FooterComponent.vue";
+import {usePage} from "@inertiajs/vue3";
+import {computed} from "vue";
 
     import {usePage} from "@inertiajs/vue3";
     import {computed} from "vue";
@@ -38,5 +45,7 @@
         />
 
         <slot/>
-    </main> -->
+    </main>
+
+    <Footer />
 </template>

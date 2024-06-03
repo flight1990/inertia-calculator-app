@@ -3,13 +3,13 @@
 namespace App\Tasks\Categories\Admin;
 
 use App\Models\Category;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class GetCategoriesTask
 {
-    public function run(?array $params = []): LengthAwarePaginator
+    public function run(?array $params = []): Collection
     {
-        return Category::query()
-            ->paginate($params['limit'] ?? 10);
+        return Category::query()->get();
+
     }
 }

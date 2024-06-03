@@ -15,9 +15,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:190'],
-            'seo_title' => ['nullable', 'string', 'max:190'],
-            'seo_description' => ['nullable', 'string', 'max:190'],
-            'seo_keywords' => ['nullable', 'string', 'max:190'],
+            'icon' => ['nullable', 'string', 'max:190'],
         ];
     }
 }

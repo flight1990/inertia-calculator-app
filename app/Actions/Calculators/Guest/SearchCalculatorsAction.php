@@ -2,8 +2,8 @@
 
 namespace App\Actions\Calculators\Guest;
 
-use App\Tasks\Calculators\GetCalculatorsByIdsTask;
-use App\Tasks\Calculators\SearchCalculatorsTask;
+use App\Tasks\Calculators\Guest\GetCalculatorsByIdsTask;
+use App\Tasks\Calculators\Guest\SearchCalculatorsTask;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\MailController;
 use App\Http\Controllers\Guest\CalculatorController;
 use App\Http\Controllers\Guest\FavoriteController;
 use App\Http\Controllers\Guest\PageController;
@@ -24,6 +25,10 @@ Route::controller(ProfileController::class)->middleware('auth')->name('profile.'
 
 Route::controller(CalculatorController::class)->name('calculators.')->group(function() {
     Route::get('/{slug}', 'show')->name('show');
+});
+
+Route::controller(MailController::class)->name('mails.')->prefix('mails')->group(function() {
+    Route::post('/send', 'sendMessage')->name('send');
 });
 
 
