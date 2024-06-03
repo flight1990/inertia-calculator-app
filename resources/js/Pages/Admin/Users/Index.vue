@@ -16,7 +16,7 @@ const headers = ref([
     {key: 'email_verified_at', title: 'Verified at', align: 'center'},
     {key: 'created_at', title: 'Created at', align: 'center'},
     {key: 'updated_at', title: 'Updated at', align: 'center'},
-    {key: 'actions', title: 'Actions', align: 'center', sortable: false},
+    {key: 'actions', title: 'Actions', align: 'center'},
 ]);
 
 const params = reactive({

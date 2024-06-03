@@ -3,7 +3,7 @@
 namespace App\Actions\Categories\Admin;
 
 use App\Tasks\Categories\Admin\GetCategoriesTask;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class GetCategoriesAction
 {
@@ -13,7 +13,7 @@ class GetCategoriesAction
     {
     }
 
-    public function run(?array $params = []): LengthAwarePaginator
+    public function run(?array $params = []): Collection
     {
         return $this->getAdminCategoriesTask->run($params);
     }

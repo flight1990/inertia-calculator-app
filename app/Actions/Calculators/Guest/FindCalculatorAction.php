@@ -2,7 +2,7 @@
 
 namespace App\Actions\Calculators\Guest;
 
-use App\Tasks\Calculators\FindGuestCalculatorTask;
+use App\Tasks\Calculators\Guest\FindGuestCalculatorTask;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 

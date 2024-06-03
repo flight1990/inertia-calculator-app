@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\SeoController;
+use App\Http\Controllers\API\CalculatorController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\SearchController;
@@ -13,3 +15,5 @@ Route::get('/user', function (Request $request) {
 Route::get('/search', [SearchController::class, 'search']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/calculators', [CalculatorController::class, 'index']);
+Route::get('/seo', [SeoController::class, 'index']);
