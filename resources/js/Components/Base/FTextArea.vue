@@ -5,10 +5,11 @@ const model = defineModel();
 const props = defineProps({
     errorMessage: [Array, String],
     label: String,
+    placeholder: String,
     disables: Boolean,
     rows: {
         type: [Number, String],
-        default: 10
+        default: 3
     },
     cols: {
         type: [Number, String],
@@ -19,12 +20,16 @@ const props = defineProps({
 </script>
 
 <template>
-    <div>
-        <label>
-            {{ label ?? '' }}
-            <textarea :rows="rows" :cols="cols" v-model="model"></textarea>
+    <div class="">
+        <label v-if="label" :for="'textarea-'+label" 
+            class="block text-sm text-gray-700 font-medium mb-2">
+            {{ label }}
         </label>
-
-        <small v-if="errorMessage">{{ errorMessage }}</small>
+        <textarea v-model="model" :id="'textarea-'+label" :rows="rows" :cols="cols" :placeholder="placeholder" :aria-describedby="'hs-textarea-'+label+'-helper-text'"
+            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none" 
+        ></textarea>
+        <p v-if="errorMessage" class="mt-2 text-sm text-red-600" :id="'hs-textarea-'+label+'-helper-text'">
+            {{ errorMessage }}
+        </p>
     </div>
 </template>

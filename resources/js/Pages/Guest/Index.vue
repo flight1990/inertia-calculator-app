@@ -10,10 +10,10 @@
         layout: Layout
     });
 
-defineProps({
-    categories: Object,
-    metta_seo: Object
-});
+    defineProps({
+        categories: Object,
+        metta_seo: Object
+    });
 
 </script>
 
@@ -21,8 +21,6 @@ defineProps({
 
     <Head>
         <title>Главная</title>
-       
-      
 
         <meta name="description" :content="metta_seo.description">
         <meta name="keywords" :content="metta_seo.keywords">
@@ -31,7 +29,7 @@ defineProps({
 
 
     <HeroComponent />
-    <CatalogComponent />
+    <CatalogComponent :items="categories.data" />
 
 
 

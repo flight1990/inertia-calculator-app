@@ -18,7 +18,7 @@
             </svg>
         </button>
 
-        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 border"
+        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 border z-10"
             aria-labelledby="hs-dropdown-user">
             <div v-if="user">
                 <div class="py-3 px-5 -m-2 mb-2 bg-gray-100 rounded-t-lg">

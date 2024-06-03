@@ -1,5 +1,6 @@
 <script setup>
     import LogoComponent from "@/Components/Components/Guest/LogoComponent.vue";
+    import SupportFooterButtonComponent from "@/Components/Components/Guest/Support/SupportFooterButtonComponent.vue";
 </script>
 
 <template>
@@ -11,10 +12,7 @@
                 </div>
                 <nav class="mt-6">
                     <div class="flex items-center justify-center flex-wrap gap-x-6">
-                        <a class="inline-block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            href="#">
-                            Поддержка
-                        </a>
+                        <SupportFooterButtonComponent />
                         <a class="inline-block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             href="#">
                             Политика конфиденциальности
