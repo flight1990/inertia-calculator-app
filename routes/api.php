@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FaqController;
 use App\Http\Controllers\API\SeoController;
 use App\Http\Controllers\API\CalculatorController;
 use App\Http\Controllers\API\UserController;
@@ -17,3 +18,4 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/calculators', [CalculatorController::class, 'index']);
 Route::get('/seo', [SeoController::class, 'index']);
+Route::get('/faq', [FaqController::class, 'index']);

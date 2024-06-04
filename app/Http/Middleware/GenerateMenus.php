@@ -21,6 +21,7 @@ class GenerateMenus
     {
         Menu::make('Menu', function ($menu) {
             $menu->add('Home', route('pages.index'))->nickname('pages.index');
+            $menu->add('FAQ', route('faq.index'))->nickname('faq.index');
 
             if (!Auth::check()) {
                 $menu->add('Login', route('login'))->nickname('login');
@@ -35,6 +36,7 @@ class GenerateMenus
             $menu->add('Dashboard', route('admin.index'))->nickname('dashboard');
             $menu->add('Categories', route('admin.categories.index'))->nickname('admin.categories.index');
             $menu->add('Calculators', route('admin.calculators.index'))->nickname('admin.calculators.index');
+            $menu->add('FAQ', route('admin.faq.index'))->nickname('admin.faq.index');
             $menu->add('SEO', route('admin.seo.index'))->nickname('admin.seo.index');
             $menu->add('Users', route('admin.users.index'))->nickname('admin.users.index');
         });

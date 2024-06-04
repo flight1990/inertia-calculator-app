@@ -23,6 +23,8 @@ const filesSize = ref(0);
 const uploadFilesHandler = (event) => {
     const files = event.target.files;
 
+    filesSize.value = 0;
+
     for (let i = 0; i < files.length; i++) {
         filesSize.value += files[i].size;
     }
