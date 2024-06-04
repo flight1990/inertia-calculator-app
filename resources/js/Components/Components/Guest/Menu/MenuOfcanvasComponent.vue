@@ -1,8 +1,5 @@
 <script setup>
 
-    import {computed} from "vue";
-
-    const menu = computed(() => page.props.menu);
 
 </script>
 <template>
@@ -31,6 +28,39 @@
             <nav class="hs-accordion-group w-full flex flex-col flex-wrap">
                 <ul class="space-y-1.5">
                     
+                    
+                    <!-- <li v-for="item in items" :key="item.id" class="hs-accordion" :id="'accordion-heading-'+item.id">
+                        <button type="button" :aria-controls="'accordion-collapse-'+item.id"
+                            class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
+                            {{ item.name }}
+                            <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div :id="'accordion-collapse-'+item.id" :aria-labelledby="'accordion-heading-'+item.id"
+                            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
+                            <ul class="pt-2 ps-2">
+                                <li>
+                                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100"
+                                        href="#">
+                                        Калькулятор ИМТ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100"
+                                        href="#">
+                                        Калькулятор веса
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li> -->
+
+
+
 
 
                     <li class="hs-accordion" id="accordion-heading-id-1">

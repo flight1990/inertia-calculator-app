@@ -4,7 +4,6 @@
     import Layout from "@/Layouts/Guest.vue";
     import HeroComponent from "@/Components/Components/Guest/Hero/HeroComponent.vue";
     import CatalogComponent from "@/Components/Components/Guest/Catalog/CatalogComponent.vue";
-    // import CategoriesList from "../../Components/Categories/CategoriesListComponent.vue";
 
     defineOptions({
         layout: Layout
@@ -31,9 +30,4 @@
     <HeroComponent />
     <CatalogComponent :items="categories.data" />
 
-
-
-    <!-- <div>
-        <CategoriesList :items="categories.data" />
-    </div> -->
 </template>
