@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Actions\Categories\Guest\GetCategoriesAction;
 use Illuminate\Support\Facades\Auth;
 use Menu;
 use Closure;
@@ -20,12 +21,24 @@ class GenerateMenus
     private function buildGuestMenu(): void
     {
         Menu::make('Menu', function ($menu) {
-            $menu->add('Home', route('pages.index'))->nickname('pages.index');
+            $categories = app(GetCategoriesAction::class)->run();
 
-            if (!Auth::check()) {
-                $menu->add('Login', route('login'))->nickname('login');
-                $menu->add('Register', route('register'))->nickname('register');
+            foreach ($categories as $category) {
+                $menu->add($category->name, ['disableActivationByURL' => true, 'url' => '#'])->nickname($category->slug);
+
+
+                foreach ($category->calculators as $calculator) {
+                    $menu->item($category->slug)->add($calculator->name, route('calculators.show', $calculator->slug));
+                }
             }
+
+
+//            $menu->add('Home', route('pages.index'))->nickname('pages.index');
+
+//            if (!Auth::check()) {
+//                $menu->add('Login', route('login'))->nickname('login');
+//                $menu->add('Register', route('register'))->nickname('register');
+//            }
         });
     }
 

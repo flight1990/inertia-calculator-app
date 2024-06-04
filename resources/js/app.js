@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
 import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
+import {createInertiaApp, router} from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -18,3 +18,17 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
+router.on('navigate', (event) => {
+    console.log(`Navigated to ${event.detail.page.url}`)
+
+    setTimeout(() => {
+        window.HSStaticMethods.autoInit();
+
+        console.log('ssss')
+    }, 100)
+
+
+    console.log('zzz')
+})
+

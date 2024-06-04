@@ -1,17 +1,19 @@
 <script setup>
 
-    import { ref, watch } from "vue";
+import {onMounted, ref, watch} from "vue";
     import { debounce } from "lodash";
     import {Link} from "@inertiajs/vue3";
-    
+
+    const modal = ref({});
+
     const search = ref("");
     const loading = ref(false);
     const calculators = ref([]);
 
     const searchHandler = debounce(async () => {
         try {
-            loading.value = true;
 
+            loading.value = true;
             const { data } = await axios.get('/api/search', {
                 params: {
                     search: search.value
@@ -27,7 +29,14 @@
         }
     }, 400);
 
+
+const close = () => {
+    document.getElementById('close-search-modal').click();
+}
+
     watch(() => search.value, () => searchHandler());
+
+
 
 </script>
 <template>
@@ -41,7 +50,7 @@
                     <h2 class="text-xl font-semibold text-gray-700">
                         Поиск
                     </h2>
-                    <button type="button"
+                    <button type="button" id="close-search-modal"
                         class="flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
                         data-hs-overlay="#hs-search-modal">
                         <span class="sr-only">Close</span>
@@ -64,12 +73,12 @@
                             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none">
 
                     </div>
-                    
+
                     <div v-if="calculators.length" class="mt-6">
-                        
+
                         <ul class="space-y-1.5">
                             <li v-for="calculator in calculators" :key="calculator.id">
-                                <Link class="py-3 px-5 rounded-lg text-sm text-gray-700 bg-gray-50 hover:text-white hover:bg-primary-600 transition flex items-center justify-between gap-4"
+                                <Link @click="close" class="py-3 px-5 rounded-lg text-sm text-gray-700 bg-gray-50 hover:text-white hover:bg-primary-600 transition flex items-center justify-between gap-4"
                                     :href="`/${calculator.slug}`">
                                     <span>
                                         {{ calculator.name }}
@@ -115,7 +124,7 @@
                                 </li>
                             </ul>
                         </div> -->
-                        
+
                     </div>
 
                     <div v-else class="py-10 text-sm text-gray-500 flex items-center justify-center">
@@ -125,13 +134,16 @@
                         <div v-if="loading" class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-primary-600 rounded-full dark:text-primary-500" role="status" aria-label="loading">
                             <span class="sr-only">Loading...</span>
                         </div>
+
+                        {{ search && loading }}
+
                         <p v-if="search && !loading">
                             Ничего не найдено
                         </p>
                     </div>
 
-                    
-                  
+
+
 
 
                 </div>

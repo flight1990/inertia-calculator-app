@@ -6,17 +6,18 @@
 
     import HeaderComponent from "@/Components/Components/Guest/Header/HeaderComponent.vue";
     import FooterComponent from "@/Components/Components/Guest/Footer/FooterComponent.vue";
-   
+
 
     // import FooterComponent from "@/Components/Layouts/Guest/FooterComponent.vue";
 
 
     import {usePage} from "@inertiajs/vue3";
-    import {computed} from "vue";
+    import {computed, onMounted} from "vue";
 
     const page = usePage();
     const user = computed(() => page.props.auth.user);
     const menu = computed(() => page.props.menu);
+
 </script>
 <template>
     <div class="min-h-screen flex flex-col">

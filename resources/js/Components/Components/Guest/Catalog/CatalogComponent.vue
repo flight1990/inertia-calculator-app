@@ -4,6 +4,8 @@
     defineProps({
         items: Array
     });
+
+
 </script>
 <template>
     <section id="catalog" class="pb-20">
@@ -27,7 +29,7 @@
                     <section v-for="calculator in item.calculators" :key="calculator.id">
                         <Link :href="`/${calculator.slug}`" class="flex items-center justify-center p-4 text-base text-gray-900 font-medium text-center relative rounded-xl shadow-sm bg-white border hover:bg-primary-600 hover:text-white transition">
                             {{ calculator.name }}
-                        </Link>    
+                        </Link>
                     </section>
                 </div>
             </div>
