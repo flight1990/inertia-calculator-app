@@ -1,8 +1,20 @@
 <script setup>
 
-    import {computed} from "vue";
+import {Link, usePage} from "@inertiajs/vue3";
+import {computed, onMounted, ref} from "vue";
 
-    const menu = computed(() => page.props.menu);
+
+const menu = computed(() => usePage().props.menu.data);
+
+const close = () => {
+    document.getElementById('close').click();
+}
+
+// onMounted(() => {
+//    closeBtn.value = document.getElementById('close');
+//
+//     console.log(closeBtn.value);
+// });
 
 </script>
 <template>
@@ -13,7 +25,7 @@
             <h2 class="text-xl font-semibold text-gray-700">
                 Меню
             </h2>
-            <button type="button"
+            <button id="close" type="button"
                 class="flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
                 data-hs-overlay="#hs-overlay-menu">
                 <span class="sr-only">Close</span>
@@ -30,7 +42,35 @@
             class="p-4 h-[calc(100vh-4rem)] !overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
             <nav class="hs-accordion-group w-full flex flex-col flex-wrap">
                 <ul class="space-y-1.5">
-                    
+
+
+
+                    <li v-for="item in menu" :key="item.id" class="hs-accordion" :id="'accordion-heading-'+item.id">
+                        <button type="button" :aria-controls="'accordion-collapse-'+item.id"
+                            class="hs-accordion-toggle hs-accordion-active:bg-gray-100 w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100">
+                            {{ item.name }}
+                            <svg class="hs-accordion-active:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div :id="'accordion-collapse-'+item.id" :aria-labelledby="'accordion-heading-'+item.id"
+                            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
+                            <ul class="pt-2 ps-2">
+                                <li v-for="child in item.children" :key="child.id">
+                                    <Link @click="close" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100"
+                                        :href="child.url">
+                                        {{ child.name }}
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+
 
 
                     <li class="hs-accordion" id="accordion-heading-id-1">
