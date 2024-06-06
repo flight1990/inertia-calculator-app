@@ -15,20 +15,13 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: '#4B5563',
+        color: '#06b6d4',
     },
 });
 
 router.on('navigate', (event) => {
-    console.log(`Navigated to ${event.detail.page.url}`)
-
     setTimeout(() => {
         window.HSStaticMethods.autoInit();
-
-        console.log('ssss')
     }, 100)
-
-
-    console.log('zzz')
 })
 

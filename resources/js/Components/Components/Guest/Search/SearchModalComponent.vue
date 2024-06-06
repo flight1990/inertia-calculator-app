@@ -1,6 +1,6 @@
 <script setup>
 
-import {onMounted, ref, watch} from "vue";
+    import {onMounted, ref, watch} from "vue";
     import { debounce } from "lodash";
     import {Link} from "@inertiajs/vue3";
 

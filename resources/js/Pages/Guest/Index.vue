@@ -1,9 +1,10 @@
 <script setup>
-
     import { Head } from "@inertiajs/vue3";
-    import Layout from "@/Layouts/Guest.vue";
-    import HeroComponent from "@/Components/Components/Guest/Hero/HeroComponent.vue";
-    import CatalogComponent from "@/Components/Components/Guest/Catalog/CatalogComponent.vue";
+
+    import Layout from "@/Layouts/Guest/Guest.vue";
+
+    import HeroComponent from "@/Components/Guest/Hero/HeroComponent.vue";
+    import CatalogComponent from "@/Components/Guest/Catalog/CatalogComponent.vue";
 
     defineOptions({
         layout: Layout

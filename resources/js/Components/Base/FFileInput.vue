@@ -4,6 +4,7 @@
     const model = defineModel();
 
     const props = defineProps({
+        id: String,
         errorMessage: Array,
         label: String,
         disabled: Boolean,
@@ -38,11 +39,11 @@
 
 <template>
     <div class="">
-        <label v-if="label" for="file-input"
+        <label v-if="label" :for="'file-input-'+id"
             class="block text-sm text-gray-700 font-medium mb-2">
             {{ label }}
         </label>
-        <input type="file" id="file-input" :multiple="multiple" @input="uploadFilesHandler" :disabled="disabled"
+        <input type="file" :id="'file-input-'+id" :multiple="multiple" @input="uploadFilesHandler" :disabled="disabled"
             class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm
             focus:z-10 focus:border-primary-500 focus:ring-primary-500 focus:outline-none
             disabled:opacity-50 disabled:pointer-events-none disabled:bg-gray-100
