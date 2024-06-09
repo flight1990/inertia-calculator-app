@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Actions\Calculators\Guest\GetFavoritesCalculatorsAction;
 use App\Actions\Categories\Guest\GetCategoriesAction;
 use Illuminate\Support\Facades\Auth;
 use Menu;

@@ -3,6 +3,7 @@
     import SearchComponent from "@/Components/Guest/Search/SearchComponent.vue";
     import UserDropdownButtonComponent from "@/Components/Guest/User/UserDropdownButtonComponent.vue";
     import MenuComponent from "@/Components/Guest/Menu/MenuComponent.vue";
+
 </script>
 <template>
     <header class="h-16 border-b">
@@ -10,7 +11,12 @@
             <div class="h-full flex items-center justify-between gap-x-10">
                 <LogoComponent />
                 <div class="flex items-center gap-x-2 sm:gap-x-6">
-                    <SearchComponent />
+
+
+
+                    <div>
+                        <SearchComponent />
+                    </div>
                     <UserDropdownButtonComponent />
                     <div class="sm:border-l sm:pl-6">
                         <MenuComponent />

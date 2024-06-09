@@ -4,6 +4,7 @@
     import { computed, onMounted, ref } from "vue";
 
     const menu = computed(() => usePage().props.menu.data);
+    const favorites = computed(() => usePage().props.auth.favorites);
 
     const close = () => {
         document.getElementById('close').click();
@@ -11,6 +12,7 @@
 
 </script>
 <template>
+
     <section>
         <button
             class="p-2 font-semibold text-sm text-gray-700 bg-white rounded-lg hover:bg-gray-100 active:bg-gray-200 flex items-center gap-x-2"
@@ -44,6 +46,7 @@
             </div>
             <div
                 class="p-2 h-[calc(100vh-4rem)] !overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                {{ favorites }}
                 <div class="hs-accordion-group space-y-1.5">
                     <div v-for="item in menu" :key="item.id" class="hs-accordion" :id="'heading-'+item.id">
                         <button :aria-controls="'collapse-'+item.id"

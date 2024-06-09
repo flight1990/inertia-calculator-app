@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Actions\Calculators\Guest\GetFavoritesCalculatorsAction;
 use App\Actions\Seo\Guest\GetSeoAction;
 use App\Http\Resources\SeoGuestResource;
 use App\Http\Resources\SeoResource;
@@ -30,6 +31,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user()
                     ? $request->user()->only(['id', 'name', 'email', 'email_verified_at'])
                     : null,
+                'favorites' => app(GetFavoritesCalculatorsAction::class)->run(),
             ],
             'menu' => MenuResource::collection(Menu::get('Menu')->roots()),
             'metta_seo' => in_array($request->route()->getName(), ['pages.index', 'calculators.show']) && !$request->routeIs('admin.*')

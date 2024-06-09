@@ -3,7 +3,8 @@
 namespace App\Actions\Calculators\Guest;
 
 use App\Tasks\Calculators\Guest\GetGuestFavoritesCalculatorsTask;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
+
 
 class GetFavoritesCalculatorsAction
 {
