@@ -16,9 +16,6 @@ class CategoryResource extends JsonResource
             'name' => $this->whenHas('name'),
             'icon' => $this->whenHas('icon'),
             'slug' => $this->whenHas('slug'),
-            'seo_title' => $this->whenHas('seo_title'),
-            'seo_description' => $this->whenHas('seo_description'),
-            'seo_keywords' => $this->whenHas('seo_keywords'),
             'created_at' => $this->whenHas('created_at'),
             'updated_at' => $this->whenHas('updated_at'),
             'calculators' => CalculatorResource::collection($this->whenLoaded('calculators'))

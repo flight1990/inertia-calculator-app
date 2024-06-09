@@ -5,7 +5,7 @@ import {ref} from "vue";
 const model = defineModel();
 
 const props = defineProps({
-    errorMessage: Array,
+    errorMessage: [Array, String],
     label: String,
     disables: Boolean,
     showFilesSize: {
@@ -29,7 +29,7 @@ const uploadFilesHandler = (event) => {
         filesSize.value += files[i].size;
     }
 
-    model.value = files;
+    model.value = props.multiple ? files : files[0];
 }
 
 </script>
@@ -42,6 +42,6 @@ const uploadFilesHandler = (event) => {
         </label>
 
         <small v-if="filesSize && showFilesSize">Size: {{ filesSize }} Kb</small>
-        <small v-if="errorMessage.length">{{ errorMessage }}</small>
+        <small v-if="errorMessage?.length">{{ errorMessage }}</small>
     </div>
 </template>

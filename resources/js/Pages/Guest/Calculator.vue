@@ -2,9 +2,9 @@
 
 import {Head, useForm, usePage} from "@inertiajs/vue3";
 import Category from "@/Components/Categories/CategoryComponent.vue";
-import SendEmailComponent from "@/Components/Calculators/SendEmailComponent.vue";
+import SendEmailComponent from "@/Components/Mails/SendEmailComponent.vue";
 import Layout from "@/Layouts/Guest.vue";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 
 const user = computed(() => usePage().props.auth.user);
 
@@ -36,6 +36,12 @@ const toggleFavorite = () => {
     props.calculator.is_favorite ? removeFromFavorites() : addToFavorites();
 }
 
+onMounted( () => {
+    import(props.calculator.script).then((script) => {
+        script.show(props.calculator.uuid);
+    });
+})
+
 </script>
 
 <template>
@@ -51,6 +57,11 @@ const toggleFavorite = () => {
         <h2>{{ calculator.slug }}</h2>
 
         <p v-html="calculator.description"></p>
+
+        <hr>
+            <h3>Calculator {{ calculator.uuid }}</h3>
+            <div id="calculator-container"></div>
+        <hr>
 
         <button @click.prevent="toggleFavorite" :disabled="form.processing" v-if="user">
             Favorite {{ calculator.is_favorite }}

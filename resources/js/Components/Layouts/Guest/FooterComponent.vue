@@ -1,6 +1,6 @@
 <script setup>
 
-import SendEmail from "@/Components/Calculators/SendEmailComponent.vue";
+import SendEmail from "@/Components/Mails/SendEmailComponent.vue";
 
 </script>
 
