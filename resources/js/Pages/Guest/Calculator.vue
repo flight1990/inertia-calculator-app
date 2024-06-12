@@ -38,8 +38,10 @@ const toggleFavorite = () => {
 
 onMounted( () => {
     import(props.calculator.script).then((script) => {
-        script.show(props.calculator.uuid);
-    });
+        script.showCalculator(props.calculator.uuid);
+    }).catch(err =>
+        console.error('Error while loading the JS Module', err)
+    );
 })
 
 </script>
@@ -54,18 +56,15 @@ onMounted( () => {
     </Head>
 
     <div>
-        <h2>{{ calculator.slug }}</h2>
-
-        <p v-html="calculator.description"></p>
-
         <hr>
-            <h3>Calculator {{ calculator.uuid }}</h3>
             <div id="calculator-container"></div>
         <hr>
 
         <button @click.prevent="toggleFavorite" :disabled="form.processing" v-if="user">
             Favorite {{ calculator.is_favorite }}
         </button>
+
+        <p v-html="calculator.description"></p>
 
         <SendEmailComponent
             title="Error message"

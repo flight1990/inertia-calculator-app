@@ -30,6 +30,7 @@ Route::controller(FaqController::class)->name('faq.')->prefix('faq')->group(func
 
 Route::controller(CalculatorController::class)->name('calculators.')->group(function() {
     Route::get('/{slug}', 'show')->name('show');
+    Route::post('/calculators/{uuid}', 'processing')->name('processing');
 });
 
 Route::controller(MailController::class)->name('mails.')->prefix('mails')->group(function() {
