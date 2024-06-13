@@ -51,7 +51,7 @@
         <p v-if="filesSize && showFilesSize" class="mt-2 text-sm text-gray-500">
             Размер: {{ filesSize  }} Mb
         </p>
-        <p v-if="errorMessage.length" class="mt-2 text-sm text-red-600">
+        <p v-if="errorMessage?.length" class="mt-2 text-sm text-red-600">
             {{ errorMessage }}
         </p>
     </div>

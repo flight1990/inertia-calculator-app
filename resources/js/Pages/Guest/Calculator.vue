@@ -1,6 +1,6 @@
 <script setup>
     import { Head, useForm, usePage } from "@inertiajs/vue3";
-    import { computed } from "vue";
+    import { computed, onMounted } from "vue";
 
     import Layout from "@/Layouts/Guest/Guest.vue";
 
@@ -43,6 +43,14 @@
         props.calculator.is_favorite ? removeFromFavorites() : addToFavorites();
     }
 
+    onMounted(() => {
+        import(props.calculator.script).then((script) => {
+            script.showCalculator(props.calculator.uuid);
+        }).catch(err =>
+            console.error('Error while loading the JS Module', err)
+        );
+    })
+
 </script>
 <template>
 
@@ -65,7 +73,7 @@
             <div class="flex flex-col lg:flex-row gap-10 mt-4">
                 <main class="flex-1">
                     <section id="calculator">
-                        <div class="w-full h-96 bg-white rounded-lg border  shadow-sm">
+                        <div id="calculator-container" class="w-full h-96 bg-white rounded-lg border  shadow-sm">
 
                         </div>
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">

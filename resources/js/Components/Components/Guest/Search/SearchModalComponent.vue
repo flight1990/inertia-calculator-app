@@ -30,13 +30,12 @@
     }, 400);
 
 
-const close = () => {
-    document.getElementById('close-search-modal').click();
-}
-
     watch(() => search.value, () => searchHandler());
 
 
+onMounted(() => {
+    console.log('onMounted')
+})
 
 </script>
 <template>
@@ -141,10 +140,6 @@ const close = () => {
                             Ничего не найдено
                         </p>
                     </div>
-
-
-
-
 
                 </div>
             </div>

@@ -8,6 +8,7 @@
         DialogTitle,
         DialogClose,
     } from 'radix-vue'
+    import {defineEmits} from "vue";
 
     const props = defineProps({
         title: String,
@@ -16,11 +17,13 @@
             default: 480,
         }
     });
+
+    const emit = defineEmits(['update:open']);
 </script>
 
 <template>
     <DialogRoot>
-        
+
         <DialogTrigger as="div">
             <slot name="trigger">
                 <button>Open Dialog</button>
@@ -29,7 +32,7 @@
 
         <DialogPortal>
             <DialogOverlay class="bg-black/50 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
-            <DialogContent 
+            <DialogContent @openAutoFocus.prevent="emit('update:open')"
                 :aria-describedby="undefined"
                 :style="{ 'max-width': width + 'px' }"
                 class="rounded-xl bg-white border shadow-sm data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] translate-x-[-50%] translate-y-[-50%] focus:outline-none flex flex-col z-[100]">
@@ -38,7 +41,7 @@
                         <DialogTitle as="h2" class="text-xl font-semibold text-gray-700">
                             {{ title }}
                         </DialogTitle>
-                        <DialogClose 
+                        <DialogClose
                             class="flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none">
                             <span class="sr-only">Close</span>
                             <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -50,7 +53,7 @@
                         </DialogClose>
                     </div>
                 </slot>
-                
+
                 <div class="p-4 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
                     <slot name="body"></slot>
                 </div>
