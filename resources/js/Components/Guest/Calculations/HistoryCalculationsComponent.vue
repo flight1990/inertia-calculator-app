@@ -2,11 +2,13 @@
     import { Link } from "@inertiajs/vue3";
     import ROfcanvas from "@/Components/Base/ROfcanvas.vue";
     import { DialogClose } from 'radix-vue';
+
+    const emit = defineEmits(['opened']);
 </script>
 <template>
     <ROfcanvas title="История расчетов" :width="360" side="left">
         <template v-slot:trigger>
-            <button type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
+            <button @click="emit('opened')" type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="h-4 w-4">

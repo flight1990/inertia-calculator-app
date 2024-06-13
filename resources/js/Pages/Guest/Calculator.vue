@@ -1,9 +1,8 @@
 <script setup>
     import { Head, useForm, usePage } from "@inertiajs/vue3";
-    import { computed, onMounted } from "vue";
-
+    import {computed, onMounted, ref, watch} from "vue";
+    import {useLocalStorage} from "@/Composables/useLocalStorage.js";
     import Layout from "@/Layouts/Guest/Guest.vue";
-
     import BreadcrumbsComponent from "@/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
     import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
     import AdComponent from "@/Components/Guest/Ad/AdComponent.vue";
@@ -12,6 +11,12 @@
     import HistoryCalculationsComponent from "@/Components/Guest/Calculations/HistoryCalculationsComponent.vue";
     import ShareCalculationsComponent from "@/Components/Guest/Calculations/ShareCalculationsComponent.vue";
     import RPopover from "@/Components/Base/RPopover.vue";
+
+    const {getItem} = useLocalStorage();
+
+    const historyOpenHandler = () => {
+        console.log(getItem(`history_percent`));
+    }
 
     const user = computed(() => usePage().props.auth.user);
 
@@ -71,14 +76,16 @@
             </div>
 
             <div class="flex flex-col lg:flex-row gap-10 mt-4">
+
                 <main class="flex-1">
                     <section id="calculator">
                         <div id="calculator-container" class="w-full h-96 bg-white rounded-lg border  shadow-sm">
 
                         </div>
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">
-
-                            <HistoryCalculationsComponent />
+                            <HistoryCalculationsComponent
+                                @opened="historyOpenHandler"
+                            />
 
                             <SaveCalculationsComponent />
 
