@@ -17,6 +17,9 @@ class Calculator extends Model
     protected $fillable = [
         'name',
         'slug',
+        'uuid',
+        'backend_path',
+        'frontend_path',
         'description',
         'category_id'
     ];

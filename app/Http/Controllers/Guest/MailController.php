@@ -16,7 +16,7 @@ class MailController extends Controller
     {
         $mailData = $request->except(['files']);
 
-        if (!empty($request->get('files'))) {
+        if (!empty($request->file('files'))) {
             foreach ($request->file('files') as $file) {
                 $mailData['files'][] = Storage::disk('public')->put('mail', $file);
             }

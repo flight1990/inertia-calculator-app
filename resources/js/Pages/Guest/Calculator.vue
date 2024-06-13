@@ -76,11 +76,11 @@
 
                             <ShareCalculationsComponent />
 
-                            <SupportComponent 
+                            <SupportComponent
                                 modal-title="Сообщить об ошибке"
-                                :title="'Error message of '+calculator.name" 
-                                subject="Error message" 
-                                :send-url="true" 
+                                :title="'Error message of '+calculator.name"
+                                subject="Error message"
+                                :send-url="true"
                             />
 
                             <div class="flex items-center">

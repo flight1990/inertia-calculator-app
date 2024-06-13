@@ -2,18 +2,23 @@
 
 namespace App\Actions\Calculators\Admin;
 
-use App\Tasks\Calculators\Admin\DeleteCalculatorTask;
+use App\Tasks\Calculators\Admin\FindCalculatorByIdTask;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteCalculatorAction
 {
     public function __construct(
-        protected DeleteCalculatorTask $deleteCalculatorTask
+        protected FindCalculatorByIdTask $findCalculatorByIdTask
     )
     {
     }
 
     public function run(int $id): void
     {
-        $this->deleteCalculatorTask->run($id);
+        $calculator = $this->findCalculatorByIdTask->run($id);
+
+        Storage::disk('public')->deleteDirectory("calcs/{$calculator['uuid']}");
+
+        $calculator->delete();
     }
 }
