@@ -6,7 +6,6 @@ export default {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
-        "node_modules/preline/dist/*.js"
     ],
     darkMode: 'selector',
     theme: {
@@ -39,11 +38,89 @@ export default {
 					'950': '#0a0a0a',
 				},
 
-			}
+			},
+			keyframes: {
+				backdropIn: {
+					from: { opacity: 0 },
+					to: { opacity: 1 },
+				},
+				dialogIn: {
+					from: { transform: 'translate(-50%, -70%) scale(.98)' },
+					to: { transform: 'translate(-50%, -50%) scale(1)' },
+				},
+				ofcanvasInRight: {
+					from: { transform: 'translate(100%, 0%)' },
+					to: { transform: 'translate(0%, 0%)' },
+				},
+				ofcanvasOutRight: {
+					from: { transform: 'translate(0%, 0%)' },
+					to: { transform: 'translate(100%, 0%)' },
+				},
+				ofcanvasInLeft: {
+					from: { transform: 'translate(-100%, 0%)' },
+					to: { transform: 'translate(0%, 0%)' },
+				},
+				ofcanvasOutLeft: {
+					from: { transform: 'translate(0%, 0%)' },
+					to: { transform: 'translate(-100%, 0%)' },
+				},
+				slideDown: {
+					from: { height: 0 },
+					to: { height: 'var(--radix-accordion-content-height)' },
+				},
+				slideUp: {
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: 0 },
+				},
+				slideDownAndFade: {
+					from: { opacity: 0, transform: 'translateY(-2px)' },
+					to: { opacity: 1, transform: 'translateY(0)' },
+				},
+				slideLeftAndFade: {
+					from: { opacity: 0, transform: 'translateX(2px)' },
+					to: { opacity: 1, transform: 'translateX(0)' },
+				},
+				slideUpAndFade: {
+					from: { opacity: 0, transform: 'translateY(2px)' },
+					to: { opacity: 1, transform: 'translateY(0)' },
+				},
+				slideRightAndFade: {
+					from: { opacity: 0, transform: 'translateX(-2px)' },
+					to: { opacity: 1, transform: 'translateX(0)' },
+				},
+				overlayShow: {
+					from: { opacity: 0 },
+					to: { opacity: 1 },
+				},
+				overlayHide: {
+					from: { opacity: 1 },
+					to: { opacity: 0 },
+				},
+				contentShow: {
+					from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
+					to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+				},
+			},
+			animation: {
+				backdropIn: 'backdropIn 500ms cubic-bezier(0.16, 1, 0.3, 1)',
+				dialogIn: 'dialogIn 500ms cubic-bezier(0, 0, 0.2, 1)',
+				ofcanvasInRight: 'ofcanvasInRight 300ms cubic-bezier(0, 0, 0.2, 1)',
+				ofcanvasOutRight: 'ofcanvasOutRight 300ms cubic-bezier(0, 0, 0.2, 1)',
+				ofcanvasInLeft: 'ofcanvasInLeft 300ms cubic-bezier(0, 0, 0.2, 1)',
+				ofcanvasOutLeft: 'ofcanvasOutLeft 300ms cubic-bezier(0, 0, 0.2, 1)',
+				slideDown: 'slideDown 300ms cubic-bezier(0.4, 0, 1, 1)',
+        		slideUp: 'slideUp 300ms cubic-bezier(0.4, 0, 1, 1)',
+				slideDownAndFade: 'slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+				slideLeftAndFade: 'slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+				slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+				slideRightAndFade: 'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+				overlayShow: 'overlayShow 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+				overlayHide: 'overlayHide 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+       			contentShow: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+			},
 		},
   	},
     plugins: [
         forms,
-        require('preline/plugin'),
     ],
 };

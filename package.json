@@ -21,6 +21,6 @@
     "dependencies": {
         "lodash": "^4.17.21",
         "moment": "^2.30.1",
-        "preline": "^2.3.0"
+        "radix-vue": "^1.8.3"
     }
 }

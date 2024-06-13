@@ -18,10 +18,3 @@ createInertiaApp({
         color: '#06b6d4',
     },
 });
-
-router.on('navigate', (event) => {
-    setTimeout(() => {
-        window.HSStaticMethods.autoInit();
-    }, 100)
-})
-

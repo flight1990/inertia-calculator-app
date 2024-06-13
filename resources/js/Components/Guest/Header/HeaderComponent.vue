@@ -11,12 +11,7 @@
             <div class="h-full flex items-center justify-between gap-x-10">
                 <LogoComponent />
                 <div class="flex items-center gap-x-2 sm:gap-x-6">
-
-
-
-                    <div>
-                        <SearchComponent />
-                    </div>
+                    <SearchComponent />
                     <UserDropdownButtonComponent />
                     <div class="sm:border-l sm:pl-6">
                         <MenuComponent />

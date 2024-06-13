@@ -2,9 +2,6 @@
     import HeaderComponent from "@/Components/Guest/Header/HeaderComponent.vue";
     import FooterComponent from "@/Components/Guest/Footer/FooterComponent.vue";
 
-    import LoginComponent from "@/Components/Guest/Auth/LoginComponent.vue";
-    import RegisterComponent from "@/Components/Guest/Auth/RegisterComponent.vue";
-    import ForgotPasswordComponent from "@/Components/Guest/Auth/ForgotPasswordComponent.vue";
 
     import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
 
@@ -24,15 +21,4 @@
 		</main>
     	<FooterComponent />
   	</div>
-    <section v-if="!user">
-        <LoginComponent />
-        <RegisterComponent />
-        <ForgotPasswordComponent />
-    </section>
-    <section>
-        <SupportComponent 
-            title="Feedbacks"
-            subject="Feedback"
-        />
-    </section>
 </template>

@@ -4,7 +4,7 @@
     import FFileInput from "@/Components/Base/FFileInput.vue";
     import { useForm, usePage } from "@inertiajs/vue3";
     import { computed } from "vue";
-    import FDialog from "@/Components/Base/FDialog.vue";
+    import RDialog from "@/Components/Base/RDialog.vue";
 
     const props = defineProps({
         modalTitle: {
@@ -43,74 +43,95 @@
             .map(([key, value]) => value);
     })
 
-    const closeSupportModal = () => {
-        document.getElementById('close-support-modal').click();
-    }
-
     const sendHandler = () => {
         form.post('/mails/send', {
             preserveScroll: true,
             forceFormData: true,
             onSuccess: () => {
                 form.reset();
-                closeSupportModal();
             }
         });
     }
 </script>
 
 <template>
-
-    <FDialog
-        :title="title"
-    >
-
-        <template v-slot:default="{closeDialog}">
-            <div
-                class="p-4 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
-                <form class="space-y-6">
-                    <FTextInput v-model="form.email" label="Ваш E-mail" :id="'support-email-'+props.title" :error-message="form.errors.email" />
-                    <FTextArea v-model="form.message" label="Сообщение" :id="'support-message-'+props.title" :error-message="form.errors.message" />
-                    <FFileInput v-model="form.files" label="Прикрепить файл" :id="'support-files-'+props.title" :error-message="fileErrors" />
-
-                </form>
-            </div>
+    <RDialog :title="modalTitle" :width="490">
+        <template v-slot:trigger>
+            
+            <template v-if="sendUrl">
+                <button type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="h-4 w-4">
+                        <path d="M22 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12.5" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        <path d="M20 14v4" />
+                        <path d="M20 22v.01" />
+                    </svg>
+                    Сообщить об ошибке
+                </button>
+            </template>
+            <template v-else>
+                <button type="button" class="inline-block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Поддержка
+                </button>
+            </template>
+            
         </template>
+        <template v-slot:body>
+            <form class="space-y-6">
+                <FTextInput v-model="form.email" label="Ваш E-mail" id="support-email" :error-message="form.errors.email" />
+                <FTextArea v-model="form.message" label="Сообщение" id="support-message" :error-message="form.errors.message" />
+                <FFileInput v-model="form.files" label="Прикрепить файл" id="support-files" :error-message="fileErrors" />
+            </form>
+        </template>
+        <template v-slot:footer>
+            <button @click.prevent="sendHandler" :disabled="form.processing"
+                    class="px-3 py-2 font-semibold text-sm text-white bg-primary-500 rounded-lg hover:bg-primary-600 active:bg-primary-700 flex items-center gap-x-2">
+                Отправить
+            </button>
+        </template>
+    </RDialog>
 
+
+
+
+
+
+
+
+
+    <!-- <FDialog :title="modalTitle">
+        <template v-if="sendUrl" v-slot:button="{openDialog}">
+            <button @click="openDialog" type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-4 w-4">
+                    <path d="M22 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12.5" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    <path d="M20 14v4" />
+                    <path d="M20 22v.01" />
+                </svg>
+                Сообщить об ошибке
+            </button>
+        </template>
+        <template v-else v-slot:button="{openDialog}">
+            <button @click="openDialog" type="button" class="inline-block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                Поддержка
+            </button>
+        </template>
+        <template v-slot:default="{closeDialog}">
+            <form class="space-y-6">
+                <FTextInput v-model="form.email" label="Ваш E-mail" id="support-email" :error-message="form.errors.email" />
+                <FTextArea v-model="form.message" label="Сообщение" id="support-message" :error-message="form.errors.message" />
+                <FFileInput v-model="form.files" label="Прикрепить файл" id="support-files" :error-message="fileErrors" />
+            </form>
+        </template>
         <template v-slot:actions>
             <button @click.prevent="sendHandler" :disabled="form.processing"
                     class="px-3 py-2 font-semibold text-sm text-white bg-primary-500 rounded-lg hover:bg-primary-600 active:bg-primary-700 flex items-center gap-x-2">
                 Отправить
             </button>
-
         </template>
-
-    </FDialog>
-
-<!--    <div id="hs-support-modal"-->
-<!--        class="hs-overlay-backdrop-open:backdrop-blur-sm hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">-->
-<!--        <div-->
-<!--            class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto h-[calc(100%-3.5rem)] min-h-[calc(100%-3.5rem)] flex items-center">-->
-<!--            <div-->
-<!--                class="w-full max-h-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">-->
-<!--                <div class="flex justify-between items-center py-3 px-4 border-b">-->
-<!--                    <h2 class="text-xl font-semibold text-gray-700">-->
-<!--                        {{ modalTitle }}-->
-<!--                    </h2>-->
-<!--                    <button type="button" id="close-support-modal"-->
-<!--                        class="flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"-->
-<!--                        data-hs-overlay="#hs-support-modal">-->
-<!--                        <span class="sr-only">Close</span>-->
-<!--                        <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"-->
-<!--                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"-->
-<!--                            stroke-linejoin="round">-->
-<!--                            <path d="M18 6 6 18"></path>-->
-<!--                            <path d="m6 6 12 12"></path>-->
-<!--                        </svg>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                -->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    </FDialog> -->
 </template>
