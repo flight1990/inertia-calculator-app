@@ -22,6 +22,8 @@ defineProps({
         <title>Profile</title>
     </Head>
 
+
+
     <UpdateProfileInformationForm
         :must-verify-email="mustVerifyEmail"
         :status="status"
