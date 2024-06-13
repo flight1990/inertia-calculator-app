@@ -16,6 +16,8 @@ class CreateCalculatorRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:190'],
             'description' => ['required', 'string'],
+            'backend' => ['required', 'file', 'extensions:php'],
+            'frontend' => ['required', 'file', 'extensions:js'],
             'category_id' => ['required', 'integer', 'exists:categories,id']
         ];
     }

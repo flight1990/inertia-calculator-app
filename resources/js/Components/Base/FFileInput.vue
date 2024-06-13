@@ -1,7 +1,23 @@
 <script setup>
     import {ref} from "vue";
+    
+import {ref} from "vue";
 
-    const model = defineModel();
+const model = defineModel();
+
+const props = defineProps({
+    errorMessage: [Array, String],
+    label: String,
+    disables: Boolean,
+    showFilesSize: {
+        type: Boolean,
+        default: true
+    },
+    multiple: {
+        type: Boolean,
+        default: true
+    }
+});
 
     const props = defineProps({
         errorMessage: Array,
@@ -28,11 +44,12 @@
             filesSize.value += files[i].size;
         }
 
-        const filesSizeInMB = filesSize.value / (1024 * 1024);
+        model.value = props.multiple ? files : files[0];
 
+        const filesSizeInMB = filesSize.value / (1024 * 1024);
+        
         filesSize.value = filesSizeInMB.toFixed(4);
 
-        model.value = files;
     }
 </script>
 
@@ -42,6 +59,7 @@
             class="block text-sm text-gray-700 font-medium mb-2">
             {{ label }}
         </label>
+        
         <input type="file" id="file-input" :multiple="multiple" @input="uploadFilesHandler" :disabled="disabled"
             class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm
             focus:z-10 focus:border-primary-500 focus:ring-primary-500 focus:outline-none

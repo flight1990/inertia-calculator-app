@@ -7,13 +7,15 @@ use App\Actions\Categories\Guest\FindCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CalculatorResource;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class CalculatorController extends Controller
 {
     public function __construct(
-        protected FindCategoryAction        $findGuestCategoryAction,
+        protected FindCategoryAction   $findGuestCategoryAction,
         protected FindCalculatorAction $findGuestCalculatorAction
     )
     {
@@ -28,5 +30,12 @@ class CalculatorController extends Controller
             'calculator' => new CalculatorResource($calculator),
             'category' => new CategoryResource($category)
         ]);
+    }
+
+    public function processing(Request $request, string $uuid)
+    {
+        $pathToPhpFile = Storage::path("calcs/{$uuid}/backend.php");
+
+        include_once $pathToPhpFile;
     }
 }

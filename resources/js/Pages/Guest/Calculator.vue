@@ -1,8 +1,12 @@
 <script setup>
 
-    import { Head, useForm, usePage } from "@inertiajs/vue3";
-    import Category from "@/Components/Categories/CategoryComponent.vue";
-    import SendEmailComponent from "@/Components/Calculators/SendEmailComponent.vue";
+
+import {Head, useForm, usePage} from "@inertiajs/vue3";
+import Category from "@/Components/Categories/CategoryComponent.vue";
+import SendEmailComponent from "@/Components/Mails/SendEmailComponent.vue";
+import Layout from "@/Layouts/Guest.vue";
+import {computed, onMounted} from "vue";
+
 
     import BreadcrumbsComponent from "@/Components/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
     import AdComponent from "@/Components/Components/Guest/Ad/AdComponent.vue";
@@ -40,6 +44,14 @@
         props.calculator.is_favorite ? removeFromFavorites() : addToFavorites();
     }
 
+onMounted( () => {
+    import(props.calculator.script).then((script) => {
+        script.showCalculator(props.calculator.uuid);
+    }).catch(err =>
+        console.error('Error while loading the JS Module', err)
+    );
+})
+
 </script>
 
 <template>
@@ -51,6 +63,7 @@
         <meta name="keywords" :content="metta_seo.keywords">
         <meta name="title" :content="metta_seo.title">
     </Head>
+
 
     <section class="pt-10 pb-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -165,14 +178,12 @@
         </div>
     </section>
 
-    <!-- <div>
-        <h2>{{ calculator.slug }}</h2>
-
-        <p v-html="calculator.description"></p>
 
         <button @click.prevent="toggleFavorite" :disabled="form.processing" v-if="user">
             Favorite {{ calculator.is_favorite }}
         </button>
+
+        <p v-html="calculator.description"></p>
 
         <SendEmailComponent
             title="Error message"
@@ -183,5 +194,4 @@
         <Category
             :category="category"
         />
-    </div> -->
 </template>

@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->longText('description')->fulltext();
+            $table->string('uuid')->nullable()->unique();
+            $table->string('backend_path')->nullable();
+            $table->string('frontend_path')->nullable();
+            $table->longText('description');
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
