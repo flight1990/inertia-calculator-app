@@ -19,6 +19,9 @@ export default defineConfig({
         }),
     ],
     rollupOptions: {
-        external: ['lodash'],
+        external: ['lodash', 'vue', 'radix-vue'],
     },
+    ssr: {
+        noExternal: ['vue', 'radix-vue', 'lodash']
+    }
 });
