@@ -5,7 +5,7 @@
 
     const props = defineProps({
         id: String,
-        errorMessage: Array,
+        errorMessage: [Array, String],
         label: String,
         disabled: Boolean,
         showFilesSize: {
@@ -33,7 +33,7 @@
 
         filesSize.value = filesSizeInMB.toFixed(4);
 
-        model.value = files;
+        model.value = props.multiple ? files : files[0];
     }
 </script>
 
