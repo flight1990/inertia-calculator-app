@@ -3,7 +3,6 @@
 
     import LogoComponent from "@/Components/Guest/Logo/LogoComponent.vue";
     import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
-    import SupportFooterButtonComponent from "@/Components/Components/Guest/Support/SupportFooterButtonComponent.vue";
 </script>
 
 <template>
