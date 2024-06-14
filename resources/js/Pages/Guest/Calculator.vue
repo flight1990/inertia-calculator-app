@@ -79,7 +79,7 @@
 
                 <main class="flex-1">
                     <section id="calculator">
-                        <div id="calculator-container" class="w-full p-4 bg-white rounded-lg border shadow-sm">
+                        <div id="calculator-container" class="">
 
                         </div>
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">
