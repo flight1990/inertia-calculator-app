@@ -80,7 +80,7 @@ onMounted(() => {
                 type="search"
                 v-model="search"
                 placeholder="Найти калькулятор"
-                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none"
+                class="form-input py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none"
             />
 
             <div v-if="!calculators.length" class="py-10 text-sm text-gray-500 flex items-center justify-center">

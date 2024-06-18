@@ -78,10 +78,223 @@
             <div class="flex flex-col lg:flex-row gap-10 mt-4">
 
                 <main class="flex-1">
+
+
+
+
+
+
+                    <div class="mb-10 border p-4 bg-white rounded-lg hidden">
+                        <div>
+                            <form>
+                                
+
+                             
+
+
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Что вычислить
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <select 
+                                            name="age" 
+                                            id="age"
+                                            class="w-full py-2 px-4 bg-transparent outline-none border focus:border-black shadow-sm rounded-lg">
+                                            <option value="1" selected="selected">Найти процент от числа</option>
+                                            <option value="2">Сколько процентов составляет число от числа</option>
+                                            <option value="3">Прибавить процент к числу</option>
+                                            <option value="4">Вычесть процент из числа</option>
+                                            <option value="5">На сколько процентов одно число больше другого</option>
+                                            <option value="6">На сколько процентов одно число меньше другого</option>
+                                            <option value="7">Найти 100 процентов</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <label class="text-gray-600">
+                                        Значения
+                                    </label>
+                                    <div class="flex items-center flex-wrap gap-x-4">
+                                        <div>
+                                            <div class="relative mt-2 max-w-md text-gray-700">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="0.00" 
+                                                    class="w-full py-2 pl-4 pr-10 appearance-none bg-transparent outline-none border focus:border-black shadow-sm rounded-lg" />
+                                                <span class="h-6 text-gray-700 absolute right-3 inset-y-0 my-auto select-none">
+                                                    см.
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex-none relative mt-2 max-w-md text-gray-700">some text</div>
+
+                                        <div>
+                                            
+                                            <div class="relative mt-2 max-w-md text-gray-700">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="0.00" 
+                                                    class="w-full py-2 pl-4 pr-10 !appearance-none bg-transparent outline-none border focus:border-black shadow-sm rounded-lg" />
+                                                <span class="h-6 text-gray-700 absolute right-3 inset-y-0 my-auto select-none">
+                                                    см.
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Округлять до
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <select 
+                                            name="age" 
+                                            id="age"
+                                            class="w-full py-2 px-4 bg-transparent outline-none border focus:border-black shadow-sm rounded-lg">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2" selected="">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <button
+                                        class="px-4 py-2 text-sm text-white duration-150 bg-cyan-600 rounded-md hover:bg-cyan-700 active:shadow-lg">
+                                        Расчитать
+                                    </button>
+                                </div>
+
+                                
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Вариант расчета
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <select 
+                                            name="age" 
+                                            id="age"
+                                            class="w-full py-2 px-4 bg-transparent outline-none border focus:border-black shadow-sm rounded-lg">
+                                            <option value="1" data-autofocus="credit_sum" selected="selected">Расчет ежемесячного платежа</option>
+                                            <option value="2" data-autofocus="credit_sum">Расчет срока кредита</option>
+                                            <option value="3" data-autofocus="period">Расчет максимальной суммы кредита</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Сумма кредита, в выбранной валюте
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <input type="number" placeholder="0.00" class="w-full pl-4 pr-16 py-2 appearance-none bg-transparent outline-none border focus:border-black shadow-sm rounded-lg" />
+                                        <div class="absolute inset-y-0 right-3 flex items-center">
+                                            <select class="text-sm bg-transparent outline-none px-1 rounded-lg h-full">
+                                                <option>BYN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Срок кредита
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <input type="number" placeholder="0.00" class="w-full pl-4 pr-24 py-2 appearance-none bg-transparent outline-none border focus:border-black shadow-sm rounded-lg" />
+                                        <div class="absolute inset-y-0 right-3 flex items-center">
+                                            <select class="text-sm bg-transparent outline-none px-1 rounded-lg h-full">
+                                                <option value="Y" selected="">лет</option>
+									            <option value="M">месяцев</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Ежемесячный платеж
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <input 
+                                            type="number" 
+                                            placeholder="0.00" 
+                                            class="w-full py-2 pl-4 pr-12 appearance-none bg-transparent outline-none border focus:border-black shadow-sm rounded-lg" />
+                                        <span class="h-6 text-gray-700 absolute right-3 inset-y-0 my-auto select-none">
+                                            BYN
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">
+                                        Процентная ставка, %
+                                    </label>
+                                    <div class="relative mt-2 max-w-md text-gray-700">
+                                        <input 
+                                            type="number" 
+                                            placeholder="0.00" 
+                                            class="w-full py-2 pl-4 pr-8 appearance-none bg-transparent outline-none border focus:border-black shadow-sm rounded-lg" />
+                                        <span class="h-6 text-gray-700 absolute right-3 inset-y-0 my-auto select-none">
+                                            %
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 first:mt-0">
+                                    <label class="text-gray-600">Тип ежемесячных платежей</label>
+                                    <div class="flex max-w-md gap-x-2 mt-2">
+                                        <div class="w-full flex items-center ps-4 border border-gray-200 shadow-sm rounded-lg">
+                                            <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-black">
+                                            <label for="bordered-radio-1" class="w-full py-2 ms-2 text-gray-700">Аннуитетные</label>
+                                        </div>
+                                        <div class="w-full flex items-center ps-4 border border-gray-200 shadow-sm rounded-lg">
+                                            <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-black">
+                                            <label for="bordered-radio-2" class="w-full py-2 ms-2 text-gray-700">Дифференцированные</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="mt-4 first:mt-0">
+                                    <button
+                                        class="px-4 py-2 text-sm text-white duration-150 bg-cyan-600 rounded-md hover:bg-cyan-700 active:shadow-lg">
+                                        Расчитать
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div>
+                            <!-- response -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
                     <section id="calculator">
-                        <div id="calculator-container" class="">
+
+                        <div class="no-tailwind" id="calculator-container">
 
                         </div>
+
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">
                             <HistoryCalculationsComponent
                                 @opened="historyOpenHandler"

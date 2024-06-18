@@ -28,7 +28,7 @@ const props = defineProps({
             {{ label ?? '' }}
             <select v-model="model">
                 <option value="" disabled>Choose an option</option>
-                <option :value="item[itemValue]" v-for="item in items" :key="item[itemValue]">
+                <option class="form-select" :value="item[itemValue]" v-for="item in items" :key="item[itemValue]">
                     {{ item[itemName] }}
                 </option>
             </select>
