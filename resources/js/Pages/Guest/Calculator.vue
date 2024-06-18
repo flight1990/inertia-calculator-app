@@ -12,12 +12,6 @@
     import ShareCalculationsComponent from "@/Components/Guest/Calculations/ShareCalculationsComponent.vue";
     import RPopover from "@/Components/Base/RPopover.vue";
 
-    const {getItem} = useLocalStorage();
-
-    const historyOpenHandler = () => {
-        console.log(getItem(`history_percent`));
-    }
-
     const user = computed(() => usePage().props.auth.user);
 
     const props = defineProps({
@@ -83,7 +77,8 @@
 
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">
                             <HistoryCalculationsComponent
-                                @opened="historyOpenHandler"
+                                :uuid="calculator.uuid"
+                                :slug="calculator.slug"
                             />
 
                             <SaveCalculationsComponent />
