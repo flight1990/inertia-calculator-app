@@ -10,6 +10,7 @@ class GetCategoriesTask
     public function run(): Collection
     {
         return Category::query()
+            ->whereHas('calculators')
             ->with(['calculators'])
             ->get();
     }

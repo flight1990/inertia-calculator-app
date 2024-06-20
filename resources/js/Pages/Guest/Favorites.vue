@@ -1,8 +1,7 @@
 <script setup>
 
-import Layout from "@/Layouts/Guest.vue";
+import Layout from "@/Layouts/Guest/Guest.vue";
 import {Head} from "@inertiajs/vue3";
-import CalculatorsList from "../../Components/Calculators/CalculatorsListComponent.vue";
 
 defineOptions({
     layout: Layout
@@ -21,9 +20,5 @@ defineProps({
 
     <div>
         Pages: Guest/Favorites
-
-        <CalculatorsList
-            :calculators="calculators.data"
-        />
     </div>
 </template>

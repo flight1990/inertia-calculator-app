@@ -22,12 +22,22 @@ class UpdateCalculatorAction
 
         if (!empty($payload['frontend'])) {
 
-            Storage::disk('public')->delete($calculator['frontend_path']);
+
+            if (!empty($calculator['frontend_path'])) {
+                Storage::disk('public')->delete($calculator['frontend_path']);
+            }
+
+
             $payload['frontend_path'] = $payload['frontend']->storeAs("calcs/{$calculator['uuid']}", 'frontend.'.$payload['frontend']->getClientOriginalExtension());
         }
 
         if (!empty($payload['backend'])) {
-            Storage::disk('public')->delete($calculator['backend_path']);
+
+            if (!empty($calculator['backend_path'])) {
+                Storage::disk('public')->delete($calculator['backend_path']);
+            }
+
+
             $payload['backend_path'] = $payload['backend']->storeAs("calcs/{$calculator['uuid']}", 'backend.'.$payload['backend']->getClientOriginalExtension());
         }
 

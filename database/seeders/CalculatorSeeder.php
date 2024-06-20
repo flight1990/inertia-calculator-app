@@ -13,6 +13,16 @@ class CalculatorSeeder extends Seeder
      */
     public function run(): void
     {
-        Calculator::factory(50)->create();
+        Calculator::factory()->create([
+            'name' => 'Калькулятор процентов',
+        ]);
+
+        Calculator::factory()->create([
+            'name' => 'Калькулятор веса',
+        ]);
+
+        Calculator::factory()->create([
+            'name' => 'Кредитный калькулятор',
+        ]);
     }
 }

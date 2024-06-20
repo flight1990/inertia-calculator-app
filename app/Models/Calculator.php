@@ -27,9 +27,7 @@ class Calculator extends Model
     public function toSearchableArray(): array
     {
         return [
-            'id' => (int) $this['id'],
             'name' => $this['name'],
-            'slug' => $this['slug'],
         ];
     }
 

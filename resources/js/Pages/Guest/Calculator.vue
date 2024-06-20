@@ -81,9 +81,9 @@
                                 :slug="calculator.slug"
                             />
 
-                            <SaveCalculationsComponent />
+<!--                            <SaveCalculationsComponent />-->
 
-                            <ShareCalculationsComponent />
+<!--                            <ShareCalculationsComponent />-->
 
                             <SupportComponent
                                 modal-title="Сообщить об ошибке"

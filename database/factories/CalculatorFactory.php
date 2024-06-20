@@ -13,8 +13,9 @@ class CalculatorFactory extends Factory
 
         return [
             'name' => $name,
+            'uuid' => $this->faker->uuid(),
             'description' => $this->faker->realText(750),
-            'category_id' => Category::query()->inRandomOrder()->value('id')
+            'category_id' => 1
         ];
     }
 }
