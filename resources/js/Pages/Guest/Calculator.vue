@@ -1,7 +1,6 @@
 <script setup>
     import { Head, useForm, usePage } from "@inertiajs/vue3";
     import {computed, onMounted, ref, watch} from "vue";
-    import {useLocalStorage} from "@/Composables/useLocalStorage.js";
     import Layout from "@/Layouts/Guest/Guest.vue";
     import BreadcrumbsComponent from "@/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
     import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
@@ -44,7 +43,13 @@
 
     onMounted(() => {
         import(props.calculator.script).then((script) => {
+           let run = script;
+
             script.showCalculator(props.calculator.uuid);
+
+
+
+            console.log(run);
         }).catch(err =>
             console.error('Error while loading the JS Module', err)
         );
@@ -77,11 +82,12 @@
 
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">
                             <HistoryCalculationsComponent
+                                :name="calculator.name"
                                 :uuid="calculator.uuid"
                                 :slug="calculator.slug"
                             />
 
-<!--                            <SaveCalculationsComponent />-->
+                            <SaveCalculationsComponent />
 
 <!--                            <ShareCalculationsComponent />-->
 

@@ -4,9 +4,10 @@ import ROfcanvas from "@/Components/Base/ROfcanvas.vue";
 import {DialogClose} from 'radix-vue';
 import {useLocalStorage} from "@/Composables/useLocalStorage.js";
 import {computed, ref} from "vue";
+import {useDateTransformer} from "@/Composables/useDateTransformer.js";
 
 const {getItem} = useLocalStorage();
-const props = defineProps(['uuid', 'slug']);
+const props = defineProps(['uuid', 'slug', 'name']);
 const emit = defineEmits(['opened']);
 
 const currentUrl = computed(() => window.location.href);
@@ -18,7 +19,7 @@ const openDrawerHandler = () => {
 
 </script>
 <template>
-    <ROfcanvas title="История расчетов" :width="360" side="left">
+    <ROfcanvas :title="`История расчетов`" :width="360" side="left">
         <template v-slot:trigger>
             <button @click="openDrawerHandler" type="button"
                     class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
@@ -33,12 +34,20 @@ const openDrawerHandler = () => {
             </button>
         </template>
         <template v-slot:body>
+
+            {{ name }}
+
             <ul>
                 <li v-for="item in history">
                     <DialogClose as-child>
                         <Link :href="`/${props.slug}?input=${item.data}`"
                               class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100">
-                            {{ item.name }}
+                           <div> {{ item.name }}</div>
+                            <div class="text-gray-500">
+                                <small>{{ useDateTransformer(item.date, 'DD.MM.YYYY HH:mm') }}</small>
+                            </div>
+
+
                         </Link>
                     </DialogClose>
                 </li>

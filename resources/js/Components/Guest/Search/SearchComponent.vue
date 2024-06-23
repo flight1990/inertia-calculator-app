@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import {ref, watch, onMounted, onUnmounted, onBeforeUnmount} from 'vue';
 import { debounce } from 'lodash';
 import { Link } from '@inertiajs/vue3';
 import RDialog from '@/Components/Base/RDialog.vue';
@@ -12,11 +12,17 @@ const calculators = ref([]);
 const status = ref('Начните поиск');
 const inputRef = ref(null);
 
+const onOpen = () => {
+    search.value = ''
+    status.value = 'Начните поиск';
+    setFocus();
+}
+
 const setFocus = debounce(() => {
     if (inputRef.value) {
         inputRef.value.focus();
     }
-}, 5);
+}, 3);
 
 const searchHandler = async () => {
     if (!search.value) {
@@ -29,7 +35,7 @@ const searchHandler = async () => {
                 params: { search: search.value },
             });
             calculators.value = data;
-            status.value = data.length ? '' : 'Ничего не найдено';
+            status.value = data.length && search.value ? '' : 'Ничего не найдено';
         } catch (e) {
             console.error(e);
         } finally {
@@ -43,13 +49,10 @@ watch(
     debounce(() => searchHandler(), 350)
 );
 
-onMounted(() => {
-    setFocus();
-});
 </script>
 
 <template>
-    <RDialog title="Поиск" @update:open="setFocus">
+    <RDialog title="Поиск" @update:open="onOpen">
         <template v-slot:trigger>
             <button
                 type="button"
