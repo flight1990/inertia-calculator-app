@@ -43,13 +43,9 @@
 
     onMounted(() => {
         import(props.calculator.script).then((script) => {
-           let run = script;
-
+            let run = script;
             script.showCalculator(props.calculator.uuid);
-
-
-
-            console.log(run);
+            // console.log(run);
         }).catch(err =>
             console.error('Error while loading the JS Module', err)
         );

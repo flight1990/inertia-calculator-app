@@ -2,9 +2,6 @@
     import HeaderComponent from "@/Components/Guest/Header/HeaderComponent.vue";
     import FooterComponent from "@/Components/Guest/Footer/FooterComponent.vue";
 
-
-    import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
-
     import {usePage} from "@inertiajs/vue3";
     import {computed, onMounted} from "vue";
 
@@ -15,10 +12,10 @@
 </script>
 <template>
     <div class="min-h-screen flex flex-col">
-    	<HeaderComponent />
-		<main class="flex-1 bg-stone-50">
-            <slot />
-		</main>
-    	<FooterComponent />
-  	</div>
+        <HeaderComponent/>
+        <main class="flex-1 bg-stone-50">
+            <slot/>
+        </main>
+        <FooterComponent/>
+    </div>
 </template>
