@@ -30,6 +30,8 @@ Route::controller(FaqController::class)->name('faq.')->prefix('faq')->group(func
 
 Route::controller(CalculatorController::class)->name('calculators.')->group(function() {
     Route::get('/{slug}', 'show')->name('show');
+    Route::delete('/calculators/{id}', 'destroy')->name('destroy');
+    Route::post('/calculators', 'store')->name('store');
     Route::post('/calculators/{uuid}', 'processing')->name('processing');
 });
 

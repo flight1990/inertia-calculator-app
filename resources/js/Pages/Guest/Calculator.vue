@@ -1,15 +1,17 @@
 <script setup>
-    import { Head, useForm, usePage } from "@inertiajs/vue3";
-    import {computed, onMounted, ref, watch} from "vue";
+    import { Head, useForm, usePage, router } from "@inertiajs/vue3";
+    import {computed, onMounted, ref, watch, onUnmounted, watchEffect} from "vue";
     import Layout from "@/Layouts/Guest/Guest.vue";
     import BreadcrumbsComponent from "@/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
     import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
     import AdComponent from "@/Components/Guest/Ad/AdComponent.vue";
     import CategoryComponent from "@/Components/Guest/Category/CategoryComponent.vue";
     import SaveCalculationsComponent from "@/Components/Guest/Calculations/SaveCalculationsComponent.vue";
+    import SavedCalculationsComponent from "@/Components/Guest/Calculations/SavedCalculationsComponent.vue";
     import HistoryCalculationsComponent from "@/Components/Guest/Calculations/HistoryCalculationsComponent.vue";
     import ShareCalculationsComponent from "@/Components/Guest/Calculations/ShareCalculationsComponent.vue";
     import RPopover from "@/Components/Base/RPopover.vue";
+    import {useUrlWatcher} from "@/Composables/useUrlWatcher.js"
 
     const user = computed(() => usePage().props.auth.user);
 
@@ -49,6 +51,7 @@
         }).catch(err =>
             console.error('Error while loading the JS Module', err)
         );
+
     })
 
 </script>
@@ -73,6 +76,8 @@
             <div class="flex flex-col lg:flex-row gap-10 mt-4">
 
                 <main class="flex-1">
+
+
                     <section id="calculator">
                         <div class="no-tailwind" id="calculator-container"></div>
 
@@ -83,7 +88,9 @@
                                 :slug="calculator.slug"
                             />
 
-                            <SaveCalculationsComponent />
+                            <SaveCalculationsComponent
+                                :id="calculator.id"
+                            />
 
 <!--                            <ShareCalculationsComponent />-->
 
@@ -149,41 +156,14 @@
 
                     <CategoryComponent :category="category" :calculator-id="calculator.id" />
 
-                    <section>
-                        <div class="rounded-lg border bg-white shadow-sm">
-                            <div class="border-b px-4 py-2">
-                                <h4 class="font-semibold text-gray-700 flex items-center gap-3.5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="w-5 h-5 flex-none text-primary-500">
-                                        <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-                                        <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
-                                        <path d="M7 3v4a1 1 0 0 0 1 1h7" />
-                                    </svg>
-                                    Сохраненные расчеты
-                                </h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-500 mb-4">
-                                    Вы можете сохранять ваши расчеты и они будут отображаться здесь.
-                                </p>
-                                <ul class="space-y-1.5">
-                                    <li>
-                                        <a class="flex py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:bg-gray-200"
-                                            href="#">
-                                            Имя сохраненного расчета 1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="flex py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:bg-gray-200"
-                                            href="#">
-                                            Другой расчет
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
+
+
+                    <SavedCalculationsComponent
+                        :items="calculator.saved_calculations"
+                        :slug="calculator.slug"
+                        :name="calculator.name"
+                    />
+
                 </aside>
             </div>
         </div>

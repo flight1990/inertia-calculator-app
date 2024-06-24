@@ -6,6 +6,7 @@ use App\Actions\Calculators\Guest\GetFavoritesCalculatorsAction;
 use App\Actions\Seo\Guest\GetSeoAction;
 use App\Http\Resources\SeoGuestResource;
 use App\Http\Resources\SeoResource;
+use Illuminate\Support\Facades\Session;
 use Menu;
 use App\Http\Resources\MenuResource;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            'session' => Session::get('processing'),
             'auth' => [
                 'user' => $request->user()
                     ? $request->user()->only(['id', 'name', 'email', 'email_verified_at'])

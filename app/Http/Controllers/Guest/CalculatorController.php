@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Guest;
 
+use DB;
 use App\Actions\Calculators\Guest\FindCalculatorAction;
 use App\Actions\Categories\Guest\FindCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CalculatorResource;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
+use function Laravel\Prompts\table;
 
 class CalculatorController extends Controller
 {
@@ -32,10 +36,29 @@ class CalculatorController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+
+        Auth::user()->calculators()->attach($request->calculator_id, [
+            'name' => $request->title,
+            'input' => $request->input
+        ]);
+
+        return back();
+    }
+
+    public function destroy(int $id)
+    {
+
+        DB::table('calculator_user')->delete($id);
+
+
+        return back();
+    }
+
     public function processing(Request $request, string $uuid)
     {
         $pathToPhpFile = Storage::path("calcs/{$uuid}/backend.php");
-
         include_once $pathToPhpFile;
     }
 }
