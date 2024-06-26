@@ -79,7 +79,7 @@
 
 
                     <section id="calculator">
-                        <div class="no-tailwind" id="calculator-container"></div>
+                        <div class="(no-tailwind)" id="calculator-container"></div>
 
                         <div class="flex flex-col sm:flex-row sm:items-end justify-end flex-wrap gap-y-2 gap-x-6 mt-2">
                             <HistoryCalculationsComponent
