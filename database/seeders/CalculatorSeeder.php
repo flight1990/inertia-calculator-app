@@ -15,14 +15,17 @@ class CalculatorSeeder extends Seeder
     {
         Calculator::factory()->create([
             'name' => 'Калькулятор процентов',
+            'category_id' => 1
         ]);
 
         Calculator::factory()->create([
             'name' => 'Калькулятор веса',
+            'category_id' => 3
         ]);
 
         Calculator::factory()->create([
             'name' => 'Кредитный калькулятор',
+            'category_id' => 2
         ]);
     }
 }

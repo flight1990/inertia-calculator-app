@@ -14,7 +14,18 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory()->create([
-            'name' => 'Математические калбкудяторы'
+            'name' => 'Математические калькуляторы',
+            'icon' => '<i class="bi bi-percent"></i>'
+        ]);
+
+        Category::factory()->create([
+            'name' => 'Финансовые калькуляторы',
+            'icon' => '<i class="bi bi-coin"></i>'
+        ]);
+
+        Category::factory()->create([
+            'name' => 'Калькуляторы для здоровья',
+            'icon' => '<i class="bi bi-heart-pulse-fill"></i>'
         ]);
     }
 }
