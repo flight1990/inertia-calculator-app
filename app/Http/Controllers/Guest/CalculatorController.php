@@ -7,6 +7,7 @@ use App\Actions\Calculators\Guest\DeleteSavedCalculatorAction;
 use App\Actions\Calculators\Guest\FindCalculatorAction;
 use App\Actions\Categories\Guest\FindCategoryAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Calculators\SaveUsedCalculatorRequest;
 use App\Http\Resources\CalculatorResource;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\RedirectResponse;
@@ -37,9 +38,9 @@ class CalculatorController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(SaveUsedCalculatorRequest $request): RedirectResponse
     {
-        $this->attachSavedCalculatorAction->run($request->all());
+        $this->attachSavedCalculatorAction->run($request->validated());
         return back();
     }
 
