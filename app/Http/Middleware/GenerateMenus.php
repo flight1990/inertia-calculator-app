@@ -26,10 +26,10 @@ class GenerateMenus
             $categories = app(GetCategoriesAction::class)->run();
 
             foreach ($categories as $category) {
-                $menu->add($category->name, ['disableActivationByURL' => true, 'url' => '#'])->nickname($category->slug);
+                $menu->add($category->name, ['disableActivationByURL' => true, 'url' => '#'])->attr(['icon' => $category->icon])->nickname($category->slug);
 
                 foreach ($category->calculators as $calculator) {
-                    $menu->item($category->slug)->add($calculator->name, route('calculators.show', $calculator->slug));
+                    $menu->item($category->slug)->add($calculator->name, route('calculators.show', $calculator->slug))->attr(['icon' => $calculator->icon]);
                 }
             }
         });

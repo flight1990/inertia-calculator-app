@@ -67,21 +67,7 @@
                         <AccordionTrigger
                             class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
                             <div class="flex items-center gap-x-3.5">
-                                <svg class="w-5 h-5 group-data-[state=open]:text-primary-500"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <rect width="16" height="20" x="4" y="2" rx="2" />
-                                    <line x1="8" x2="16" y1="6" y2="6" />
-                                    <line x1="16" x2="16" y1="14" y2="18" />
-                                    <path d="M16 10h.01" />
-                                    <path d="M12 10h.01" />
-                                    <path d="M8 10h.01" />
-                                    <path d="M12 14h.01" />
-                                    <path d="M8 14h.01" />
-                                    <path d="M12 18h.01" />
-                                    <path d="M8 18h.01" />
-                                </svg>
+                                <div v-html="item.icon" class="text-xl group-data-[state=open]:text-primary-500"></div>
                                 {{ item.name }}
                             </div>
                             <svg class="group-data-[state=open]:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"

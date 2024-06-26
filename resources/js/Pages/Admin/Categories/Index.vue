@@ -93,6 +93,10 @@ const deleteCategory = (id) => {
             {{ item }}
         </template>
 
+        <template v-slot:item.icon="{item}">
+            <div v-html="item.icon" class="text-xl text-center"></div>
+        </template>
+
         <template v-slot:item.created_at="{item}">
             {{ useDateTransformer(item.created_at) }}
         </template>

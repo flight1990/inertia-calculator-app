@@ -12,20 +12,7 @@
         <div class="rounded-lg border bg-white shadow-sm">
             <div class="border-b px-4 py-2">
                 <h4 class="font-semibold text-gray-700 flex items-center gap-3.5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="w-5 h-5 text-primary-500">
-                        <rect width="16" height="20" x="4" y="2" rx="2" />
-                        <line x1="8" x2="16" y1="6" y2="6" />
-                        <line x1="16" x2="16" y1="14" y2="18" />
-                        <path d="M16 10h.01" />
-                        <path d="M12 10h.01" />
-                        <path d="M8 10h.01" />
-                        <path d="M12 14h.01" />
-                        <path d="M8 14h.01" />
-                        <path d="M12 18h.01" />
-                        <path d="M8 18h.01" />
-                    </svg>
+                    <div v-html="category.icon" class="text-xl text-primary-500"></div>
                     {{ category.name }}
                 </h4>
             </div>

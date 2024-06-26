@@ -17,6 +17,7 @@ class MenuResource extends JsonResource
             'url' => $this->resource->url(),
             'isActive' => $this->resource->isActive,
             'nickname' => $this->resource->nickname,
+            'icon' => $this->resource->attributes['icon'],
             'disableActivationByURL' => $this->resource->disableActivationByURL,
             'children' => MenuResource::collection($this->resource->children()),
             'parent' => $this->resource->parent,

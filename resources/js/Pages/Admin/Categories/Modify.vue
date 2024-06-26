@@ -42,6 +42,12 @@ const saveCategory = () => {
             :error-message="form.errors.icon"
         />
 
+        <div>
+            Copy icon from 
+            <a class="underline hover:text-gray-500" href="https://icons.getbootstrap.com/#icons" target="_blank">icons.getbootstrap.com</a> 
+            as Icon font (Example: "&lt;i class="bi bi-calculator"&gt;&lt;/i&gt;")
+        </div>
+
         <button type="submit">{{ category ? 'Update' : 'Create' }}</button>
     </form>
 
