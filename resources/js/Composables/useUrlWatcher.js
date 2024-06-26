@@ -11,13 +11,11 @@ export function useUrlWatcher() {
         const originalMethod = history[methodName];
         history[methodName] = function (...args) {
             const [state, title, url] = args;
-            console.log(`Patched ${methodName} called with URL: ${url}`);
             try {
                 const result = originalMethod.apply(history, args);
                 updateUrl();
                 return result;
             } catch (error) {
-                console.error(`Error in patched ${methodName}:`, error);
                 throw error;
             }
         };
