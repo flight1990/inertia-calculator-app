@@ -31,7 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function calculators(): BelongsToMany
+    public function savedCalculators(): BelongsToMany
     {
         return $this->belongsToMany(Calculator::class, 'calculator_user');
     }

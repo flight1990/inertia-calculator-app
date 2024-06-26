@@ -44,14 +44,14 @@
                         </div>
                     </section>
 
-                    <AdComponent 
-                        class="mt-10" 
+                    <AdComponent
+                        class="mt-10"
                         link="/"
                         img-src="/ad2.gif"
                     />
                 </main>
                 <aside class="lg:w-[300px] flex-none space-y-10">
-                    <AdComponent 
+                    <AdComponent
                         link="/"
                         img-src="/ad1.gif"
                     />
@@ -100,6 +100,5 @@
             </div>
         </div>
     </section>
-
 </template>
 

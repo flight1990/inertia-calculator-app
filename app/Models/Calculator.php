@@ -43,7 +43,7 @@ class Calculator extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function users(): BelongsToMany
+    public function savedUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'calculator_user')->withPivot('name', 'input', 'id');
     }

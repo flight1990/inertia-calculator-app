@@ -14,7 +14,7 @@ class FindGuestCalculatorTask
             ->when(!empty($userId), function ($q) use ($userId) {
                 $q->withCount(['favoriteUsers' => function ($q) use ($userId) {
                     $q->where('user_id', $userId);
-                }])->with('users', function ($q) use($userId) {
+                }])->with('savedUsers', function ($q) use($userId) {
                     $q->where('user_id', $userId);
                 } );
             })

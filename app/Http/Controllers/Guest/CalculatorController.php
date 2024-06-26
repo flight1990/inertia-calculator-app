@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers\Guest;
 
-use DB;
+use App\Actions\Calculators\Guest\AttachSavedCalculatorAction;
+use App\Actions\Calculators\Guest\DeleteSavedCalculatorAction;
 use App\Actions\Calculators\Guest\FindCalculatorAction;
 use App\Actions\Categories\Guest\FindCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CalculatorResource;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
-use function Laravel\Prompts\table;
 
 class CalculatorController extends Controller
 {
     public function __construct(
-        protected FindCategoryAction   $findGuestCategoryAction,
-        protected FindCalculatorAction $findGuestCalculatorAction
+        protected FindCategoryAction          $findGuestCategoryAction,
+        protected FindCalculatorAction        $findGuestCalculatorAction,
+        protected AttachSavedCalculatorAction $attachSavedCalculatorAction,
+        protected DeleteSavedCalculatorAction $deleteSavedCalculatorAction
     )
     {
     }
@@ -36,23 +37,15 @@ class CalculatorController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-
-        Auth::user()->calculators()->attach($request->calculator_id, [
-            'name' => $request->title,
-            'input' => $request->input
-        ]);
-
+        $this->attachSavedCalculatorAction->run($request->all());
         return back();
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
-
-        DB::table('calculator_user')->delete($id);
-
-
+        $this->deleteSavedCalculatorAction->run($id);
         return back();
     }
 

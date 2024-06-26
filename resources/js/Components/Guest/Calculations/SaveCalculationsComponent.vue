@@ -3,16 +3,14 @@ import {useForm, usePage} from '@inertiajs/vue3';
 import FTextInput from "@/Components/Base/FTextInput.vue";
 import RDialog from "@/Components/Base/RDialog.vue";
 import {DialogClose} from 'radix-vue';
-import {computed, watch, ref} from "vue";
+import {computed} from "vue";
 import {useUrlWatcher} from "@/Composables/useUrlWatcher.js";
-
 
 const {id} = defineProps({
     id: Number
 })
 
-
-const { url } = useUrlWatcher();
+const {url} = useUrlWatcher();
 const user = computed(() => usePage().props.auth.user);
 
 const input = computed(() => new URLSearchParams(new URL(url.value).search).get('input'));
@@ -20,22 +18,19 @@ const title = computed(() => JSON.stringify(atob(input.value)));
 
 const form = useForm({
     title: null,
-    calculator_id: id,
-    user_id: user.value.id,
+    calculator_id: null,
     input: null
 });
 
-const onOpen =() => {
+const onOpen = () => {
     form.title = title.value
+    form.calculator_id = id
     form.input = input.value
 }
 
 function handleClick() {
-
-
-
     form.post('/calculators', {
-        preserveScroll:true,
+        preserveScroll: true,
         preserveState: true,
         onSuccess: () => {
 
@@ -48,7 +43,8 @@ function handleClick() {
 <template>
     <RDialog title="Сохранить расчет" :width="420" v-if="user && input">
         <template v-slot:trigger>
-            <button @click="onOpen" type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
+            <button @click="onOpen" type="button"
+                    class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                      class="h-4 w-4">

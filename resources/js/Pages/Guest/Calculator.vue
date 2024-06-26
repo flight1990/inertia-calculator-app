@@ -1,62 +1,57 @@
 <script setup>
-    import { Head, useForm, usePage, router } from "@inertiajs/vue3";
-    import {computed, onMounted, ref, watch, onUnmounted, watchEffect} from "vue";
-    import Layout from "@/Layouts/Guest/Guest.vue";
-    import BreadcrumbsComponent from "@/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
-    import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
-    import AdComponent from "@/Components/Guest/Ad/AdComponent.vue";
-    import CategoryComponent from "@/Components/Guest/Category/CategoryComponent.vue";
-    import SaveCalculationsComponent from "@/Components/Guest/Calculations/SaveCalculationsComponent.vue";
-    import SavedCalculationsComponent from "@/Components/Guest/Calculations/SavedCalculationsComponent.vue";
-    import HistoryCalculationsComponent from "@/Components/Guest/Calculations/HistoryCalculationsComponent.vue";
-    import ShareCalculationsComponent from "@/Components/Guest/Calculations/ShareCalculationsComponent.vue";
-    import RPopover from "@/Components/Base/RPopover.vue";
-    import {useUrlWatcher} from "@/Composables/useUrlWatcher.js"
+import {Head, useForm, usePage} from "@inertiajs/vue3";
+import {computed, onMounted} from "vue";
+import Layout from "@/Layouts/Guest/Guest.vue";
+import BreadcrumbsComponent from "@/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
+import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
+import AdComponent from "@/Components/Guest/Ad/AdComponent.vue";
+import CategoryComponent from "@/Components/Guest/Category/CategoryComponent.vue";
+import SaveCalculationsComponent from "@/Components/Guest/Calculations/SaveCalculationsComponent.vue";
+import SavedCalculationsComponent from "@/Components/Guest/Calculations/SavedCalculationsComponent.vue";
+import HistoryCalculationsComponent from "@/Components/Guest/Calculations/HistoryCalculationsComponent.vue";
+import ShareCalculationsComponent from "@/Components/Guest/Calculations/ShareCalculationsComponent.vue";
+import RPopover from "@/Components/Base/RPopover.vue";
 
-    const user = computed(() => usePage().props.auth.user);
+const user = computed(() => usePage().props.auth.user);
 
-    const props = defineProps({
-        calculator: Object,
-        category: Object,
-        metta_seo: Object
+const props = defineProps({
+    calculator: Object,
+    category: Object,
+    metta_seo: Object
+});
+
+defineOptions({
+    layout: Layout
+})
+
+const form = useForm({});
+
+const addToFavorites = () => {
+    form.post(`/favorites/${props.calculator.id}`, {
+        preserveScroll: true
     });
+}
 
-    defineOptions({
-        layout: Layout
-    })
+const removeFromFavorites = () => {
+    form.delete(`/favorites/${props.calculator.id}`, {
+        preserveScroll: true
+    });
+}
 
-    const form = useForm({});
+const toggleFavorite = () => {
+    props.calculator.is_favorite ? removeFromFavorites() : addToFavorites();
+}
 
-    const addToFavorites = () => {
-        form.post(`/favorites/${props.calculator.id}`, {
-            preserveScroll: true
-        });
-    }
-
-    const removeFromFavorites = () => {
-        form.delete(`/favorites/${props.calculator.id}`, {
-            preserveScroll: true
-        });
-    }
-
-    const toggleFavorite = () => {
-        props.calculator.is_favorite ? removeFromFavorites() : addToFavorites();
-    }
-
-    onMounted(() => {
-        import(props.calculator.script).then((script) => {
-            let run = script;
-            script.showCalculator(props.calculator.uuid);
-            // console.log(run);
-        }).catch(err =>
-            console.error('Error while loading the JS Module', err)
-        );
-
-    })
+onMounted(() => {
+    import(/* @vite-ignore */ props.calculator.script).then((script) => {
+        script.showCalculator(props.calculator.uuid);
+    }).catch(err =>
+        console.error('Error while loading the JS Module', err)
+    );
+})
 
 </script>
 <template>
-
     <Head>
         <title>{{ calculator.name }}</title>
         <meta name="description" :content="metta_seo.description">
@@ -66,7 +61,7 @@
 
     <section class="pt-8 pb-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <BreadcrumbsComponent :title="calculator.name" :category="category.name" />
+            <BreadcrumbsComponent :title="calculator.name" :category="category.name"/>
             <div class="mt-2">
                 <h2 class="text-2xl font-medium tracking-tight text-gray-700">
                     {{ calculator.name }}
@@ -74,10 +69,7 @@
             </div>
 
             <div class="flex flex-col lg:flex-row gap-10 mt-4">
-
                 <main class="flex-1">
-
-
                     <section id="calculator">
                         <div class="(no-tailwind)" id="calculator-container"></div>
 
@@ -92,7 +84,7 @@
                                 :id="calculator.id"
                             />
 
-<!--                            <ShareCalculationsComponent />-->
+                            <!--                            <ShareCalculationsComponent />-->
 
                             <SupportComponent
                                 modal-title="Сообщить об ошибке"
@@ -103,11 +95,12 @@
 
                             <div class="flex items-center">
                                 <button v-if="user" @click.prevent="toggleFavorite" :disabled="form.processing"
-                                    class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
+                                        class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
                                     <svg class="h-4 w-4" :class=" calculator.is_favorite ? 'text-primary-500' : '' "
-                                        :fill=" calculator.is_favorite ? 'currentColor' : 'none' " stroke="currentColor"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                         :fill=" calculator.is_favorite ? 'currentColor' : 'none' "
+                                         stroke="currentColor"
+                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="m12.412 17.876 4.725 3c.61.385 1.36-.187 1.181-.89l-1.368-5.382a.815.815 0 0 1 .272-.825l4.237-3.534c.553-.46.272-1.388-.45-1.434l-5.531-.357a.779.779 0 0 1-.684-.506L12.73 2.754a.778.778 0 0 0-1.463 0l-2.06 5.194a.778.778 0 0 1-.684.506l-5.532.357c-.722.046-1.003.975-.45 1.434l4.238 3.534a.816.816 0 0 1 .272.825l-1.266 4.988c-.215.844.684 1.528 1.406 1.069l4.397-2.785a.768.768 0 0 1 .825 0v0Z">
                                         </path>
@@ -118,10 +111,10 @@
                                     <RPopover :width="320">
                                         <template v-slot:trigger>
                                             <button type="button"
-                                                class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
+                                                    class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
                                                 <svg class="h-4 w-4" fill="none" stroke="currentColor"
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="m12.412 17.876 4.725 3c.61.385 1.36-.187 1.181-.89l-1.368-5.382a.815.815 0 0 1 .272-.825l4.237-3.534c.553-.46.272-1.388-.45-1.434l-5.531-.357a.779.779 0 0 1-.684-.506L12.73 2.754a.778.778 0 0 0-1.463 0l-2.06 5.194a.778.778 0 0 1-.684.506l-5.532.357c-.722.046-1.003.975-.45 1.434l4.238 3.534a.816.816 0 0 1 .272.825l-1.266 4.988c-.215.844.684 1.528 1.406 1.069l4.397-2.785a.768.768 0 0 1 .825 0v0Z">
                                                     </path>
@@ -143,7 +136,7 @@
                         </div>
                     </section>
 
-                    <AdComponent class="mt-10" link="/" img-src="/ad2.gif" />
+                    <AdComponent class="mt-10" link="/" img-src="/ad2.gif"/>
 
                     <section id="description">
                         <article class="mt-10" v-html="calculator.description"></article>
@@ -151,19 +144,15 @@
                 </main>
 
                 <aside class="lg:w-[300px] flex-none space-y-10">
+                    <AdComponent link="/" img-src="/ad1.gif"/>
 
-                    <AdComponent link="/" img-src="/ad1.gif" />
-
-                    <CategoryComponent :category="category" :calculator-id="calculator.id" />
-
-
+                    <CategoryComponent :category="category" :calculator-id="calculator.id"/>
 
                     <SavedCalculationsComponent
                         :items="calculator.saved_calculations"
                         :slug="calculator.slug"
                         :name="calculator.name"
                     />
-
                 </aside>
             </div>
         </div>

@@ -6,18 +6,15 @@ import {computed} from "vue";
 const {name, slug, items} = defineProps({
     name: String,
     slug: String,
-    items: Array
+    items: {
+        type: Array,
+        default: () => []
+    }
 })
-
 
 const form = useForm({});
 
 const onDelete = (id) => {
-
-
-    console.log(id);
-
-
     form.delete(`/calculators/${id}`, {
         preserveState: true,
         preserveScroll: true
