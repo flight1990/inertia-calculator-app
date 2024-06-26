@@ -17,7 +17,7 @@ class CalculatorResource extends JsonResource
             'name' => $this->whenHas('name'),
             'slug' => $this->whenHas('slug'),
             'uuid' => $this->whenHas('uuid'),
-            'script' => $this->whenHas('frontend_path', Storage::disk('public')->url($this['frontend_path'])),
+            'script' => $this->whenHas('frontend_path', !empty($this['frontend_path']) ? Storage::disk('public')->url($this['frontend_path']) : null),
             'description' => $this->whenHas('description'),
             'category_id' => $this->whenHas('category_id'),
             'created_at' => $this->whenHas('created_at'),

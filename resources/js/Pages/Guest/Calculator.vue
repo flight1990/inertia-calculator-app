@@ -43,11 +43,13 @@ const toggleFavorite = () => {
 }
 
 onMounted(() => {
-    import(/* @vite-ignore */ props.calculator.script).then((script) => {
-        script.showCalculator(props.calculator.uuid);
-    }).catch(err =>
-        console.error('Error while loading the JS Module', err)
-    );
+    if (props.calculator.script) {
+        import(/* @vite-ignore */ props.calculator.script).then((script) => {
+            script.showCalculator(props.calculator.uuid);
+        }).catch(err =>
+            console.error('Error while loading the JS Module', err)
+        );
+    }
 })
 
 </script>
