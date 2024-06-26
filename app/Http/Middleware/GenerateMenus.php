@@ -27,13 +27,13 @@ class GenerateMenus
 
             foreach ($categories as $category) {
                 $menu->add($category->name, ['disableActivationByURL' => true, 'url' => '#'])
-                    ->attr(['icon' => 'icon'])
+                    ->attr(['icon' => $category->icon])
                     ->nickname($category->slug);
 
                 foreach ($category->calculators as $calculator) {
                     $menu->item($category->slug)
                         ->add($calculator->name, route('calculators.show', $calculator->slug))
-                        ->attr(['icon' => 'icon']);
+                        ->attr(['icon' => $category->icon]);
                 }
             }
         });
