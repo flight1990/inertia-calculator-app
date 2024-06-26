@@ -3,8 +3,9 @@ import {ref, watch, onMounted, onUnmounted, onBeforeUnmount} from 'vue';
 import { debounce } from 'lodash';
 import { Link } from '@inertiajs/vue3';
 import RDialog from '@/Components/Base/RDialog.vue';
-import { DialogClose } from 'radix-vue';
 import axios from 'axios';
+
+const open = ref(false);
 
 const search = ref('');
 const loading = ref(false);
@@ -16,6 +17,11 @@ const onOpen = () => {
     search.value = ''
     status.value = 'Начните поиск';
     setFocus();
+}
+
+const onClose = () => {
+    search.value = null;
+    open.value = false;
 }
 
 const setFocus = debounce(() => {
@@ -52,9 +58,9 @@ watch(
 </script>
 
 <template>
-    <RDialog title="Поиск" @update:open="onOpen">
+    <RDialog title="Поиск" v-model="open">
         <template v-slot:trigger>
-            <button
+            <button @click="onOpen"
                 type="button"
                 class="p-2 font-semibold text-gray-700 bg-white rounded-lg hover:bg-gray-100 active:bg-gray-200 flex items-center gap-x-2"
             >
@@ -104,29 +110,29 @@ watch(
             <div v-else class="mt-6">
                 <ul class="space-y-1.5">
                     <li v-for="calculator in calculators" :key="calculator.id">
-                        <DialogClose as-child>
-                            <Link
-                                @click="search = null"
-                                class="py-3 px-5 rounded-lg text-sm text-gray-700 bg-gray-50 hover:text-white hover:bg-primary-600 transition flex items-center justify-between gap-4"
-                                :href="`/${calculator.slug}`"
+                       
+                        <Link
+                            @click="onClose"
+                            class="py-3 px-5 rounded-lg text-sm text-gray-700 bg-gray-50 hover:text-white hover:bg-primary-600 transition flex items-center justify-between gap-4"
+                            :href="`/${calculator.slug}`"
+                        >
+                            <span>{{ calculator.name }}</span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="flex-none size-4"
                             >
-                                <span>{{ calculator.name }}</span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="flex-none size-4"
-                                >
-                                    <path d="m9 18 6-6-6-6" />
-                                </svg>
-                            </Link>
-                        </DialogClose>
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </Link>
+                        
                     </li>
                 </ul>
             </div>

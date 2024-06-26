@@ -34,24 +34,27 @@ const openDrawerHandler = () => {
             </button>
         </template>
         <template v-slot:body>
-           
-
-            <div class="w-full text-start font-medium text-gray-700">
-                {{ name }}
+            <div v-if="history?.length">
+                <div class="w-full text-start font-medium text-gray-700">
+                    {{ name }}
+                </div>
+                <ul class="mt-2">
+                    <li v-for="item in history">
+                        <DialogClose as-child>
+                            <Link :href="`/${props.slug}?input=${item.data}`"
+                                class="flex flex-col py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100">
+                                <div class="text-gray-500">
+                                    <small>{{ useDateTransformer(item.date, 'DD.MM.YYYY HH:mm') }}</small>
+                                </div>
+                                <div> {{ item.name }}</div>
+                            </Link>
+                        </DialogClose>
+                    </li>
+                </ul>
             </div>
-            <ul class="mt-2">
-                <li v-for="item in history">
-                    <DialogClose as-child>
-                        <Link :href="`/${props.slug}?input=${item.data}`"
-                            class="flex flex-col py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100">
-                            <div class="text-gray-500">
-                                <small>{{ useDateTransformer(item.date, 'DD.MM.YYYY HH:mm') }}</small>
-                            </div>
-                            <div> {{ item.name }}</div>
-                        </Link>
-                    </DialogClose>
-                </li>
-            </ul>
+            <div v-else class="h-full flex items-center justify-center text-gray-400">
+                История расчетов пуста
+            </div>
         </template>
     </ROfcanvas>
 </template>

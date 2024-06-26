@@ -3,7 +3,7 @@
     import FTextArea from "@/Components/Base/FTextArea.vue";
     import FFileInput from "@/Components/Base/FFileInput.vue";
     import { useForm, usePage } from "@inertiajs/vue3";
-    import { computed } from "vue";
+    import { computed, ref } from "vue";
     import RDialog from "@/Components/Base/RDialog.vue";
 
     const props = defineProps({
@@ -24,6 +24,8 @@
             default: false
         }
     });
+
+    const open = ref(false);
 
     const user = computed(() => usePage().props.auth.user);
     const url = computed(() => props.sendUrl ? window.location.href : null);
@@ -49,13 +51,14 @@
             forceFormData: true,
             onSuccess: () => {
                 form.reset();
+                open.value = false
             }
         });
     }
 </script>
 
 <template>
-    <RDialog :title="modalTitle" :width="490">
+    <RDialog :title="modalTitle" :width="490" v-model="open">
         <template v-slot:trigger>
             
             <template v-if="sendUrl">
