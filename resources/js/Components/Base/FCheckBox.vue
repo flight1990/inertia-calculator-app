@@ -18,7 +18,7 @@
                 class="form-checkbox border-gray-200 rounded text-primary-600 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none" >
         </div>
         <label v-if="label || errorMessage" :for="id" class="ms-3">
-            <span v-if="label" class="block text-sm font-semibold text-gray-800">
+            <span v-if="label" class="block text-sm font-semibold text-gray-800 select-none">
                 {{ label }}
             </span>
             <span v-if="errorMessage" :id="id+'-error'" class="block text-sm text-red-600">
