@@ -230,114 +230,149 @@ onMounted(() => updateOptionsHandler());
 </script>
 
 <template>
-    <table width="100%">
-        <slot name="thead" :headers="headers">
-            <thead>
-            <tr>
-                <th v-if="showExpanded"></th>
-                <th v-if="showSelected" align="center">
-                    <input
-                        type="checkbox"
-                        :checked="isAllSelected"
-                        :indeterminate="isPartiallySelected"
-                        @click="toggleSelectAll"
-                    />
-                </th>
-                <th v-for="header in headers" :key="header.key" :align="header.align ?? 'left'">
-                    <slot :name="`head.${header.key}`" :header="header">
-                        <button
-                            v-if="(header.sortable !== false && !disableSort)"
-                            @click="toggleSort(header.key)"
-                        >
-                            {{ getSortState(header.key) }}
-                        </button>
-
-                        {{ header.title }}
-                    </slot>
-                </th>
-            </tr>
-            </thead>
-        </slot>
-        <slot name="tbody" :items="items">
-            <tbody>
-            <template v-if="loading">
-                <tr>
-                    <td :colspan="colSpan">
-                        <slot name="loading">{{ loadingText }}</slot>
-                    </td>
-                </tr>
-            </template>
-            <template v-else>
-                <template v-if="items.length">
-                    <template v-for="item in items" :key="item[itemKey]">
-                        <tr @dblclick.prevent="dbClickRowHandler(item)">
-                            <td v-if="showExpanded">
-                                <button @click.prevent="toggleExpandedHandler(item[itemValue])">
-                                    {{ isRowExpanded(item[itemValue]) ? '-' : '+' }}
-                                </button>
-                            </td>
-                            <td v-if="showSelected" align="center">
-                                <input type="checkbox" :value="item[itemValue]" v-model="selected"/>
-                            </td>
-                            <td v-for="header in headers" :key="header.key" :align="header.align ?? 'left'">
-                                <slot :name="`item.${header.key}`" :item="item">
-                                    {{ item[header.key] }}
-                                </slot>
-                            </td>
-                        </tr>
-                        <tr v-if="isRowExpanded(item[itemValue])">
-                            <td :colspan="colSpan">
-                                <slot name="expanded-row" :item="item">
-
-                                </slot>
-                            </td>
-                        </tr>
-                    </template>
-                </template>
-                <template v-else>
+    <div class="block w-full overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <slot name="thead" :headers="headers">
+                <thead class="bg-gray-50">
                     <tr>
-                        <td :colspan="colSpan">
-                            {{ noDataText }}
-                        </td>
+                        <th v-if="showExpanded"></th>
+                        <th v-if="showSelected" align="center" class="px-4 py-3">
+                            <label for="hs-at-with-checkboxes-main" class="flex">
+                                <input
+                                    type="checkbox"
+                                    :checked="isAllSelected"
+                                    :indeterminate="isPartiallySelected"
+                                    @click="toggleSelectAll"
+                                    class="shrink-0 border-gray-300 rounded text-primary-600 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none"
+                                />
+                            </label>
+                        </th>
+                        <th v-for="header in headers" :key="header.key" :align="header.align ?? 'center'" class="px-4 py-3">
+                            <slot :name="`head.${header.key}`" :header="header">
+                                <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                                    {{ header.title }}
+                                </span>
+                                <button
+                                    v-if="(header.sortable !== false && !disableSort)"
+                                    @click="toggleSort(header.key)"
+                                >
+                                    {{ getSortState(header.key) }}
+                                </button>
+                            </slot>
+                        </th>
                     </tr>
-                </template>
-            </template>
-            </tbody>
-        </slot>
-        <slot name="tfoot">
-            <tr>
-                <td :colspan="colSpan">
-                    {{ computedPageText }}
-                    <label>
-                        {{ itemsPerPageText }}
-                        <select v-model="options.itemsPerPage" @change="updateItemsPerPageHandler">
-                            <option v-for="option in itemsPerPageOptions" :key="option.value" :value="option.value">
-                                {{ option.title }}
-                            </option>
-                        </select>
-                    </label>
-
-                    <button :disabled="isFirstPageBtnDisabled" @click.prevent="firstPageHandler">
-                        {{ firstPageLabel }}
-                    </button>
-
-                    <button :disabled="isPrevBtnDisabled" @click.prevent="prevPageHandler">
-                        {{ prevPageLabel }}
-                    </button>
-
-                    <template v-if="showCurrentPage">
-                        {{ options.page }}
+                </thead>
+            </slot>
+            <slot name="tbody" :items="items">
+                <tbody class="divide-y divide-gray-200 bg-white">
+                    <template v-if="loading">
+                        <tr>
+                            <td :colspan="colSpan" class="size-px px-2 py-3 text-sm text-gray-700">
+                                <slot name="loading">{{ loadingText }}</slot>
+                            </td>
+                        </tr>
                     </template>
+                    <template v-else>
+                        <template v-if="items.length">
+                            <template v-for="item in items" :key="item[itemKey]">
+                                <tr @dblclick.prevent="dbClickRowHandler(item)" class="hover:bg-gray-50">
+                                    <td v-if="showExpanded" class="size-px px-2 py-2 text-sm text-gray-700">
+                                        <button @click.prevent="toggleExpandedHandler(item[itemValue])">
+                                            {{ isRowExpanded(item[itemValue]) ? '-' : '+' }}
+                                        </button>
+                                    </td>
+                                    <td v-if="showSelected" align="center" class="size-px px-2 py-2 text-sm text-gray-700">
+                                        <input type="checkbox" :value="item[itemValue]" v-model="selected"/>
+                                    </td>
+                                    <td v-for="header in headers" :key="header.key" :align="header.align ?? 'left'" class="size-px px-2 py-2 text-sm text-gray-700">
+                                        <slot :name="`item.${header.key}`" :item="item">
+                                            {{ item[header.key] }}
+                                        </slot>
+                                    </td>
+                                </tr>
+                                <tr v-if="isRowExpanded(item[itemValue])">
+                                    <td :colspan="colSpan">
+                                        <slot name="expanded-row" :item="item">
 
-                    <button :disabled="isNextBtnDisabled" @click.prevent="nextPageHandler">
-                        {{ nexPageLabel }}
-                    </button>
-
-                    <button :disabled="isLastPageBtnDisabled" @click.prevent="lastPageHandler">
-                        {{ lastPageLabel }}
-                    </button>
-                </td>
-            </tr>
-        </slot>
-    </table>
+                                        </slot>
+                                    </td>
+                                </tr>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <tr>
+                                <td :colspan="colSpan" class="size-px px-6 py-3 text-sm text-center text-gray-700">
+                                    {{ noDataText }}
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+                </tbody>
+            </slot>
+        </table>
+    </div>
+    <slot name="tfoot">
+        <div class="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 !mt-0">
+            <div class="order-last sm:order-first flex items-center gap-x-3.5">
+                <label>
+                    <!-- {{ itemsPerPageText }} -->
+                    <select v-model="options.itemsPerPage" @change="updateItemsPerPageHandler"
+                        class="form-select py-1.5 px-2 pe-9 block w-full border-gray-200 rounded-lg text-sm font-medium focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none">
+                        <option v-for="option in itemsPerPageOptions" :key="option.value" :value="option.value">
+                            {{ option.title }}
+                        </option>
+                    </select>
+                </label>
+                
+            </div>
+            <div class="flex items-center gap-x-2">
+                <button :disabled="isFirstPageBtnDisabled" @click.prevent="firstPageHandler" type="button" class="py-1.5 px-1.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 18-6-6 6-6"/><path d="M7 6v12"/></svg>
+                </button>
+                <button :disabled="isPrevBtnDisabled" @click.prevent="prevPageHandler" type="button" class="py-1.5 px-1.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <span class="text-sm font-semibold text-gray-800">
+                    {{ computedPageText }}
+                </span>
+                <!-- <div v-if="showCurrentPage" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700">
+                    {{ options.page }}
+                </div> -->
+                <button :disabled="isNextBtnDisabled" @click.prevent="nextPageHandler" type="button" class="py-1.5 px-1.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+                <button :disabled="isLastPageBtnDisabled" @click.prevent="lastPageHandler" type="button" class="py-1.5 px-1.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 18 6-6-6-6"/><path d="M17 6v12"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- <tr>
+            <td :colspan="colSpan">
+                {{ computedPageText }}
+                <label>
+                    {{ itemsPerPageText }}
+                    <select v-model="options.itemsPerPage" @change="updateItemsPerPageHandler">
+                        <option v-for="option in itemsPerPageOptions" :key="option.value" :value="option.value">
+                            {{ option.title }}
+                        </option>
+                    </select>
+                </label>
+                <button :disabled="isFirstPageBtnDisabled" @click.prevent="firstPageHandler">
+                    {{ firstPageLabel }}
+                </button>
+                <button :disabled="isPrevBtnDisabled" @click.prevent="prevPageHandler">
+                    {{ prevPageLabel }}
+                </button>
+                <template v-if="showCurrentPage">
+                    {{ options.page }}
+                </template>
+                <button :disabled="isNextBtnDisabled" @click.prevent="nextPageHandler">
+                    {{ nexPageLabel }}
+                </button>
+                <button :disabled="isLastPageBtnDisabled" @click.prevent="lastPageHandler">
+                    {{ lastPageLabel }}
+                </button>
+            </td>
+        </tr> -->
+    </slot>
 </template>
