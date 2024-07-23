@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    'driver' => env('SCOUT_DRIVER', 'database'),
 
     /*
     |--------------------------------------------------------------------------
@@ -130,21 +130,21 @@ return [
     |
     */
 
-    'meilisearch' => [
-        'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
-        'key' => env('MEILISEARCH_KEY'),
-        'index-settings' => [
-            'calculators' => [
-                'filterableAttributes'=> ['name'],
-                'searchableAttributes' => ['name'],
-                'sortableAttributes'=> ['id', 'name'],
-                'pagination' => [
-                    'maxTotalHits' => 100000
-                ]
-            ],
-
-        ],
-    ],
+//    'meilisearch' => [
+//        'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
+//        'key' => env('MEILISEARCH_KEY'),
+//        'index-settings' => [
+//            'calculators' => [
+//                'filterableAttributes'=> ['name'],
+//                'searchableAttributes' => ['name'],
+//                'sortableAttributes'=> ['id', 'name'],
+//                'pagination' => [
+//                    'maxTotalHits' => 100000
+//                ]
+//            ],
+//
+//        ],
+//    ],
 
     /*
     |--------------------------------------------------------------------------
