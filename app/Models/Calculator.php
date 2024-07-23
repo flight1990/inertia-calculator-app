@@ -24,12 +24,12 @@ class Calculator extends Model
         'category_id'
     ];
 
-    public function toSearchableArray(): array
-    {
-        return [
-            'name' => $this['name'],
-        ];
-    }
+//    public function toSearchableArray(): array
+//    {
+//        return [
+//            'name' => $this['name'],
+//        ];
+//    }
 
     public function getSlugOptions() : SlugOptions
     {
