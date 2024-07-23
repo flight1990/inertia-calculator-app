@@ -22,10 +22,11 @@ class SearchCalculatorsAction
 
         if (!empty($search)) {
             $searchResults = $this->searchCalculatorsTask->run($search);
+            $ids = $searchResults['results']->pluck('id')->toArray();
         }
 
-        return !empty($searchResults['hits'])
-            ? $this->getCalculatorsByIdsTask->run(Arr::pluck($searchResults['hits'], 'id'))
+        return !empty($ids)
+            ? $this->getCalculatorsByIdsTask->run($ids)
             : collect([]);
     }
 }
