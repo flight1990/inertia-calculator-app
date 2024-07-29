@@ -14,7 +14,7 @@ class CreateSeoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url' => ['nullable', 'url', 'max:255'],
+            'url' => ['required', 'url', 'max:255'],
             'h1' => ['nullable', 'string', 'max:255'],
             'title' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
