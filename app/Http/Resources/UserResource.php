@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'email_verified_at' => $this->whenHas('email_verified_at'),
             'created_at' => $this->whenHas('created_at'),
             'updated_at' => $this->whenHas('updated_at'),
+            'is_admin' => $this->whenHas('is_admin'),
         ];
     }
 }

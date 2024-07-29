@@ -22,7 +22,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        return redirect()->intended(route('pages.index', absolute: false));
+        return redirect()->back();
     }
 
     public function destroy(Request $request): RedirectResponse

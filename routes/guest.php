@@ -8,6 +8,8 @@ use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\Guest\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::controller(PageController::class)->name('pages.')->group(function() {
     Route::get('/', 'index')->name('index');
 });
@@ -38,5 +40,8 @@ Route::controller(CalculatorController::class)->name('calculators.')->group(func
 Route::controller(MailController::class)->name('mails.')->prefix('mails')->group(function() {
     Route::post('/send', 'sendMessage')->name('send');
 });
+
+
+
 
 

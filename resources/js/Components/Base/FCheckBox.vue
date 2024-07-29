@@ -11,7 +11,7 @@
 
 </script>
 
-<template>    
+<template>
     <div class="relative flex items-start">
         <div class="flex items-center h-5 ">
             <input v-model="model" :id="id" type="checkbox" :aria-describedby="id+'-error'"

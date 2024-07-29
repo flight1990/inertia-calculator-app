@@ -3,6 +3,7 @@
 import Layout from "@/Layouts/Admin/Admin.vue";
 import {Head, Link, useForm} from "@inertiajs/vue3";
 import FTextInput from "@/Components/Base/FTextInput.vue";
+import FCheckBox from "@/Components/Base/FCheckBox.vue";
 
 defineOptions({
     layout: Layout
@@ -15,6 +16,7 @@ const props = defineProps({
 const form = useForm({
     name: props.user?.name ?? "",
     email: props.user?.email ?? "",
+    is_admin: props.user?.is_admin ?? false,
     password: "",
     password_confirmation: ""
 });
@@ -29,7 +31,7 @@ const saveUser = () => {
     <Head>
         <title>{{ user ? 'Редактировать' : 'Создать' }} пользователя</title>
     </Head>
-    
+
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
             <div>
@@ -62,6 +64,11 @@ const saveUser = () => {
                     v-model="form.password_confirmation"
                     :error-message="form.errors.password_confirmation"
                 />
+
+                <FCheckBox
+                    label="Админ"
+                    v-model="form.is_admin"
+                />
             </form>
         </div>
         <div class="px-6 py-4 flex items-center gap-x-2">
@@ -74,6 +81,6 @@ const saveUser = () => {
         </div>
     </div>
 
-    
+
 
 </template>
