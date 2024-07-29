@@ -9,11 +9,35 @@
     const favorites = computed(() => usePage().props.auth.favorites);
     const user = computed(() => usePage().props.auth.user);
 
+    const recentUsedCalculators = ref([])
+
+    const getRecentUsed = async () => {
+        const recentUsedUuid = Object.keys(localStorage)
+            .filter(key => key.startsWith("history_"))
+            .map(key => key.substring("history_".length));
+
+        await fetchRecentCalculators(recentUsedUuid)
+    }
+
+    const fetchRecentCalculators = async (recentUsedUuid) => {
+
+        const params = {uuid: recentUsedUuid}
+
+        try {
+            const {data} = await axios.get('/api/calculators/recent', {params});
+
+            recentUsedCalculators.value = data.data;
+        } catch (e) {
+        } finally {
+        }
+    }
+
 </script>
 <template>
     <ROfcanvas title="Меню" :width="360" side="right">
         <template v-slot:trigger>
             <button
+                @click="getRecentUsed"
                 class="p-2 font-semibold text-sm text-gray-700 bg-white rounded-lg hover:bg-gray-100 active:bg-gray-200 flex items-center gap-x-2">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -62,6 +86,8 @@
                     </AccordionContent>
                 </AccordionItem>
 
+                {{ recentUsedCalculators }}
+
                 <template v-for="item in menu" :key="item.id">
                     <AccordionItem :value="item.nickname">
                         <AccordionTrigger
@@ -97,5 +123,4 @@
             </AccordionRoot>
         </template>
     </ROfcanvas>
-
 </template>

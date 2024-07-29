@@ -34,6 +34,10 @@
 
     <!-- <RecentUsedCalculators v-if="recentUsedCalculators.length" :items="recentUsedCalculators"/> -->
 
+
+    {{ recentUsed }}
+
+
     <section id="catalog" class="py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- <div v-if="recentUsedCalculators.length" class="mt-16 first:mt-0">

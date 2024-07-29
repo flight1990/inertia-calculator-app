@@ -17,5 +17,6 @@ Route::get('/search', [SearchController::class, 'search']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/calculators', [CalculatorController::class, 'index']);
+Route::get('/calculators/recent', [CalculatorController::class, 'recent']);
 Route::get('/seo', [SeoController::class, 'index']);
 Route::get('/faq', [FaqController::class, 'index']);
