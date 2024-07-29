@@ -10,32 +10,30 @@
     const favorites = computed(() => usePage().props.auth.favorites);
     const user = computed(() => usePage().props.auth.user);
 
-    const recentUsed = ref([])
-
-    const getRecentUsed = () => {
-        recentUsed.value = Object.keys(localStorage)
-            .filter(key => key.startsWith("history_"))
-            .map(key => key.substring("history_".length));
-    }
-
-    const recentUsedCalculators = computed(() => {
-        return items.flatMap(item =>
-            item.calculators.filter(calc => recentUsed.value.includes(calc.uuid)).map(calc => ({
-                id: calc.id,
-                name: calc.name,
-                slug: calc.slug
-            }))
-        );
-    });
-
-    onMounted(() => getRecentUsed())
+    // const recentUsed = ref([])
+    //
+    // const getRecentUsed = () => {
+    //     recentUsed.value = Object.keys(localStorage)
+    //         .filter(key => key.startsWith("history_"))
+    //         .map(key => key.substring("history_".length));
+    // }
+    //
+    // const recentUsedCalculators = computed(() => {
+    //     return items.flatMap(item =>
+    //         item.calculators.filter(calc => recentUsed.value.includes(calc.uuid)).map(calc => ({
+    //             id: calc.id,
+    //             name: calc.name,
+    //             slug: calc.slug
+    //         }))
+    //     );
+    // });
+    //
+    // onMounted(() => getRecentUsed())
 </script>
 <template>
 
     <!-- <RecentUsedCalculators v-if="recentUsedCalculators.length" :items="recentUsedCalculators"/> -->
 
-
-    {{ recentUsed }}
 
 
     <section id="catalog" class="py-8">
