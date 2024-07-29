@@ -36,7 +36,7 @@
 
     <section id="catalog" class="py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div v-if="recentUsedCalculators.length" class="mt-16 first:mt-0">
+            <!-- <div v-if="recentUsedCalculators.length" class="mt-16 first:mt-0">
                 <div class="scroll-mt-12 text-start col-span-2 md:col-span-3 lg:col-span-4 mb-4 xl:mb-6">
                     <h3 class="text-gray-700 text-lg font-semibold flex items-center gap-3.5">
                         <svg
@@ -68,7 +68,7 @@
                         </Link>
                     </section>
                 </div>
-            </div>
+            </div> -->
             <div v-if="user && favorites.length" class="mt-16 first:mt-0">
                 <div class="scroll-mt-12 text-start col-span-2 md:col-span-3 lg:col-span-4 mb-4 xl:mb-6">
                     <h3 class="text-gray-700 text-lg font-semibold flex items-center gap-3.5">

@@ -1,7 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
-import ROfcanvas from "@/Components/Base/ROfcanvas.vue";
-import {DialogClose} from 'radix-vue';
+import RDialog from "@/Components/Base/RDialog.vue";
 import {useLocalStorage} from "@/Composables/useLocalStorage.js";
 import {computed, ref} from "vue";
 import {useDateTransformer} from "@/Composables/useDateTransformer.js";
@@ -19,7 +18,7 @@ const openDrawerHandler = () => {
 
 </script>
 <template>
-    <ROfcanvas :title="`История расчетов`" :width="360" side="left">
+    <RDialog title="История расчетов" :width="420">
         <template v-slot:trigger>
             <button @click="openDrawerHandler" type="button"
                     class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
@@ -35,26 +34,21 @@ const openDrawerHandler = () => {
         </template>
         <template v-slot:body>
             <div v-if="history?.length">
-                <div class="w-full text-start font-medium text-gray-700">
-                    {{ name }}
-                </div>
-                <ul class="mt-2">
+                <ul class="">
                     <li v-for="item in history">
-                        <DialogClose as-child>
-                            <Link :href="`/${props.slug}?input=${item.data}`"
-                                class="flex flex-col py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100">
-                                <div class="text-gray-500">
-                                    <small>{{ useDateTransformer(item.date, 'DD.MM.YYYY HH:mm') }}</small>
-                                </div>
-                                <div> {{ item.name }}</div>
-                            </Link>
-                        </DialogClose>
+                        <Link :href="`/${props.slug}?input=${item.data}`"
+                            class="flex flex-col py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100">
+                            <div class="text-gray-500">
+                                <small>{{ useDateTransformer(item.date, 'DD.MM.YYYY HH:mm') }}</small>
+                            </div>
+                            <div> {{ item.name }}</div>
+                        </Link>
                     </li>
                 </ul>
             </div>
-            <div v-else class="h-full flex items-center justify-center text-gray-400">
+            <div v-else class="h-56 flex items-center justify-center text-gray-400">
                 История расчетов пуста
             </div>
         </template>
-    </ROfcanvas>
+    </RDialog>
 </template>
