@@ -32,7 +32,7 @@
         </DialogTrigger>
 
         <DialogPortal>
-            <DialogOverlay class="bg-black/50 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
+            <DialogOverlay class="bg-black/50 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-[60]" />
             <DialogContent @openAutoFocus.prevent="emit('update:open')"
                 :aria-describedby="undefined"
                 :style="{ 'max-width': width + 'px' }"
