@@ -12,15 +12,11 @@ class MenuResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->id,
-            'name' => $this->resource->title,
-            'url' => $this->resource->url(),
-            'isActive' => $this->resource->isActive,
-            'nickname' => $this->resource->nickname,
-            'icon' => $this->resource->attributes['icon'] ?? null,
-            'disableActivationByURL' => $this->resource->disableActivationByURL,
-            'children' => MenuResource::collection($this->resource->children()),
-            'parent' => $this->resource->parent,
+            'id' => $this->whenHas('id'),
+            'title' => $this->whenHas('title'),
+            'url' => $this->whenHas('url'),
+            'created_at' => $this->whenHas('created_at'),
+            'updated_at' => $this->whenHas('updated_at'),
         ];
     }
 }

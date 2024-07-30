@@ -8,7 +8,7 @@ use App\Http\Resources\SeoGuestResource;
 use App\Http\Resources\SeoResource;
 use Illuminate\Support\Facades\Session;
 use Menu;
-use App\Http\Resources\MenuResource;
+use App\Http\Resources\NavigationResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -35,7 +35,7 @@ class HandleInertiaRequests extends Middleware
                     : null,
                 'favorites' => app(GetFavoritesCalculatorsAction::class)->run(),
             ],
-            'menu' => MenuResource::collection(Menu::get('Menu')->roots()),
+            'menu' => NavigationResource::collection(Menu::get('Menu')->roots()),
             'metta_seo' => in_array($request->route()->getName(), ['pages.index', 'calculators.show']) && !$request->routeIs('admin.*')
                 ? new SeoGuestResource(app(GetSeoAction::class)->run($request->url()))
                 : []
