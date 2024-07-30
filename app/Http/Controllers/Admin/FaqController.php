@@ -8,8 +8,8 @@ use App\Actions\Faq\Admin\FindFaqByIdAction;
 use App\Actions\Faq\Admin\GetFaqsAction;
 use App\Actions\Faq\Admin\UpdateFaqAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Faq\CreateFaqRequest;
-use App\Http\Requests\Faq\UpdateFaqRequest;
+use App\Http\Requests\Faq\CreateMenuRequest;
+use App\Http\Requests\Faq\UpdateMenuRequest;
 use App\Http\Resources\FaqResource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +38,7 @@ class FaqController extends Controller
         return Inertia::render('Admin/Faq/Modify');
     }
 
-    public function store(CreateFaqRequest $request): RedirectResponse
+    public function store(CreateMenuRequest $request): RedirectResponse
     {
         $this->createFaqAction->run($request->validated());
         return redirect()->route('admin.faq.index');
@@ -53,7 +53,7 @@ class FaqController extends Controller
         ]);
     }
 
-    public function update(UpdateFaqRequest $request, int $id): RedirectResponse
+    public function update(UpdateMenuRequest $request, int $id): RedirectResponse
     {
         $this->updateFaqAction->run($request->validated(), $id);
         return redirect()->route('admin.faq.index');

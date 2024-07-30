@@ -8,6 +8,7 @@
         "php": "^8.2",
         "http-interop/http-factory-guzzle": "^1.2",
         "inertiajs/inertia-laravel": "^1.0",
+        "kalnoy/nestedset": "^6.0",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
