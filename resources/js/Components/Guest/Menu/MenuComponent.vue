@@ -15,17 +15,13 @@
         const recentUsedUuid = Object.keys(localStorage)
             .filter(key => key.startsWith("history_"))
             .map(key => key.substring("history_".length));
-
         await fetchRecentCalculators(recentUsedUuid)
     }
 
     const fetchRecentCalculators = async (recentUsedUuid) => {
-
         const params = {uuid: recentUsedUuid}
-
         try {
             const {data} = await axios.get('/api/calculators/recent', {params});
-
             recentUsedCalculators.value = data.data;
         } catch (e) {
         } finally {
@@ -51,11 +47,57 @@
         <template v-slot:body>
             <AccordionRoot class="space-y-1.5" type="single" :collapsible="true">
 
+                <AccordionItem v-if="recentUsedCalculators" :value="recentUsedCalculators">
+                    <AccordionTrigger
+                        class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
+                        <div class="flex items-center gap-x-3.5">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="h-5 w-5 group-data-[state=open]:text-primary-500"
+                            >
+                                <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/>
+                                <path d="M16 2v4"/>
+                                <path d="M8 2v4"/>
+                                <path d="M3 10h5"/>
+                                <path d="M17.5 17.5 16 16.3V14"/>
+                                <circle cx="16" cy="16" r="6"/>
+                            </svg>
+                            Ранее используемые
+                        </div>
+                        <svg class="group-data-[state=open]:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </AccordionTrigger>
+                    <AccordionContent
+                        class="data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden">
+                        <ul class="pt-2 ps-2">
+                            <li v-for="calc in recentUsedCalculators" :key="calc.id">
+                                <DialogClose as-child>
+                                    <Link
+                                        class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100"
+                                        :href="calc.slug">
+                                    {{ calc.name }}
+                                    </Link>
+                                </DialogClose>
+                            </li>
+                        </ul>
+                    </AccordionContent>
+                </AccordionItem>
                 <AccordionItem v-if="user && favorites.length" :value="favorites">
                     <AccordionTrigger
                         class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
                         <div class="flex items-center gap-x-3.5">
-                            <svg class="h-5 w-5 text-primary-500" fill="currentColor" stroke="currentColor" stroke-linecap="round"
+                            <svg class="h-5 w-5 group-data-[state=open]:text-primary-500" fill="currentColor" stroke="currentColor" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -85,8 +127,6 @@
                         </ul>
                     </AccordionContent>
                 </AccordionItem>
-
-                {{ recentUsedCalculators }}
 
                 <template v-for="item in menu" :key="item.id">
                     <AccordionItem :value="item.nickname">
