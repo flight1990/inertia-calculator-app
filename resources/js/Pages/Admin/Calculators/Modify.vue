@@ -1,5 +1,5 @@
 <script setup>
-
+    import Editor from '@tinymce/tinymce-vue'
     import Layout from "@/Layouts/Admin/Admin.vue";
     import {Head, Link, useForm} from "@inertiajs/vue3";
     import FTextInput from "@/Components/Base/FTextInput.vue";
@@ -64,11 +64,11 @@
                     v-model="form.name"
                     :error-message="form.errors.name"
                 />
-                <FTextArea
+                <!-- <FTextArea
                     label="Описание"
                     v-model="form.description"
                     :error-message="form.errors.description"
-                />
+                /> -->
                 <FFileInput
                     label="PHP"
                     id="PHP"
@@ -83,6 +83,31 @@
                     :multiple="false"
                     :error-message="form.errors.frontend"
                 />
+                <div>
+                    <label 
+                        class="block text-sm text-gray-700 font-medium mb-2">
+                        Описание
+                    </label>
+                    <Editor
+                        v-model="form.description"
+                        api-key="3owncuirjbhs9lgl07bh11gvq0hwpen3km43wsgv8dekqmmb"
+                        :init="{
+                            toolbar_mode: 'sliding',
+                            plugins: 'fullscreen charmap emoticons image link lists media table visualblocks mediaembed advcode editimage',
+                            menu: {
+                                edit: { title:'Edit', items: ' undo redo | cut copy past | selectall ' },
+                                view: { title:'View', items: ' code visualblocks | fullscreen ' },
+                                insert: { title:'Insert', items: ' link image media | inserttable ' },
+                                format: { title:'Format', items: ' strikethrough superscript subscript | removeformat ' },
+                            },
+                            menubar: 'edit view insert format',
+                            toolbar: 'blocks | bold italic underline | align | link image table | numlist bullist indent outdent | fullscreen',
+                        }"
+                        initial-value="Welcome to TinyMCE!"
+                        language="ru"
+                        language_url="/resources/js/Tinymce/langs/ru.js"
+                    />
+                </div>
             </form>
         </div>
         <div class="px-6 py-4 flex items-center gap-x-2">
