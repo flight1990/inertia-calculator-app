@@ -6,7 +6,11 @@
     import Nested from "@/Pages/Admin/Menus/infra/Nested.vue";
 
     const props = defineProps({
-        tasks: Array
+        tasks: Array,
+        level: {
+            type: Number,
+            default: 1,
+        }
     })
 
     const rebuildTree = () => {
@@ -20,7 +24,7 @@
         class=""
         tag="ul"
         :list="tasks"
-        :group="{ name: 'g1' }"
+        :group="{ name: `g_${level}`, put: true }"
         item-key="id"
         handle=".handle"
         animation="500"
@@ -78,7 +82,7 @@
                         </RDialog>
                     </div>
                 </div>
-                <Nested :tasks="element.children" class="!ml-10" />
+                <Nested :tasks="element.children" :level="level+1" class="!ml-10" />
             </li>
         </template>
     </draggable>
