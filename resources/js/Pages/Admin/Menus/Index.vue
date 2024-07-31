@@ -55,9 +55,7 @@ const props = defineProps({
             <div class="text-slate-700 mb-4 text-sm">
                 {{ items.data.length ? 'Потяните пункт меню для сортировки' : 'Нет данных...' }}
             </div>
-            <!-- <pre>
-            {{ items.data }}
-            </pre> -->
+
             <Nested :tasks="items.data" />
             <!-- <ul>
                 <li v-for="item in items.data">
@@ -72,9 +70,7 @@ const props = defineProps({
                     </div>
                 </li>
             </ul> -->
-        
-        </div>
-        
-    </div>
 
+        </div>
+    </div>
 </template>

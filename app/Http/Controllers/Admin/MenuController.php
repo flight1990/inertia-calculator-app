@@ -72,9 +72,8 @@ class MenuController extends Controller
         return redirect()->route('admin.menus.index');
     }
 
-    public function rebuild(Request $request): RedirectResponse
+    public function rebuild(Request $request): int
     {
-        $this->rebuildMenuTreeAction->run($request->all());
-        return redirect()->route('admin.menus.index');
+        return $this->rebuildMenuTreeAction->run($request->get('menu'));
     }
 }

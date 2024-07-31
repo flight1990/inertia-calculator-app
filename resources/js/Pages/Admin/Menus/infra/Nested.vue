@@ -10,14 +10,13 @@
     })
 
     const rebuildTree = () => {
-        axios.post('/admin/menus/rebuild', {menu: tasks})
-        console.log('rebuildTree');
+        axios.post('/admin/menus/rebuild', {menu: props.tasks})
     }
 
 </script>
 
 <template>
-    <draggable 
+    <draggable
         class=""
         tag="ul"
         :list="tasks"
@@ -79,13 +78,7 @@
                         </RDialog>
                     </div>
                 </div>
-               
             </li>
-            
         </template>
-
     </draggable>
-    <pre>
-        {{ tasks }}
-    </pre>
 </template>
