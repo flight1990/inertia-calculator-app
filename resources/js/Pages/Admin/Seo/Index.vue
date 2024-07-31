@@ -12,17 +12,13 @@
     });
 
     const headers = ref([
-        {key: 'id', title: 'ID', align: 'center'},
         {key: 'url', title: 'URL', align: 'center'},
-        // {key: 'h1', title: 'H1', align: 'center'},
-        // {key: 'title', title: 'Title', align: 'center'},
-        // {key: 'description', title: 'Description', align: 'center'},
-        // {key: 'keywords', title: 'Keywords', align: 'center'},
-        // {key: 'robots', title: 'Robots', align: 'center'},
-        // {key: 'no_index', title: 'No index', align: 'center'},
-        // {key: 'no_follow', title: 'No follow', align: 'center'},
-        {key: 'created_at', title: 'Создан', align: 'center'},
-        {key: 'updated_at', title: 'Обновлен', align: 'center'},
+        {key: 'h1', title: 'H1', align: 'center'},
+        {key: 'title', title: 'Title', align: 'center'},
+        {key: 'description', title: 'Description', align: 'center'},
+        {key: 'keywords', title: 'Keywords', align: 'center'},
+        {key: 'index', title: 'Index', align: 'center'},
+        {key: 'follow', title: 'Follow', align: 'center'},
         {key: 'actions', title: '', align: 'center'},
     ]);
 
@@ -134,7 +130,7 @@
                         <template v-slot:footer>
                             <button @click="deleteSeo(item.id)" type="button" class="py-2 px-3 inline-flex text-sm font-medium rounded-lg border border-rose-200 bg-rose-100 text-rose-800 shadow-sm hover:bg-rose-200 disabled:opacity-50 disabled:pointer-events-none">
                                 Удалить
-                            </button> 
+                            </button>
                         </template>
                     </RDialog>
                 </div>

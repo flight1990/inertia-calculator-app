@@ -35,6 +35,31 @@
             });
     }
 
+    const filePickerHandler = (cb, value, meta) => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+
+        input.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+
+                const id = 'blobid' + (new Date()).getTime();
+                const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                const base64 = reader.result.split(',')[1];
+                const blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+
+                cb(blobInfo.blobUri(), { title: file.name });
+            });
+            reader.readAsDataURL(file);
+        });
+
+        input.click();
+    }
+
 </script>
 
 <template>
@@ -84,7 +109,7 @@
                     :error-message="form.errors.frontend"
                 />
                 <div>
-                    <label 
+                    <label
                         class="block text-sm text-gray-700 font-medium mb-2">
                         Описание
                     </label>
@@ -92,7 +117,7 @@
                         v-model="form.description"
                         api-key="3owncuirjbhs9lgl07bh11gvq0hwpen3km43wsgv8dekqmmb"
                         :init="{
-                            toolbar_mode: 'sliding',
+                            file_picker_callback: filePickerHandler,
                             plugins: 'fullscreen charmap emoticons image link lists media table visualblocks mediaembed advcode editimage',
                             menu: {
                                 edit: { title:'Edit', items: ' undo redo | cut copy past | selectall ' },

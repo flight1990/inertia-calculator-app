@@ -20,8 +20,8 @@ class CreateSeoRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'keywords' => ['nullable', 'string'],
             'robots' => ['nullable', 'string'],
-            'no_index' => ['nullable', 'boolean'],
-            'no_follow' => ['nullable', 'boolean'],
+            'index' => ['nullable', 'boolean'],
+            'follow' => ['nullable', 'boolean'],
         ];
     }
 }

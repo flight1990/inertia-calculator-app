@@ -56,9 +56,11 @@ onMounted(() => {
 <template>
     <Head>
         <title>{{ calculator.name }}</title>
+
+        <meta name="title" :content="metta_seo.title">
         <meta name="description" :content="metta_seo.description">
         <meta name="keywords" :content="metta_seo.keywords">
-        <meta name="title" :content="metta_seo.title">
+        <meta name="robots" :content="(metta_seo.index ? 'index' : 'noindex')+','+ (metta_seo.follow ? 'follow' : 'nofollow')">
     </Head>
 
     <section class="pt-8 pb-20">

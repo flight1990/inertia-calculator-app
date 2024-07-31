@@ -20,13 +20,11 @@ const form = useForm({
     title: props.seo?.title ?? "",
     description: props.seo?.description ?? "",
     keywords: props.seo?.keywords ?? "",
-    robots: props.seo?.robots ?? "",
-    no_index: props.seo?.no_index ?? false,
-    no_follow: props.seo?.no_follow ?? false,
+    index: props.seo?.index ?? false,
+    follow: props.seo?.follow ?? false,
 });
 
 const saveSeo = () => {
-    // console.log(props.seo);
     props.seo ? form.patch(`/admin/seo/${props.seo.id}`) : form.post('/admin/seo');
 }
 
@@ -72,20 +70,15 @@ const saveSeo = () => {
                     v-model="form.keywords"
                     :error-message="form.errors.keywords"
                 />
-                <FTextArea
-                    label="Robots"
-                    v-model="form.robots"
-                    :error-message="form.errors.robots"
+                <FCheckBox
+                    label="Index"
+                    v-model="form.index"
+                    :error-message="form.errors.index"
                 />
                 <FCheckBox
-                    label="No index"
-                    v-model="form.no_index"
-                    :error-message="form.errors.no_index"
-                />
-                <FCheckBox
-                    label="No follow"
-                    v-model="form.no_follow"
-                    :error-message="form.errors.no_follow"
+                    label="Follow"
+                    v-model="form.follow"
+                    :error-message="form.errors.follow"
                 />
             </form>
         </div>
