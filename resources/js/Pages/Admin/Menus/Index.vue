@@ -57,6 +57,9 @@ const props = defineProps({
             </div>
 
             <Nested :tasks="items.data" />
+            <pre>
+                {{ items.data }}
+            </pre>
             <!-- <ul>
                 <li v-for="item in items.data">
                     <div>

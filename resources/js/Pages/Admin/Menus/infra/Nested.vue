@@ -78,6 +78,7 @@
                         </RDialog>
                     </div>
                 </div>
+                <Nested :tasks="element.children" class="!ml-10" />
             </li>
         </template>
     </draggable>
