@@ -20,6 +20,7 @@ class MenuResource extends JsonResource
             'parent_id' => $this->whenHas('parent_id'),
             'created_at' => $this->whenHas('created_at'),
             'updated_at' => $this->whenHas('updated_at'),
+            'children' => $this->whenLoaded('children')
         ];
     }
 }
