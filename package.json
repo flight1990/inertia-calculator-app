@@ -23,6 +23,7 @@
         "lodash": "^4.17.21",
         "moment": "^2.30.1",
         "radix-vue": "^1.8.3",
-        "tinymce": "^7.2.1"
+        "tinymce": "^7.2.1",
+        "vuedraggable": "^4.1.0"
     }
 }
