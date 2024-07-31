@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('keywords')->nullable();
-            $table->text('robots')->nullable();
-            $table->boolean('no_index')->default(0);
-            $table->boolean('no_follow')->default(0);
+            $table->boolean('index')->default(false);
+            $table->boolean('follow')->default(false);
             $table->timestamps();
         });
     }

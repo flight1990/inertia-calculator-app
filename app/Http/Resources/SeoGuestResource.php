@@ -16,9 +16,8 @@ class SeoGuestResource extends JsonResource
             'title' => $this['title'] ?? 'default title',
             'description' => $this['description'] ?? 'default description',
             'keywords' => $this['keywords'] ?? 'default keywords',
-            'robots' => $this['robots'] ?? 'default robots',
-            'no_index' => $this['no_index'] ?? false,
-            'no_follow' => $this['no_follow'] ?? false,
+            'index' => $this['index'] ?? false,
+            'follow' => $this['follow'] ?? false,
         ];
     }
 }

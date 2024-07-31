@@ -36,7 +36,7 @@ class HandleInertiaRequests extends Middleware
                 'favorites' => app(GetFavoritesCalculatorsAction::class)->run(),
             ],
             'menu' => NavigationResource::collection(Menu::get('Menu')->roots()),
-            'metta_seo' => in_array($request->route()->getName(), ['pages.index', 'calculators.show']) && !$request->routeIs('admin.*')
+            'metta_seo' => !$request->routeIs('admin.*')
                 ? new SeoGuestResource(app(GetSeoAction::class)->run($request->url()))
                 : []
         ];

@@ -17,13 +17,12 @@ class Seo extends Model
         'title',
         'description',
         'keywords',
-        'robots',
-        'no_index',
-        'no_follow',
+        'index',
+        'follow',
     ];
 
     protected $casts = [
-        'no_index' => 'boolean',
-        'no_follow' => 'boolean',
+        'index' => 'boolean',
+        'follow' => 'boolean',
     ];
 }
