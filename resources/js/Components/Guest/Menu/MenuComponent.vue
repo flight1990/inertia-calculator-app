@@ -4,6 +4,7 @@
     import ROfcanvas from "@/Components/Base/ROfcanvas.vue";
     import { DialogClose } from 'radix-vue';
     import { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from 'radix-vue';
+    import MenuItemComponent from "@/Components/Guest/Menu/MenuItemComponent.vue";
 
     const menu = computed(() => usePage().props.menu.data);
     const favorites = computed(() => usePage().props.auth.favorites);
@@ -45,11 +46,11 @@
             </button>
         </template>
         <template v-slot:body>
-            <AccordionRoot class="space-y-1.5" type="single" :collapsible="true">
+            <AccordionRoot class="space-y-1.5" type="multiple" :collapsible="true">
 
                 <AccordionItem v-if="recentUsedCalculators" :value="recentUsedCalculators">
                     <AccordionTrigger
-                        class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
+                        class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
                         <div class="flex items-center gap-x-3.5">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +96,7 @@
                 </AccordionItem>
                 <AccordionItem v-if="user && favorites.length" :value="favorites">
                     <AccordionTrigger
-                        class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
+                        class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
                         <div class="flex items-center gap-x-3.5">
                             <svg class="h-5 w-5 group-data-[state=open]:text-primary-500" fill="currentColor" stroke="currentColor" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
@@ -127,38 +128,8 @@
                         </ul>
                     </AccordionContent>
                 </AccordionItem>
-
-                <template v-for="item in menu" :key="item.id">
-                    <AccordionItem :value="item.nickname">
-                        <AccordionTrigger
-                            class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 font-medium text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
-                            <div class="flex items-center gap-x-3.5">
-                                <div v-html="item.icon" class="text-xl group-data-[state=open]:text-primary-500"></div>
-                                {{ item.name }}
-                            </div>
-                            <svg class="group-data-[state=open]:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="m6 9 6 6 6-6" />
-                            </svg>
-                        </AccordionTrigger>
-                        <AccordionContent
-                            class="data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden">
-                            <ul class="pt-2 ps-2">
-                                <li v-for="child in item.children" :key="child.id">
-                                    <DialogClose as-child>
-                                        <Link
-                                            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100"
-                                            :href="child.url">
-                                        {{ child.name }}
-                                        </Link>
-                                    </DialogClose>
-                                </li>
-                            </ul>
-                        </AccordionContent>
-                    </AccordionItem>
-                </template>
+               
+                <MenuItemComponent :menu="menu" />
 
             </AccordionRoot>
         </template>
