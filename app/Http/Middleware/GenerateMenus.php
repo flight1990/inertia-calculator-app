@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use App\Actions\Calculators\Guest\GetFavoritesCalculatorsAction;
 use App\Actions\Categories\Guest\GetCategoriesAction;
+use App\Actions\Menu\GetMenuToTreeAction;
 use Illuminate\Support\Facades\Auth;
+use App\Actions\Menu\BuildMenusFromDataBaseAction;
 use Menu;
 use Closure;
 use Illuminate\Http\Request;
@@ -15,27 +17,13 @@ class GenerateMenus
     public function handle(Request $request, Closure $next): Response
     {
         $request->routeIs('admin.*') ? $this->buildAdminMenu() : $this->buildGuestMenu();
-
         return $next($request);
     }
 
     private function buildGuestMenu(): void
     {
         Menu::make('Menu', function ($menu) {
-
-            $categories = app(GetCategoriesAction::class)->run();
-
-            foreach ($categories as $category) {
-                $menu->add($category->name, ['disableActivationByURL' => true, 'url' => '#'])
-                    ->attr(['icon' => $category->icon])
-                    ->nickname($category->slug);
-
-                foreach ($category->calculators as $calculator) {
-                    $menu->item($category->slug)
-                        ->add($calculator->name, route('calculators.show', $calculator->slug))
-                        ->attr(['icon' => $category->icon]);
-                }
-            }
+            app(BuildMenusFromDataBaseAction::class)->run($menu);
         });
     }
 

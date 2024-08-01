@@ -6,6 +6,7 @@ use App\Actions\Calculators\Guest\AttachSavedCalculatorAction;
 use App\Actions\Calculators\Guest\DeleteSavedCalculatorAction;
 use App\Actions\Calculators\Guest\FindCalculatorAction;
 use App\Actions\Categories\Guest\FindCategoryAction;
+use App\Actions\Menu\GetMenuToTreeForParentSelectorAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Calculators\SaveUsedCalculatorRequest;
 use App\Http\Resources\CalculatorResource;
@@ -19,10 +20,10 @@ use Inertia\Response;
 class CalculatorController extends Controller
 {
     public function __construct(
-        protected FindCategoryAction          $findGuestCategoryAction,
-        protected FindCalculatorAction        $findGuestCalculatorAction,
-        protected AttachSavedCalculatorAction $attachSavedCalculatorAction,
-        protected DeleteSavedCalculatorAction $deleteSavedCalculatorAction
+        protected FindCategoryAction                   $findGuestCategoryAction,
+        protected FindCalculatorAction                 $findGuestCalculatorAction,
+        protected AttachSavedCalculatorAction          $attachSavedCalculatorAction,
+        protected DeleteSavedCalculatorAction          $deleteSavedCalculatorAction
     )
     {
     }
@@ -41,7 +42,7 @@ class CalculatorController extends Controller
     public function store(SaveUsedCalculatorRequest $request): RedirectResponse
     {
         $this->attachSavedCalculatorAction->run($request->validated());
-        return redirect(strtok(back()->getTargetUrl(),'?') . '?data=' . $request->get('input'));
+        return redirect(strtok(back()->getTargetUrl(), '?') . '?data=' . $request->get('input'));
     }
 
     public function destroy(int $id): RedirectResponse

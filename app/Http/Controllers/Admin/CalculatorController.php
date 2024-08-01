@@ -20,11 +20,11 @@ use Inertia\Response;
 class CalculatorController extends Controller
 {
     public function __construct(
-        protected FindCalculatorByIdAction $findCalculatorByIdAction,
-        protected UpdateCalculatorAction   $updateCalculatorAction,
-        protected CreateCalculatorAction   $createCalculatorAction,
-        protected DeleteCalculatorAction   $deleteCalculatorAction,
-        protected GetCategoriesAction      $getCategoriesAction
+        protected FindCalculatorByIdAction             $findCalculatorByIdAction,
+        protected UpdateCalculatorAction               $updateCalculatorAction,
+        protected CreateCalculatorAction               $createCalculatorAction,
+        protected DeleteCalculatorAction               $deleteCalculatorAction,
+        protected GetCategoriesAction                  $getCategoriesAction
     )
     {
     }

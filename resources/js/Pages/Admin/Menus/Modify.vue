@@ -3,13 +3,15 @@
 import Layout from "@/Layouts/Admin/Admin.vue";
 import {Head, Link, useForm} from "@inertiajs/vue3";
 import FTextInput from "@/Components/Base/FTextInput.vue";
+import FSelect from "@/Components/Base/FSelect.vue";
 
 defineOptions({
     layout: Layout
 });
 
 const props = defineProps({
-    item: Object
+    item: Object,
+    parents: Array
 });
 
 const form = useForm({
@@ -39,6 +41,15 @@ const saveMenu = () => {
         </div>
         <div class="px-6 py-4 border-b border-gray-200">
             <form class="flex flex-col gap-y-3.5">
+                <FSelect
+                    label="Родитель"
+                    :items="parents"
+                    item-name="title"
+                    item-value="id"
+                    v-model="form.parent_id"
+                    :error-message="form.errors.parent_id"
+                />
+
                 <FTextInput
                     label="Название"
                     v-model="form.title"
@@ -61,7 +72,7 @@ const saveMenu = () => {
         </div>
     </div>
 
-    
+
 
     <!-- <FTextInput
         label="Название"

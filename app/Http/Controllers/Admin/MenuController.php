@@ -6,6 +6,7 @@ use App\Actions\Menu\CreateMenuAction;
 use App\Actions\Menu\DeleteMenuAction;
 use App\Actions\Menu\FindMenuByIdAction;
 use App\Actions\Menu\GetMenuToTreeAction;
+use App\Actions\Menu\GetMenuToTreeForParentSelectorAction;
 use App\Actions\Menu\RebuildMenuTreeAction;
 use App\Actions\Menu\UpdateMenuAction;
 use App\Http\Controllers\Controller;
@@ -20,12 +21,13 @@ use Inertia\Response;
 class MenuController extends Controller
 {
     public function __construct(
-        protected GetMenuToTreeAction $getMenuToTreeAction,
-        protected CreateMenuAction $createMenuAction,
-        protected UpdateMenuAction $updateMenuAction,
-        protected DeleteMenuAction $deleteMenuAction,
-        protected RebuildMenuTreeAction $rebuildMenuTreeAction,
-        protected FindMenuByIdAction $findMenuByIdAction
+        protected GetMenuToTreeForParentSelectorAction $getMenuToTreeForParentSelectorAction,
+        protected GetMenuToTreeAction                  $getMenuToTreeAction,
+        protected CreateMenuAction                     $createMenuAction,
+        protected UpdateMenuAction                     $updateMenuAction,
+        protected DeleteMenuAction                     $deleteMenuAction,
+        protected RebuildMenuTreeAction                $rebuildMenuTreeAction,
+        protected FindMenuByIdAction                   $findMenuByIdAction
     )
     {
     }
@@ -41,15 +43,21 @@ class MenuController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Admin/Menus/Modify');
+        $parents = $this->getMenuToTreeForParentSelectorAction->run();
+
+        return Inertia::render('Admin/Menus/Modify', [
+            'parents' => $parents
+        ]);
     }
 
     public function edit(int $id): Response
     {
         $menu = $this->findMenuByIdAction->run($id);
+        $parents = $this->getMenuToTreeForParentSelectorAction->run($id);
 
         return Inertia::render('Admin/Menus/Modify', [
-            'item' => new MenuResource($menu)
+            'item' => new MenuResource($menu),
+            'parents' => $parents
         ]);
     }
 
@@ -72,7 +80,7 @@ class MenuController extends Controller
         return redirect()->route('admin.menus.index');
     }
 
-    public function rebuild(Request $request)
+    public function rebuild(Request $request): RedirectResponse
     {
         $this->rebuildMenuTreeAction->run($request->get('menu'));
         return redirect()->route('admin.menus.index');
