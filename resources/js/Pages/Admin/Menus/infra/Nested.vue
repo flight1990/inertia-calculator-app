@@ -27,7 +27,7 @@ const onSort = () => {
         class="border rounded-t-xl border-t-0 border-dashed"
         tag="ul"
         :list="tasks"
-        :group="{ name: 'g1' }"
+        :group="{ name: props.lvl <=3  ?'g1' : 'g2' }"
         item-key="title"
         handle=".handle"
         animation="500"
