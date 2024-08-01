@@ -11,7 +11,8 @@ class GetMenuToTreeTask
     {
         return Menu::query()
             ->when(!empty($id), function ($q) use ($id) {
-                $q->whereNotDescendantOf($id);
+                $q->where('id', '!=', $id)
+                    ->whereNotDescendantOf($id);
             })
             ->when(!empty($depth), function ($q) use ($id) {
                 $q->withDepth()
