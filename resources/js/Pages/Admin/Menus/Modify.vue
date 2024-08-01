@@ -42,6 +42,7 @@ const saveMenu = () => {
         <div class="px-6 py-4 border-b border-gray-200">
             <form class="flex flex-col gap-y-3.5">
                 <FSelect
+                    v-if="!item?.children?.length || item.parent_id"
                     label="Родитель"
                     :items="parents"
                     item-name="title"

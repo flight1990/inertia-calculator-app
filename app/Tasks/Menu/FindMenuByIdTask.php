@@ -9,6 +9,8 @@ class FindMenuByIdTask
 {
     public function run(int $id): Model
     {
-        return Menu::query()->findOrFail($id);
+        return Menu::query()
+            ->with('children')
+            ->findOrFail($id);
     }
 }

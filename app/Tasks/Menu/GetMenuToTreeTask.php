@@ -7,11 +7,12 @@ use Kalnoy\Nestedset\Collection;
 
 class GetMenuToTreeTask
 {
-    public function run(int $id = null, int $depth = null): Collection
+    public function run(int $id = null, int $depth = null, int $parentId = null): Collection
     {
         return Menu::query()
-            ->when(!empty($id), function ($q) use ($id) {
-                $q->where('id', '!=', $id)
+            ->when(!empty($id), function ($q) use ($id, $parentId) {
+                $q
+                    ->where('id', '!=', $id)
                     ->whereNotDescendantOf($id);
             })
             ->when(!empty($depth), function ($q) use ($id) {
