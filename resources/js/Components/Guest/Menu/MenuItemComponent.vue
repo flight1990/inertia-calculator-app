@@ -11,18 +11,22 @@
 </script>
 <template>
     <template v-for="item in menu" :key="item.id">
-        
-
 
         <AccordionItem v-if="item.children.length" :value="item.id">
             
             <div v-if="item.url" class="flex items-center justify-between gap-2">
-                <DialogClose as-child>
+ 
+                <div v-if="item.isActive" class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100 select-none">
+                    {{ item.name }}
+                </div>
+
+                <DialogClose v-else as-child>
                     <Link class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100"
                         :href="item.url">
                         {{ item.name }}
                     </Link>
                 </DialogClose>
+
                 <AccordionTrigger class="py-2.5 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100 group">
                     <svg class="group-data-[state=open]:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -61,9 +65,12 @@
         </AccordionItem>
 
 
+        <div v-else-if="item.isActive" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 select-none">
+            {{ item.name }}
+        </div>
 
         <DialogClose as-child v-else-if="item.url">
-            <Link
+            <Link v-if="!item.isActive"
                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100"
                 :href="item.url">
                 {{ item.name }}
