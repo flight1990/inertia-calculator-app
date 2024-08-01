@@ -7,25 +7,22 @@
 
     const props = defineProps({
         tasks: Array,
-        level: {
-            type: Number,
-            default: 1,
-        }
     })
 
     const rebuildTree = () => {
         axios.post('/admin/menus/rebuild', {menu: props.tasks})
+        console.log('rebuild');
     }
 
 </script>
 
 <template>
     <draggable
-        class=""
+        class="border rounded-t-xl border-t-0 border-dashed"
         tag="ul"
         :list="tasks"
-        :group="{ name: `g_${level}`, put: true }"
-        item-key="id"
+        :group="{ name: 'g1' }"
+        item-key="title"
         handle=".handle"
         animation="500"
         ghost-class="ghost"
@@ -34,7 +31,7 @@
 
         <template #item="{element}">
             <li>
-                <div class="bg-gray-100 mb-4 py-2 px-4 rounded-xl border flex items-center justify-between">
+                <div class="bg-gray-100 py-2 px-4 rounded-xl border flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="cursor-grab text-gray-400 active:text-primary-500 active:cursor-grabbing handle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
@@ -82,7 +79,8 @@
                         </RDialog>
                     </div>
                 </div>
-                <Nested :tasks="element.children" :level="level+1" class="!ml-10" />
+                <div class="h-10 "> </div>
+                <Nested :tasks="element.children" class="ml-10" />
             </li>
         </template>
     </draggable>
