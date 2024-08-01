@@ -4,6 +4,7 @@ import Layout from "@/Layouts/Admin/Admin.vue";
 import {Head, Link, router} from "@inertiajs/vue3";
 
 import Nested from "@/Pages/Admin/Menus/infra/Nested.vue";
+import {debounce} from "lodash";
 
 defineOptions({
     layout: Layout
@@ -12,6 +13,10 @@ defineOptions({
 const props = defineProps({
     items: Object
 })
+
+const rebuildTree = debounce((e) => {
+    axios.post('/admin/menus/rebuild', {menu: e})
+}, 350)
 
 </script>
 
@@ -56,24 +61,10 @@ const props = defineProps({
                 {{ items.data.length ? 'Потяните пункт меню для сортировки' : 'Нет данных...' }}
             </div>
 
-            <Nested :tasks="items.data" />
-            <pre>
-                {{ items.data }}
-            </pre>
-            <!-- <ul>
-                <li v-for="item in items.data">
-                    <div>
-                        {{ item }}
-                    </div>
-
-                    <div>
-                        <Link :href="`/admin/menus/${item.id}/edit`">Редактировать</Link>
-
-                        <Link method="DELETE" as="button" :href="`/admin/menus/${item.id}`">Удалить</Link>
-                    </div>
-                </li>
-            </ul> -->
-
+            <Nested
+                :tasks="items.data"
+                @sort:update="rebuildTree"
+            />
         </div>
     </div>
 </template>

@@ -12,7 +12,7 @@ const {id} = defineProps({
 const {url} = useUrlWatcher();
 const user = computed(() => usePage().props.auth.user);
 
-const input = computed(() => new URLSearchParams(new URL(url.value).search).get('input'));
+const input = computed(() => new URLSearchParams(new URL(url.value).search).get('data'));
 const title = computed(() => decodeURIComponent(JSON.parse(atob(input.value)).title));
 
 const open = ref(false);

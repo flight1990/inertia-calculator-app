@@ -45,9 +45,8 @@ const onDelete = (id) => {
 <!--                            {{ item.name }}-->
 <!--                        </div>-->
 
-
                         <Link class="flex-1 flex py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:bg-gray-200 break-all"
-                              :href="`/${slug}?input=${item.input}`">
+                              :href="`/${slug}?data=${item.input}`">
                             {{ item.name }}
                         </Link>
                         <div @click="onDelete(item.id)" class="flex-none py-2.5 px-2.5 text-gray-700 rounded-lg hover:bg-gray-100 focus:bg-gray-200 cursor-pointer">

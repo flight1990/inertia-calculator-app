@@ -41,7 +41,7 @@ class CalculatorController extends Controller
     public function store(SaveUsedCalculatorRequest $request): RedirectResponse
     {
         $this->attachSavedCalculatorAction->run($request->validated());
-        return back();
+        return redirect(strtok(back()->getTargetUrl(),'?') . '?data=' . $request->get('input'));
     }
 
     public function destroy(int $id): RedirectResponse
