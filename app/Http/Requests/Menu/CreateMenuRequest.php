@@ -15,7 +15,7 @@ class CreateMenuRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:190'],
-            'url' => ['required', 'url'],
+            'url' => ['nullable', 'url'],
             'parent_id' => ['nullable', 'integer'],
         ];
     }

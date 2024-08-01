@@ -8,6 +8,9 @@ class RebuildMenuTreeTask
 {
     public function run(array $payload): int
     {
-        return Menu::rebuildTree($payload);
+        Menu::rebuildTree($payload);
+        Menu::fixTree();
+
+        return  true;
     }
 }

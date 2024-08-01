@@ -15,7 +15,16 @@ const props = defineProps({
 })
 
 const rebuildTree = debounce((e) => {
-    axios.post('/admin/menus/rebuild', {menu: e})
+
+    router.post('/admin/menus/rebuild', {menu: e}, {
+        onError: (e) => {
+            console.log('error', props.items.data);
+        }
+    })
+
+   // const response =  axios.post('/admin/menus/rebuild', {menu: e})
+   //
+   //  console.log(response);
 }, 350)
 
 </script>

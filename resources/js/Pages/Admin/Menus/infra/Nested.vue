@@ -20,7 +20,6 @@ const onSort = () => {
     emit('sort:update', props.tasks);
 }
 
-
 </script>
 
 <template>
@@ -35,7 +34,6 @@ const onSort = () => {
         ghost-class="ghost"
         @sort="onSort"
     >
-
         <template #item="{element}">
             <li>
                 <div class="bg-gray-100 py-2 px-4 rounded-xl border flex items-center justify-between">
