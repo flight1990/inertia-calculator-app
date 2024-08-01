@@ -22,9 +22,6 @@ const rebuildTree = debounce((e) => {
         }
     })
 
-   // const response =  axios.post('/admin/menus/rebuild', {menu: e})
-   //
-   //  console.log(response);
 }, 350)
 
 </script>

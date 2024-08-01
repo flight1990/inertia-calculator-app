@@ -3,15 +3,10 @@ import {Link} from "@inertiajs/vue3";
 import RDialog from "@/Components/Base/RDialog.vue";
 
 import Nested from "@/Pages/Admin/Menus/infra/Nested.vue";
-import {debounce} from "lodash";
 import draggable from "vuedraggable";
 
 const props = defineProps({
     tasks: Array,
-    lvl: {
-        type: Number,
-        default: 1
-    }
 })
 
 const emit = defineEmits(['sort:update']);
@@ -24,10 +19,10 @@ const onSort = () => {
 
 <template>
     <draggable
-        class="border rounded-t-xl border-t-0 border-dashed"
+        class=""
         tag="ul"
         :list="tasks"
-        :group="{ name: props.lvl <=3  ?'g1' : 'g2' }"
+         :group="{ name: 'g1', pull: false }"
         item-key="title"
         handle=".handle"
         animation="500"
@@ -36,7 +31,7 @@ const onSort = () => {
     >
         <template #item="{element}">
             <li>
-                <div class="bg-gray-100 py-2 px-4 rounded-xl border flex items-center justify-between">
+                <div class="bg-gray-100 mb-4 py-2 px-4 rounded-xl border flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="cursor-grab text-gray-400 active:text-primary-500 active:cursor-grabbing handle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -51,7 +46,6 @@ const onSort = () => {
                             </svg>
                         </div>
                         <div>
-                           lvl {{ lvl }}
                             <h4 class="font-medium"> {{ element.title }} </h4>
                             <div class="text-xs text-gray-500">{{ element.url }}</div>
                         </div>
@@ -95,10 +89,7 @@ const onSort = () => {
                         </RDialog>
                     </div>
                 </div>
-                <div class="h-10 "></div>
-
                 <Nested
-                    :lvl="(lvl + 1)"
                     :tasks="element.children"
                     class="ml-10"
                     @sort:update="onSort"
