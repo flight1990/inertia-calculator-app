@@ -22,6 +22,7 @@ class CalculatorResource extends JsonResource
             'category_id' => $this->whenHas('category_id'),
             'created_at' => $this->whenHas('created_at'),
             'updated_at' => $this->whenHas('updated_at'),
+            'ads_code' => $this->whenHas('ads_code'),
             'category' => new CategoryResource($this->whenLoaded('category')),
             'saved_calculations' => SavedCalculatorResource::collection($this->whenLoaded('savedUsers')),
             'is_favorite' => $this['favorite_users_count'] > 0

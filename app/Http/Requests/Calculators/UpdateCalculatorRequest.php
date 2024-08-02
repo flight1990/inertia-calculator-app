@@ -18,7 +18,8 @@ class UpdateCalculatorRequest extends FormRequest
             'description' => ['required', 'string'],
             'backend' => ['nullable', 'file', 'extensions:php'],
             'frontend' => ['nullable', 'file', 'extensions:js'],
-            'category_id' => ['required', 'integer', 'exists:categories,id']
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+            'ads_code' => ['nullable']
         ];
     }
 }

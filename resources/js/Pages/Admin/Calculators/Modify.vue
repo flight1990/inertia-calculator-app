@@ -20,6 +20,7 @@
         name: props.calculator?.name ?? "",
         description: props.calculator?.description ?? "",
         category_id: props.calculator?.category_id ?? "",
+        ads_code: props.calculator?.ads_code ?? "",
         frontend: null,
         backend: null,
         _method: props.calculator ? 'PATCH' : 'POST'
@@ -89,11 +90,6 @@
                     v-model="form.name"
                     :error-message="form.errors.name"
                 />
-                <!-- <FTextArea
-                    label="Описание"
-                    v-model="form.description"
-                    :error-message="form.errors.description"
-                /> -->
                 <FFileInput
                     label="PHP"
                     id="PHP"
@@ -131,6 +127,12 @@
                         initial-value="Welcome to TinyMCE!"
                         language="ru"
                         language_url="/resources/js/Tinymce/langs/ru.js"
+                    />
+
+                    <FTextArea
+                        label="Реклама"
+                        v-model="form.ads_code"
+                        :error-message="form.errors.ads_code"
                     />
                 </div>
             </form>

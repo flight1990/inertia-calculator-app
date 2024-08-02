@@ -140,6 +140,8 @@ onMounted(() => {
                         </div>
                     </section>
 
+                    {{ calculator.ads_code }}
+
                     <AdComponent class="mt-10" link="/" img-src="/ad2.gif"/>
 
                     <section id="description">

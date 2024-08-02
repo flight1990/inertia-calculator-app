@@ -18,7 +18,8 @@ class CreateCalculatorRequest extends FormRequest
             'description' => ['required', 'string'],
             'backend' => ['required', 'extensions:php'],
             'frontend' => ['required', 'extensions:js'],
-            'category_id' => ['required', 'integer', 'exists:categories,id']
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+            'ads_code' => ['nullable']
         ];
     }
 }

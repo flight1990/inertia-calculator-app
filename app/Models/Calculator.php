@@ -21,7 +21,8 @@ class Calculator extends Model
         'backend_path',
         'frontend_path',
         'description',
-        'category_id'
+        'category_id',
+        'ads_code'
     ];
 
     public function toSearchableArray(): array
