@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             CalculatorSeeder::class,
-            FaqSeeder::class
+            FaqSeeder::class,
+            SettingsSeeder::class
         ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SeoController;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', DashboardController::class)->name('index');
+
+    Route::controller(SettingsController::class)->name('settings.')->prefix('settings')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::patch('/', 'update')->name('update');
+    });
 
     Route::controller(MenuController::class)->name('menus.')->prefix('menus')->group(function () {
         Route::get('/', 'index')->name('index');

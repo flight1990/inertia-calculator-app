@@ -2,10 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Actions\Calculators\Guest\GetFavoritesCalculatorsAction;
-use App\Actions\Categories\Guest\GetCategoriesAction;
-use App\Actions\Menu\GetMenuToTreeAction;
-use Illuminate\Support\Facades\Auth;
 use App\Actions\Menu\BuildMenusFromDataBaseAction;
 use Menu;
 use Closure;
@@ -32,6 +28,9 @@ class GenerateMenus
         Menu::make('Menu', function ($menu) {
             $menu->add('Панель управления', route('admin.index'))
                 ->nickname('dashboard');
+
+            $menu->add('Настройки сайта', route('admin.settings.index'))
+                ->nickname('admin.settings.index');
 
             $menu->add('Меню', route('admin.menus.index'))
                 ->nickname('admin.menus.index')
