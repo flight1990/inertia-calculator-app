@@ -30,7 +30,7 @@ const updateSettings = () => {
 
     <div v-for="(setting, index) in settings.data" :key="setting.key">
         <FTextArea
-            v-if="setting.key === 'hero_description'"
+            v-if="setting.key === 'hero_description' || setting.key === 'ads_code'"
             :label="setting.name"
             v-model="form[index].value"
         />
@@ -40,8 +40,6 @@ const updateSettings = () => {
             :label="setting.name"
             v-model="form[index].value"
         />
-
-
     </div>
 
     <button @click.prevent="updateSettings" :disabled="form.processing">Сохранить</button>

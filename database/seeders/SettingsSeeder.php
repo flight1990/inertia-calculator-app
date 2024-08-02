@@ -44,6 +44,11 @@ class SettingsSeeder extends Seeder
                 'key' => 'address',
                 'value' => 'Hell Street 666'
             ],
+            [
+                'name' => 'Рекламный блок (code)',
+                'key' => 'ads_code',
+                'value' => null
+            ],
         ];
 
         foreach ($settings as $setting) {
