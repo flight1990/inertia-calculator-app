@@ -47,7 +47,17 @@ class SettingsSeeder extends Seeder
             [
                 'name' => 'Рекламный блок (code)',
                 'key' => 'ads_code',
-                'value' => null
+                'value' => 'Реклама'
+            ],
+            [
+                'name' => 'Ссылка на telegram (https://...)',
+                'key' => 'tg_link',
+                'value' => ''
+            ],
+            [
+                'name' => 'Ссылка на instagram (https://...)',
+                'key' => 'inst_link',
+                'value' => ''
             ],
         ];
 

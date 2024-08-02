@@ -129,12 +129,12 @@
                         language_url="/resources/js/Tinymce/langs/ru.js"
                     />
 
-                    <FTextArea
-                        label="Реклама"
-                        v-model="form.ads_code"
-                        :error-message="form.errors.ads_code"
-                    />
                 </div>
+                <FTextArea
+                    label="Реклама"
+                    v-model="form.ads_code"
+                    :error-message="form.errors.ads_code"
+                />
             </form>
         </div>
         <div class="px-6 py-4 flex items-center gap-x-2">

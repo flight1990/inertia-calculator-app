@@ -13,6 +13,7 @@ import ShareCalculationsComponent from "@/Components/Guest/Calculations/ShareCal
 import RPopover from "@/Components/Base/RPopover.vue";
 
 const user = computed(() => usePage().props.auth.user);
+const ads_code = computed(() => usePage().props.site_settings.ads_code);
 
 const props = defineProps({
     calculator: Object,
@@ -150,7 +151,9 @@ onMounted(() => {
                 </main>
 
                 <aside class="lg:w-[300px] flex-none space-y-10">
-                    <AdComponent link="/" img-src="/ad1.gif"/>
+                    <!-- <AdComponent link="/" img-src="/ad1.gif"/> -->
+
+                    <div v-if="ads_code" v-html="ads_code"></div>
 
                     <CategoryComponent :category="category" :calculator-id="calculator.id"/>
 

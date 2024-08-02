@@ -1,8 +1,12 @@
 <script setup>
-    import { Link } from "@inertiajs/vue3";
+    import { Link, usePage } from "@inertiajs/vue3";
+    import { computed } from "vue";
 
     import LogoComponent from "@/Components/Guest/Logo/LogoComponent.vue";
     import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
+
+    const tg_link = computed(() => usePage().props.site_settings.tg_link);
+    const inst_link = computed(() => usePage().props.site_settings.inst_link);
 </script>
 
 <template>
@@ -37,7 +41,7 @@
             <div
                 class="flex flex-col items-center pt-0 pb-4 md:py-4 md:flex-row-reverse md:justify-between">
                 <div class="flex items-center gap-x-4">
-                    <a href="#"
+                    <a v-if="tg_link" :href="tg_link" target="_blank"
                         class="p-2 font-semibold text-gray-700 bg-white rounded-lg hover:bg-gray-100 active:bg-gray-200 flex items-center gap-x-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
@@ -49,7 +53,7 @@
                             <path d="m12.46 16.352-2.926 2.925a.75.75 0 0 1-1.284-.525v-6.104"></path>
                         </svg>
                     </a>
-                    <a href="#"
+                    <a v-if="inst_link" :href="inst_link" target="_blank"
                         class="p-2 font-semibold text-gray-700 bg-white rounded-lg hover:bg-gray-100 active:bg-gray-200 flex items-center gap-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
