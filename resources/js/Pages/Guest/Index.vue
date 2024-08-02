@@ -12,7 +12,8 @@ defineOptions({
 
 defineProps({
     categories: Object,
-    metta_seo: Object
+    metta_seo: Object,
+    site_settings: Object
 });
 
 </script>
@@ -30,6 +31,8 @@ defineProps({
         <meta name="robots" :content="(metta_seo.index ? 'index' : 'noindex')+','+ (metta_seo.follow ? 'follow' : 'nofollow')">
     </Head>
 
-    <HeroComponent/>
+    <HeroComponent
+        :site_settings="site_settings"
+    />
     <CatalogComponent :items="categories.data"/>
 </template>
