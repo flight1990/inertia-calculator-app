@@ -3,6 +3,7 @@
     import Layout from "@/Layouts/Admin/Admin.vue";
     import {Head, Link, useForm} from "@inertiajs/vue3";
     import FTextInput from "@/Components/Base/FTextInput.vue";
+    import FTinyEditor from "@/Components/Base/FTinyEditor.vue";
     import FSelect from "@/Components/Base/FSelect.vue";
     import FTextArea from "@/Components/Base/FTextArea.vue";
     import FFileInput from "@/Components/Base/FFileInput.vue"
@@ -109,31 +110,11 @@
                         class="block text-sm text-gray-700 font-medium mb-2">
                         Описание
                     </label>
-                    <FTextArea
+                    <FTinyEditor
                         label="Описание"
                         v-model="form.description"
                         :error-message="form.errors.description"
                     />
-<!--                    <Editor-->
-<!--                        v-model="form.description"-->
-<!--                        api-key="3owncuirjbhs9lgl07bh11gvq0hwpen3km43wsgv8dekqmmb"-->
-<!--                        :init="{-->
-<!--                            file_picker_callback: filePickerHandler,-->
-<!--                            plugins: 'fullscreen charmap emoticons image link lists media table visualblocks mediaembed advcode editimage',-->
-<!--                            menu: {-->
-<!--                                edit: { title:'Edit', items: ' undo redo | cut copy past | selectall ' },-->
-<!--                                view: { title:'View', items: ' code visualblocks | fullscreen ' },-->
-<!--                                insert: { title:'Insert', items: ' link image media | inserttable ' },-->
-<!--                                format: { title:'Format', items: ' strikethrough superscript subscript | removeformat ' },-->
-<!--                            },-->
-<!--                            menubar: 'edit view insert format',-->
-<!--                            toolbar: 'blocks | bold italic underline | align | link image table | numlist bullist indent outdent | fullscreen',-->
-<!--                        }"-->
-<!--                        initial-value="Welcome to TinyMCE!"-->
-<!--                        language="ru"-->
-<!--                        language_url="/resources/js/Tinymce/langs/ru.js"-->
-<!--                    />-->
-
                 </div>
                 <FTextArea
                     label="Реклама"

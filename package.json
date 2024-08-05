@@ -19,7 +19,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
-        "@tinymce/tinymce-vue": "^5.1.1",
+        "@tinymce/tinymce-vue": "^4.0.7",
         "lodash": "^4.17.21",
         "moment": "^2.30.1",
         "radix-vue": "^1.8.3",
