@@ -3,7 +3,6 @@
 import Editor from "@tinymce/tinymce-vue";
 
 const baseUrl = import.meta.env.VITE_APP_URL;
-
 const model = defineModel({default: null});
 
 const props = defineProps({
@@ -52,6 +51,8 @@ const filePickerCallback = (cb, value, meta) => {
     <Editor
         api-key="xcnykoky7wz5aq4opt33o6n7eng7x7vjjt8qnmfpirm62ovi"
         :init="{
+            language: 'ru',
+            language_url: '/langs/ru.js',
             height: 500,
             menubar:false,
             branding: false,
