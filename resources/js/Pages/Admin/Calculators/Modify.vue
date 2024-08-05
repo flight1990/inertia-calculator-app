@@ -111,7 +111,6 @@
                         Описание
                     </label>
                     <FTinyEditor
-                        label="Описание"
                         v-model="form.description"
                         :error-message="form.errors.description"
                     />

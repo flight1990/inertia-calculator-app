@@ -25,7 +25,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias(['is_admin' => IsAdmin::class]);
 
         $middleware->validateCsrfTokens(except: [
-            'calculators/*' // <-- exclude this route
+            'calculators/*',
+            'admin/upload/*'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

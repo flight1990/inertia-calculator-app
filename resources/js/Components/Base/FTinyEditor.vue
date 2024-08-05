@@ -11,7 +11,39 @@ const props = defineProps({
 });
 
 const filePickerCallback = (cb, value, meta) => {
+    const input = document.createElement('input');
 
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', '.txt, application/pdf');
+
+    input.onchange = function () {
+        let file = this.files[0];
+        let reader = new FileReader();
+        let fd = new FormData();
+
+        fd.append("file", file);
+
+        let filename = "";
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/admin/upload/file", false);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                filename = response.location;
+            }
+        };
+
+        xhr.send(fd);
+
+        reader.onload = function (e) {
+            cb(filename, {title: file.name, text: file.name});
+        };
+
+        reader.readAsDataURL(file);
+    }
+    input.click();
 }
 
 </script>
@@ -24,6 +56,8 @@ const filePickerCallback = (cb, value, meta) => {
             menubar:false,
             branding: false,
             automatic_uploads: true,
+            images_upload_url : '/admin/upload/image',
+            file_picker_callback: filePickerCallback,
             file_picker_types: 'file',
             relative_urls : false,
             document_base_url: baseUrl,

@@ -1,17 +1,24 @@
 <?php
 
-use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\SeoController;
+use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\CalculatorController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\SeoController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+
     Route::get('/', DashboardController::class)->name('index');
+
+    Route::controller(UploadController::class)->prefix('upload')->name('upload.')->group(function () {
+        Route::post('/image', 'uploadImage');
+        Route::post('/file', 'uploadFile');
+    });
 
     Route::controller(SettingsController::class)->name('settings.')->prefix('settings')->group(function () {
         Route::get('/', 'index')->name('index');
