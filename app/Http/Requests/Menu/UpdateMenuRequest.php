@@ -16,6 +16,7 @@ class UpdateMenuRequest extends FormRequest
         return [
             'title' => ['nullable', 'string', 'max:190'],
             'url' => ['nullable', 'url'],
+            'icon' => ['nullable', 'string'],
             'parent_id' => ['nullable', 'integer'],
         ];
     }

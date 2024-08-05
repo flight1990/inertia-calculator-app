@@ -13,6 +13,7 @@ class Menu extends Model
     protected $fillable = [
         'title',
         'url',
+        'icon',
         '_lft',
         '_rgt',
         'parent_id'

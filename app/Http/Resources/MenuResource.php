@@ -15,6 +15,7 @@ class MenuResource extends JsonResource
             'id' => $this->whenHas('id'),
             'title' => $this->whenHas('title'),
             'url' => $this->whenHas('url'),
+            'icon' => $this->whenHas('icon'),
             'parent_id' => $this->whenHas('parent_id'),
             'children' => $this->whenLoaded('children')
         ];
