@@ -16,6 +16,7 @@ const user = computed(() => usePage().props.auth.user);
 const ads_code = computed(() => usePage().props.site_settings.ads_code);
 
 const props = defineProps({
+    menu: Object,
     calculator: Object,
     category: Object,
     metta_seo: Object
@@ -66,7 +67,11 @@ onMounted(() => {
 
     <section class="pt-8 pb-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
             <BreadcrumbsComponent :title="calculator.name" :category="category.name"/>
+
+
+
             <div class="mt-2">
                 <h2 class="text-2xl font-medium tracking-tight text-gray-700">
                     {{ calculator.name }}
@@ -89,7 +94,7 @@ onMounted(() => {
                                 :id="calculator.id"
                             />
 
-                            <!--                            <ShareCalculationsComponent />-->
+                            <ShareCalculationsComponent />
 
                             <SupportComponent
                                 modal-title="Сообщить об ошибке"

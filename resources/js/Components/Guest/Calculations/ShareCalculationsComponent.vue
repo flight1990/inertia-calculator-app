@@ -2,6 +2,9 @@
     import { Link, useForm } from '@inertiajs/vue3';
     import FTextInput from "@/Components/Base/FTextInput.vue";
     import RDialog from "@/Components/Base/RDialog.vue";
+    import {useUrlWatcher} from "@/Composables/useUrlWatcher.js";
+
+    const {url} = useUrlWatcher();
 
     const form = useForm({
         title: ''
@@ -28,8 +31,8 @@
             </button>
         </template>
         <template v-slot:body>
-            ни что или нечто, подумай об этом
+            {{ url }}
         </template>
-        
+
     </RDialog>
 </template>
