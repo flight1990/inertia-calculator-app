@@ -62,7 +62,7 @@
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="h-5 w-5 group-data-[state=open]:text-primary-500"
+                                class="h-4 w-4"
                             >
                                 <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/>
                                 <path d="M16 2v4"/>
@@ -98,7 +98,7 @@
                     <AccordionTrigger
                         class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
                         <div class="flex items-center gap-x-3.5">
-                            <svg class="h-5 w-5 group-data-[state=open]:text-primary-500" fill="currentColor" stroke="currentColor" stroke-linecap="round"
+                            <svg class="h-4 w-4" fill="currentColor" stroke="currentColor" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

@@ -36,11 +36,6 @@
                     </section>
                 </div>
             </div>
-
-                <pre>
-                    {{menu}}
-                </pre>
-
             <div v-for="item in menu" :key="item.id" class="mt-10 first:mt-0">
                 <div v-if="item.children.length">
                     <div class="text-start col-span-2 md:col-span-3 lg:col-span-4 mb-4 xl:mb-6">

@@ -74,19 +74,6 @@ const saveMenu = () => {
                     v-model="form.url"
                     :error-message="form.errors.url"
                 />
-
-                <FTextInput
-                    label="Иконка"
-                    v-model="form.icon"
-                    :error-message="form.errors.icon"
-                />
-                <div class="text-sm">
-                    Иконки копируются из
-                    <a class="underline hover:text-gray-500" href="https://icons.getbootstrap.com/#icons" target="_blank">icons.getbootstrap.com</a>
-                    как
-                    <strong>Icon font </strong>
-                    (Например: "&lt;i class="bi bi-calculator"&gt;&lt;/i&gt;")
-                </div>
             </form>
         </div>
         <div class="px-6 py-4 flex items-center gap-x-2">
