@@ -1,66 +1,40 @@
 <script setup>
-    import Editor from '@tinymce/tinymce-vue'
-    import Layout from "@/Layouts/Admin/Admin.vue";
-    import {Head, Link, useForm} from "@inertiajs/vue3";
-    import FTextInput from "@/Components/Base/FTextInput.vue";
-    import FTinyEditor from "@/Components/Base/FTinyEditor.vue";
-    import FSelect from "@/Components/Base/FSelect.vue";
-    import FTextArea from "@/Components/Base/FTextArea.vue";
-    import FFileInput from "@/Components/Base/FFileInput.vue"
+import Layout from "@/Layouts/Admin/Admin.vue";
+import {Head, Link, useForm} from "@inertiajs/vue3";
+import FTextInput from "@/Components/Base/FTextInput.vue";
+import FTinyEditor from "@/Components/Base/FTinyEditor.vue";
+import FSelect from "@/Components/Base/FSelect.vue";
+import FTextArea from "@/Components/Base/FTextArea.vue";
+import FFileInput from "@/Components/Base/FFileInput.vue"
 
-    defineOptions({
-        layout: Layout
-    });
+defineOptions({
+    layout: Layout
+});
 
-    const props = defineProps({
-        calculator: Object,
-        categories: Object
-    });
+const props = defineProps({
+    calculator: Object,
+    categories: Object
+});
 
-    const form = useForm({
-        name: props.calculator?.name ?? "",
-        description: props.calculator?.description ?? "",
-        category_id: props.calculator?.category_id ?? "",
-        ads_code: props.calculator?.ads_code ?? "",
-        frontend: null,
-        backend: null,
-        _method: props.calculator ? 'PATCH' : 'POST'
-    });
+const form = useForm({
+    name: props.calculator?.name ?? "",
+    description: props.calculator?.description ?? "",
+    category_id: props.calculator?.category_id ?? "",
+    ads_code: props.calculator?.ads_code ?? "",
+    frontend: null,
+    backend: null,
+    _method: props.calculator ? 'PATCH' : 'POST'
+});
 
-    const saveCalculator = () => {
-        props.calculator
-            ? form.post(`/admin/calculators/${props.calculator.id}`, {
-                forceFormData: true
-            })
-            : form.post('/admin/calculators', {
-                forceFormData: true
-            });
-    }
-
-    const filePickerHandler = (cb, value, meta) => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-
-        input.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-
-                const id = 'blobid' + (new Date()).getTime();
-                const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                const base64 = reader.result.split(',')[1];
-                const blobInfo = blobCache.create(id, file, base64);
-                blobCache.add(blobInfo);
-
-                cb(blobInfo.blobUri(), { title: file.name });
-            });
-            reader.readAsDataURL(file);
+const saveCalculator = () => {
+    props.calculator
+        ? form.post(`/admin/calculators/${props.calculator.id}`, {
+            forceFormData: true
+        })
+        : form.post('/admin/calculators', {
+            forceFormData: true
         });
-
-        input.click();
-    }
+}
 
 </script>
 
@@ -123,10 +97,12 @@
             </form>
         </div>
         <div class="px-6 py-4 flex items-center gap-x-2">
-            <button @click.prevent="saveCalculator" type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50 disabled:pointer-events-none">
+            <button @click.prevent="saveCalculator" type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50 disabled:pointer-events-none">
                 Сохранить
             </button>
-            <Link href="/admin/calculators" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+            <Link href="/admin/calculators"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                 Отмена
             </Link>
         </div>

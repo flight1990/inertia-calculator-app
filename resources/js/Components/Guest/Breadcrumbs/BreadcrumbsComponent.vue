@@ -6,7 +6,6 @@ const page = usePage();
 const activeItems = computed(() => filterActiveElements(page.props.menu.data));
 
 const filterActiveElements = (data) => {
-
     return data.reduce((acc, item) => {
         if (item.isActive) {
             const newItem = {...item};
@@ -32,14 +31,6 @@ const flattenMenu = (menu) => {
     return result;
 };
 
-
-
-defineProps({
-    category: String,
-    title: String,
-})
-
-
 </script>
 <template>
     <ol class="flex items-center whitespace-nowrap flex-wrap">
@@ -47,7 +38,7 @@ defineProps({
             <Link
                 class="flex items-center text-sm text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900"
                 href="/">
-                Calcutor.ru
+                {{ page.props.site_settings.site_name }}
             </Link>
             <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

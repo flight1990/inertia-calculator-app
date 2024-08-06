@@ -128,7 +128,7 @@
                         </ul>
                     </AccordionContent>
                 </AccordionItem>
-               
+
                 <MenuItemComponent :menu="menu" />
 
             </AccordionRoot>

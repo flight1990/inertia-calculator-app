@@ -21,15 +21,6 @@ class FavoriteController extends Controller
     {
     }
 
-    public function index(): Response
-    {
-        $calculators = $this->getGuestFavoritesCalculatorsAction->run();
-
-        return Inertia::render('Guest/Favorites', [
-            'calculators' => CalculatorResource::collection($calculators)
-        ]);
-    }
-
     public function store(int $id): RedirectResponse
     {
         $this->attachFavoriteCalculatorAction->run($id);

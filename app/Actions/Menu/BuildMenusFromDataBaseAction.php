@@ -24,9 +24,13 @@ class BuildMenusFromDataBaseAction
                 $url = empty($item->url) ? ['disableActivationByURL' => 'true'] : $item->url;
 
                 if (empty($parent)) {
-                    $menu->add($item->title, $url)->nickname($nickName);
+                    $menu->add($item->title, $url)
+                        ->attr(['icon' => $item->icon])
+                        ->nickname($nickName);
                 } else {
-                    $menu->item($parent)->add($item->title, $url)->nickname($nickName);
+                    $menu->item($parent)->add($item->title, $url)
+                        ->attr(['icon' => $item->icon])
+                        ->nickname($nickName);
                 }
 
                 $menuBuilder($item->children, $nickName);

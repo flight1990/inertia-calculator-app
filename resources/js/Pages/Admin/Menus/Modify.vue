@@ -18,7 +18,8 @@ const form = useForm({
     icon: props.item?.icon ?? '',
     title: props.item?.title ?? '',
     url: props.item?.url ?? '',
-    parent_id: props.item?.parent_id ?? null
+    parent_id: props.item?.parent_id ?? null,
+    icon: props.item?.icon ?? null
 })
 
 const saveMenu = () => {
@@ -36,7 +37,7 @@ const saveMenu = () => {
         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
             <div>
                 <h2 class="text-lg sm:text-xl font-semibold text-gray-800">
-                    {{ item ? 'Редактировать' : 'Создать' }} пункт меню {{ form.title ? '"'+form.title+'"' : '' }}
+                    {{ item ? 'Редактировать' : 'Создать' }} пункт меню {{ form.title ? '"' + form.title + '"' : '' }}
                 </h2>
             </div>
         </div>
@@ -73,33 +74,30 @@ const saveMenu = () => {
                     v-model="form.url"
                     :error-message="form.errors.url"
                 />
+
+                <FTextInput
+                    label="Иконка"
+                    v-model="form.icon"
+                    :error-message="form.errors.icon"
+                />
+                <div class="text-sm">
+                    Иконки копируются из
+                    <a class="underline hover:text-gray-500" href="https://icons.getbootstrap.com/#icons" target="_blank">icons.getbootstrap.com</a>
+                    как
+                    <strong>Icon font </strong>
+                    (Например: "&lt;i class="bi bi-calculator"&gt;&lt;/i&gt;")
+                </div>
             </form>
         </div>
         <div class="px-6 py-4 flex items-center gap-x-2">
-            <button @click.prevent="saveMenu" type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50 disabled:pointer-events-none">
+            <button @click.prevent="saveMenu" type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50 disabled:pointer-events-none">
                 Сохранить
             </button>
-            <Link href="/admin/menus" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+            <Link href="/admin/menus"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                 Отмена
             </Link>
         </div>
     </div>
-
-
-
-    <!-- <FTextInput
-        label="Название"
-        :error-message="form.errors.title"
-        v-model="form.title"
-    />
-
-    <FTextInput
-        label="URL"
-        :error-message="form.errors.url"
-        v-model="form.url"
-    />
-
-    <button @click.prevent="saveMenu">Сохранить</button>
-
-    <Link href="/admin/menus">Отмена</Link> -->
 </template>

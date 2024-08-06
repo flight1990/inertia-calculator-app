@@ -2,7 +2,7 @@
 
 import {Head} from "@inertiajs/vue3";
 import Layout from "@/Layouts/Admin/Admin.vue";
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 
 defineOptions({
     layout: Layout
@@ -17,34 +17,34 @@ const categorytotal = ref(0);
 const fetchUsers = async () => {
     try {
         const {data} = await axios.get('/api/users');
-        usertotal.value = data.meta.total;    
+        usertotal.value = data.meta.total;
     } catch (e) {
 
-    } 
+    }
 }
 const fetchCalc = async () => {
     try {
         const {data} = await axios.get('/api/calculators');
-        calctotal.value = data.meta.total;    
+        calctotal.value = data.meta.total;
     } catch (e) {
 
-    } 
+    }
 }
 const fetchSeo = async () => {
     try {
         const {data} = await axios.get('/api/seo');
-        seototal.value = data.meta.total;    
+        seototal.value = data.meta.total;
     } catch (e) {
 
-    } 
+    }
 }
 const fetchCategory = async () => {
     try {
         const {data} = await axios.get('/api/categories');
-        categorytotal.value = data.meta.total;    
+        categorytotal.value = data.meta.total;
     } catch (e) {
 
-    } 
+    }
 }
 
 fetchUsers();
@@ -59,10 +59,6 @@ fetchCategory();
     </Head>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-
-        
-
-
         <div class="flex flex-col bg-white border shadow-sm rounded-xl">
             <div class="p-4 md:p-5">
                 <div class="flex items-center gap-x-2">
