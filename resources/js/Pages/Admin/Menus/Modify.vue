@@ -14,7 +14,8 @@ const props = defineProps({
     parents: Array
 });
 
-const form = useForm({
+const form = useForm({ 
+    icon: props.item?.icon ?? '',
     title: props.item?.title ?? '',
     url: props.item?.url ?? '',
     parent_id: props.item?.parent_id ?? null
@@ -50,7 +51,18 @@ const saveMenu = () => {
                     v-model="form.parent_id"
                     :error-message="form.errors.parent_id"
                 />
-
+                <FTextInput
+                    label="Иконка"
+                    v-model="form.icon"
+                    :error-message="form.errors.icon"
+                />
+                <div class="text-sm">
+                    Иконки копируются из
+                    <a class="underline hover:text-gray-500" href="https://icons.getbootstrap.com/#icons" target="_blank">icons.getbootstrap.com</a>
+                    как
+                    <strong>Icon font </strong>
+                    (Например: "&lt;i class="bi bi-calculator"&gt;&lt;/i&gt;")
+                </div>
                 <FTextInput
                     label="Название"
                     v-model="form.title"

@@ -41,7 +41,7 @@
                 <AccordionTrigger
                 class="w-full group text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 data-[state=open]:bg-gray-100">
                 <div class="flex items-center gap-x-3.5">
-                    <!-- <div v-html="item.icon" class="text-xl group-data-[state=open]:text-primary-500"></div> -->
+                    <div v-html="item.icon"></div>
                     {{ item.name }}
                 </div>
                 <svg class="group-data-[state=open]:rotate-180 ms-auto block size-4 text-gray-600 group-hover:text-gray-500 transition"

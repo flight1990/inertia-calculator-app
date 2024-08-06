@@ -46,7 +46,10 @@ const onSort = () => {
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-medium"> {{ element.title }} </h4>
+                            <h4 class="font-medium">
+                                <span v-html="element.icon"></span>
+                                {{ element.title }}
+                            </h4>
                             <div class="text-xs text-gray-500">{{ element.url }}</div>
                         </div>
                     </div>

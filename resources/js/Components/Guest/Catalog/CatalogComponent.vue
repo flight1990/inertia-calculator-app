@@ -31,17 +31,21 @@
                 <div class="text-start grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-6">
                     <section v-for="calculator in favorites" :key="calculator.id">
                         <Link :href="`/${calculator.slug}`" class="flex items-center justify-center p-4 text-base text-gray-900 font-medium text-center relative rounded-xl shadow-sm bg-white border hover:bg-primary-600 hover:text-white transition">
-                        {{ calculator.name }}
+                            {{ calculator.name }}
                         </Link>
                     </section>
                 </div>
             </div>
 
+                <pre>
+                    {{menu}}
+                </pre>
+
             <div v-for="item in menu" :key="item.id" class="mt-10 first:mt-0">
                 <div v-if="item.children.length">
                     <div class="text-start col-span-2 md:col-span-3 lg:col-span-4 mb-4 xl:mb-6">
                         <h3 class="text-gray-700 text-lg font-semibold flex items-center gap-3.5">
-                            <div v-html="item.icon" class="text-2xl text-primary-500"></div>
+                            <span v-html="item.icon" class="text-2xl text-primary-500"></span>
                             {{ item.name }}
                         </h3>
                     </div>
