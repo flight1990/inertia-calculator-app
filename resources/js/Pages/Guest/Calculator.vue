@@ -4,7 +4,6 @@ import {computed, onMounted} from "vue";
 import Layout from "@/Layouts/Guest/Guest.vue";
 import BreadcrumbsComponent from "@/Components/Guest/Breadcrumbs/BreadcrumbsComponent.vue";
 import SupportComponent from "@/Components/Guest/Support/SupportComponent.vue";
-import AdComponent from "@/Components/Guest/Ad/AdComponent.vue";
 import CategoryComponent from "@/Components/Guest/Category/CategoryComponent.vue";
 import SaveCalculationsComponent from "@/Components/Guest/Calculations/SaveCalculationsComponent.vue";
 import SavedCalculationsComponent from "@/Components/Guest/Calculations/SavedCalculationsComponent.vue";
@@ -67,10 +66,7 @@ onMounted(() => {
 
     <section class="pt-8 pb-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
             <BreadcrumbsComponent :title="calculator.name" :category="category.name"/>
-
-
 
             <div class="mt-2">
                 <h2 class="text-2xl font-medium tracking-tight text-gray-700">
@@ -146,9 +142,9 @@ onMounted(() => {
                         </div>
                     </section>
 
-                    {{ calculator.ads_code }}
-
-                    <AdComponent class="mt-10" link="/" img-src="/ad2.gif"/>
+                    <div v-if="calculator.ads_code">
+                        <div v-html="calculator.ads_code"></div>
+                    </div>
 
                     <section id="description">
                         <article class="mt-10" v-html="calculator.description"></article>
@@ -156,8 +152,6 @@ onMounted(() => {
                 </main>
 
                 <aside class="lg:w-[300px] flex-none space-y-10">
-                    <!-- <AdComponent link="/" img-src="/ad1.gif"/> -->
-
                     <div v-if="ads_code" v-html="ads_code"></div>
 
                     <CategoryComponent :category="category" :calculator-id="calculator.id"/>

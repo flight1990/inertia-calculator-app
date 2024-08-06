@@ -22,7 +22,6 @@ class UploadController extends Controller
         $serverName = Storage::disk('public')->put('files', $request->file('file'));
         $location  = Storage::url($serverName);
 
-
         return response()->json(['location'=> $location]);
     }
 }
