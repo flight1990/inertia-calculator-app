@@ -10,3 +10,19 @@
 .no-tailwind:not(svg *), .no-tailwind *:not(svg) {
     all: revert;
 }
+
+.prose {
+    @apply max-w-none break-words
+}
+
+.prose a {
+    @apply text-primary-400 hover:text-primary-600
+}
+
+.prose blockquote{
+    @apply bg-primary-50 text-primary-700 px-2 md:px-8 py-2 md:py-4 italic border-l-4 border-primary-500 rounded-r-2xl;
+}
+
+.prose .table-wrapper{
+    @apply overflow-x-auto
+}

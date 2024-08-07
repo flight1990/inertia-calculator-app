@@ -148,8 +148,8 @@ onMounted(() => {
                         <div v-html="calculator.ads_code"></div>
                     </div>
 
-                    <section id="description">
-                        <article class="mt-10" v-html="calculator.description"></article>
+                    <section id="description" class="">
+                        <article class="mt-10 prose" v-html="calculator.description"></article>
                     </section>
                 </main>
 
