@@ -68,6 +68,7 @@
 
     <Head>
         <title>Seo</title>
+        <meta name="robots" content="noindex,nofollow">
     </Head>
 
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">

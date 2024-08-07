@@ -30,6 +30,7 @@ const saveUser = () => {
 <template>
     <Head>
         <title>{{ user ? 'Редактировать' : 'Создать' }} пользователя</title>
+        <meta name="robots" content="noindex,nofollow">
     </Head>
 
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">

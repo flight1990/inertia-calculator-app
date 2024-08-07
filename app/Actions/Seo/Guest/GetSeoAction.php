@@ -15,6 +15,18 @@ class GetSeoAction
 
     public function run(string $url): Model|null
     {
-        return $this->findSeoByUrlTask->run($url);
+        $parsedUrl = parse_url($url);
+        parse_str($parsedUrl['query'] ?? '', $queryParams);
+        unset($queryParams['data']);
+
+        $newUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
+
+        if (isset($parsedUrl['port'])) {
+            $newUrl .= ':' . $parsedUrl['port'];
+        }
+
+        $newUrl .= $parsedUrl['path'] ?? '';
+
+        return $this->findSeoByUrlTask->run($newUrl);
     }
 }

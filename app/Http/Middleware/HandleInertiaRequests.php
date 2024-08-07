@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
             'menu' => NavigationResource::collection(Menu::get('Menu')->roots()),
             'site_settings' => Config::get('settings'),
             'metta_seo' => !$request->routeIs('admin.*')
-                ? new SeoGuestResource(app(GetSeoAction::class)->run($request->url()))
+                ? new SeoGuestResource(app(GetSeoAction::class)->run($request->fullUrl()))
                 : []
         ];
     }

@@ -1,19 +1,40 @@
 <script setup>
-import {useForm, usePage} from '@inertiajs/vue3';
+import { useForm, usePage } from '@inertiajs/vue3';
 import FTextInput from "@/Components/Base/FTextInput.vue";
 import RDialog from "@/Components/Base/RDialog.vue";
-import {computed, ref} from "vue";
-import {useUrlWatcher} from "@/Composables/useUrlWatcher.js";
+import { computed, ref } from "vue";
+import { useUrlWatcher } from "@/Composables/useUrlWatcher.js";
 
-const {id} = defineProps({
+const { id } = defineProps({
     id: Number
-})
+});
 
-const {url} = useUrlWatcher();
+const { url } = useUrlWatcher();
 const user = computed(() => usePage().props.auth.user);
 
-const input = computed(() => new URLSearchParams(new URL(url.value).search).get('data'));
-const title = computed(() => decodeURIComponent(JSON.parse(atob(input.value)).title));
+const input = computed(() => {
+    if (typeof window !== 'undefined' && url.value) {
+        try {
+            return new URLSearchParams(new URL(url.value).search).get('data');
+        } catch (e) {
+            console.error('Invalid URL:', e);
+            return null;
+        }
+    }
+    return null;
+});
+
+const title = computed(() => {
+    if (input.value) {
+        try {
+            return decodeURIComponent(JSON.parse(atob(input.value)).title);
+        } catch (e) {
+            console.error('Invalid input data:', e);
+            return null;
+        }
+    }
+    return null;
+});
 
 const open = ref(false);
 
@@ -24,24 +45,26 @@ const form = useForm({
 });
 
 const onOpen = () => {
-    form.title = title.value
-    form.calculator_id = id
-    form.input = input.value
-    form.clearErrors()
-}
+    form.title = title.value;
+    form.calculator_id = id;
+    form.input = input.value;
+    form.clearErrors();
+};
 
 function handleClick() {
     form.post('/calculators', {
         preserveScroll: true,
         preserveState: true,
         onSuccess: () => {
-            open.value = false
-        }, onError: () => {
-
+            open.value = false;
+        },
+        onError: () => {
+            // handle error
         }
-    })
+    });
 }
 </script>
+
 <template>
     <RDialog title="Сохранить расчет" :width="420" v-if="user && input" v-model="open">
         <template v-slot:trigger>

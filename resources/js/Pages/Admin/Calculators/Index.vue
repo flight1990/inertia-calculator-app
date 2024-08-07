@@ -65,6 +65,7 @@
 <template>
     <Head>
         <title>Калькуляторы</title>
+        <meta name="robots" content="noindex,nofollow">
     </Head>
 
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
@@ -127,7 +128,7 @@
                         <template v-slot:footer>
                             <button @click="deleteCalculator(item.id)" type="button" class="py-2 px-3 inline-flex text-sm font-medium rounded-lg border border-rose-200 bg-rose-100 text-rose-800 shadow-sm hover:bg-rose-200 disabled:opacity-50 disabled:pointer-events-none">
                                 Удалить
-                            </button> 
+                            </button>
                         </template>
                     </RDialog>
                 </div>

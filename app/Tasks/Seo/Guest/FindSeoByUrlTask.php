@@ -10,7 +10,7 @@ class FindSeoByUrlTask
     public function run(string $url): Model|null
     {
         return Seo::query()
-            ->where('url', $url)
+            ->where('url',  $url)
             ->first();
     }
 }

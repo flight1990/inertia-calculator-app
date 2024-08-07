@@ -28,7 +28,7 @@
     const open = ref(false);
 
     const user = computed(() => usePage().props.auth.user);
-    const url = computed(() => props.sendUrl ? window.location.href : null);
+    const url = computed(() => props.sendUrl ? (typeof window !== 'undefined' ? window.location.href : null) : null);
 
     const form = useForm({
         title: props.title ?? null,
@@ -60,7 +60,7 @@
 <template>
     <RDialog :title="modalTitle" :width="490" v-model="open">
         <template v-slot:trigger>
-            
+
             <template v-if="sendUrl">
                 <button type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -79,7 +79,7 @@
                     Поддержка
                 </button>
             </template>
-            
+
         </template>
         <template v-slot:body>
             <form class="space-y-6">

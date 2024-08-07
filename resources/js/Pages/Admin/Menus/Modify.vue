@@ -14,7 +14,7 @@ const props = defineProps({
     parents: Array
 });
 
-const form = useForm({ 
+const form = useForm({
     icon: props.item?.icon ?? '',
     title: props.item?.title ?? '',
     url: props.item?.url ?? '',
@@ -31,6 +31,7 @@ const saveMenu = () => {
 <template>
     <Head>
         <title>{{ item ? 'Редактировать' : 'Создать' }} меню</title>
+        <meta name="robots" content="noindex,nofollow">
     </Head>
 
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
