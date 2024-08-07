@@ -19,9 +19,9 @@ export default defineConfig({
         }),
     ],
     rollupOptions: {
-        external: ['lodash', 'vue', 'radix-vue'],
+        external: ['lodash', 'vue', 'radix-vue', 'vue-clipboard3'],
     },
     ssr: {
-        noExternal: ['vue', 'radix-vue', 'lodash']
+        noExternal: ['vue', 'radix-vue', 'lodash', 'vue-clipboard3']
     }
 });

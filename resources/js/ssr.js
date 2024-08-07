@@ -3,6 +3,7 @@ import { renderToString } from '@vue/server-renderer';
 import { createInertiaApp } from '@inertiajs/vue3';
 import createServer from '@inertiajs/vue3/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import Vue3SocialSharingPlugin from "vue3-social-sharing";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -14,7 +15,8 @@ createServer((page) =>
         resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
         setup({ App, props, plugin }) {
             return createSSRApp({ render: () => h(App, props) })
-                .use(plugin);
+                .use(plugin)
+                .use(Vue3SocialSharingPlugin);
         },
     })
 );
