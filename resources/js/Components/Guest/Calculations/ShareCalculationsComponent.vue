@@ -1,26 +1,32 @@
 <script setup>
-    import { Link, useForm } from '@inertiajs/vue3';
     import FTextInput from "@/Components/Base/FTextInput.vue";
     import RDialog from "@/Components/Base/RDialog.vue";
     import {useUrlWatcher} from "@/Composables/useUrlWatcher.js";
+    import useClipboard from 'vue-clipboard3'
+    // import { SwitchRoot, SwitchThumb } from 'radix-vue'
+    // import { ref } from 'vue'
 
-    import { SwitchRoot, SwitchThumb } from 'radix-vue'
-    import { ref } from 'vue'
+    const { toClipboard } = useClipboard()
 
-    const switchState = ref(false)
+    // const switchState = ref(false)
 
     const {url} = useUrlWatcher();
 
-    const form = useForm({
-        title: ''
-    });
-
-    const copyText = () => {
-        alert("Copied text " + url.value);
+    const copy = async () => {
+        try {
+            await toClipboard(url.value)
+            console.log('Copied to clipboard')
+        } catch (e) {
+            console.error(e)
+        }
     }
 
 </script>
 <template>
+
+    <button @click="copy">test copy btn </button>
+
+
     <RDialog title="Поделиться" :width="420">
         <template v-slot:trigger>
             <button type="button" class="flex items-center text-sm gap-2 text-gray-500 hover:text-gray-800">
@@ -39,27 +45,31 @@
         <template v-slot:body>
             <div class="flex items-center gap-2">
                 <FTextInput v-model="url" class="w-full" />
-                <button type="button" @click="copyText"
-                    class="py-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
-                    Копировать
-                </button>
+
+
+                <button @click="copy">test copy btn not working</button>
+
+<!--                <button type="button" @click.prevent="copy"-->
+<!--                    class="py-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">-->
+<!--                    Копировать-->
+<!--                </button>-->
             </div>
-            <div class="flex gap-2 items-center mt-2">
-                <SwitchRoot
-                    id="airplane-mode"
-                    v-model:checked="switchState"
-                    class="w-[34px] h-[18px] focus-within:!outline-none focus-within:outline-black flex bg-black/30 shadow-sm rounded-full relative data-[state=checked]:bg-primary-500 cursor-default"
-                >
-                    <SwitchThumb
-                        class="block w-[10px] h-[10px] my-auto bg-white shadow-sm rounded-full transition-transform duration-100 translate-x-1 will-change-transform data-[state=checked]:translate-x-[18px] data-[state=checked]:h-[14px] data-[state=checked]:w-[14px]"
-                    />
-                </SwitchRoot>
-                <label class="text-[15px] leading-none pr-[15px] select-none" for="airplane-mode">
-                    {{ switchState ? 'Поделиться расчетом' : 'Не делиться расчетом' }}
-                </label>
-            </div>
+<!--            <div class="flex gap-2 items-center mt-2">-->
+<!--                <SwitchRoot-->
+<!--                    id="airplane-mode"-->
+<!--                    v-model:checked="switchState"-->
+<!--                    class="w-[34px] h-[18px] focus-within:!outline-none focus-within:outline-black flex bg-black/30 shadow-sm rounded-full relative data-[state=checked]:bg-primary-500 cursor-default"-->
+<!--                >-->
+<!--                    <SwitchThumb-->
+<!--                        class="block w-[10px] h-[10px] my-auto bg-white shadow-sm rounded-full transition-transform duration-100 translate-x-1 will-change-transform data-[state=checked]:translate-x-[18px] data-[state=checked]:h-[14px] data-[state=checked]:w-[14px]"-->
+<!--                    />-->
+<!--                </SwitchRoot>-->
+<!--                <label class="text-[15px] leading-none pr-[15px] select-none" for="airplane-mode">-->
+<!--                    {{ switchState ? 'Поделиться расчетом' : 'Не делиться расчетом' }}-->
+<!--                </label>-->
+<!--            </div>-->
             <div class="flex items-center justify-start gap-2 mt-6">
-                <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=' + url" 
+                <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=' + url"
                     class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                     <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
