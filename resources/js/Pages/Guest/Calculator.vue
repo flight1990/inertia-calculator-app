@@ -90,7 +90,9 @@ onMounted(() => {
                                 :id="calculator.id"
                             />
 
-                            <ShareCalculationsComponent />
+                            <ShareCalculationsComponent
+                                :title="calculator.name"
+                            />
 
                             <SupportComponent
                                 modal-title="Сообщить об ошибке"
